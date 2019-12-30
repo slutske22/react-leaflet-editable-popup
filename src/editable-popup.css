@@ -5,26 +5,32 @@
    padding: 13px 0px 0px 0px;
 }
 
-a.leaflet-popup-remove-button,
-a.leaflet-popup-edit-button,
-a.leaflet-popup-cancel-button,
-a.leaflet-popup-save-button{
+button.leaflet-popup-button{
+   background: none;
+   border: none;
+   padding: 0;
+   /*optional*/
+   font-family: arial, sans-serif;
+   font-size: 1em;
+   color: #069;
+   cursor: pointer;
+}
+
+.leaflet-popup-button{
    border-bottom: none;
    text-decoration: none;
 }
-a.leaflet-popup-edit-button,
-a.leaflet-popup-save-button{
-   margin-left: auto;
-   text-align: right;
-}
-a.leaflet-popup-remove-button:hover,
-a.leaflet-popup-edit-button:hover,
-a.leaflet-popup-cancel-button:hover,
-a.leaflet-popup-save-button:hover{
+.leaflet-popup-button:hover{
    color: #0078A8;
    text-decoration: underline;
    cursor: pointer;
 }
+.leaflet-popup-button.edit,
+.leaflet-popup-button.save{
+   margin-left: auto;
+   text-align: right;
+}
+
 
 .leaflet-popup-input{
    border: 1px solid lightgrey;

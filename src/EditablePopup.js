@@ -38,7 +38,7 @@ class EditablePopup extends React.Component{
 
    cancelEdits = () => {
       this.setState({
-         inputValue: ''
+         inputValue: this.props.children
       })
       this.closeEditScreen()
    }

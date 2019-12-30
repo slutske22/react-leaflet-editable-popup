@@ -1,13 +1,16 @@
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Marker, Popup } from 'react-leaflet'
-import EditablePopup from './EditablePopup'
+import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet'
+import Popup from './EditablePopup'
 
+const markerRef = React.createRef()
+const markerRef2 = React.createRef()
+ 
 class Map extends React.Component{
 
 
    placeRandomMarker = () => {
       const bounds = this.refs.map.leafletElement.getBounds()
-      console.log(bounds)
+      console.log(this.refs.marker.leafletElement)
    }
 
    render(){
@@ -17,14 +20,14 @@ class Map extends React.Component{
             <TileLayer url='https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}'
             attribution='Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri' />
 
-            <Marker position={[32.96176, -117.03529]}>
-               <EditablePopup editable removable>
+            <Marker position={[32.96176, -117.03529]} ref={markerRef} >
+               <Popup editable removable source={markerRef}>
                   This popup should be totally editable
-               </EditablePopup>
+               </Popup>
             </Marker>
 
-            <Marker position={[32.86176, -117.03529]}>
-               <Popup>
+            <Marker position={[32.86176, -117.03529]} ref={markerRef2}>
+               <Popup editable removable source={markerRef2}>
                   This popup should be totally editable
                </Popup>
             </Marker>

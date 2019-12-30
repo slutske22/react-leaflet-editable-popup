@@ -1,5 +1,9 @@
 import React from 'react'
 import { Popup } from 'react-leaflet'
+import ContentEditable from 'react-contenteditable'
+import './editable-popup.css'
+
+const prefix = 'leaflet-popup'
 
 class EditablePopup extends React.Component{
 
@@ -10,7 +14,9 @@ class EditablePopup extends React.Component{
    }
 
 
+
    openEditScreen = () => {
+      console.log(this)
       this.setState({editScreenOpen: true})
    }
 
@@ -19,8 +25,22 @@ class EditablePopup extends React.Component{
    }
 
    handleEdits = (e) => {
-      console.log(e)
       this.setState({inputValue: e.target.value})
+      console.log(this.state.inputValue)
+   }
+
+   saveEdits = () => {
+      this.setState({
+         content: this.state.inputValue,
+      })
+      this.closeEditScreen()
+   }
+
+   cancelEdits = () => {
+      this.setState({
+         inputValue: ''
+      })
+      this.closeEditScreen()
    }
 
 
@@ -31,37 +51,40 @@ class EditablePopup extends React.Component{
       if (this.props.removable && !this.props.editable){
          Buttons = (
             <div className="leaflet-popup-useraction-buttons">
-               <a>Remove this marker</a>
+               <a className={`${prefix}-remove-button`}>Remove this marker</a>
          </div>
          )
       } else if (!this.props.removable && this.props.editable){
          Buttons = (
             <div className="leaflet-popup-useraction-buttons">
-               <a>Edit</a>
+               <a className={`${prefix}-edit-button`}>Edit</a>
             </div>
          )
       } else if (this.props.removable && this.props.editable){
          Buttons = (
             <div className="leaflet-popup-useraction-buttons">
-               <a>Remove this marker</a>
-               <a onClick={ this.openEditScreen }>Edit</a>
+               <a className={`${prefix}-remove-button`}>Remove this marker</a>
+               <a onClick={ this.openEditScreen } className={`${prefix}-edit-button`}>Edit</a>
             </div>
          )
       }
 
       const contentScreen = (
          <>
-            <div>{this.props.children}</div>
+            <div>{this.state.content}</div>
             {Buttons}
          </>
       )
 
       const editScreen = (
          <>
-            <div contentEditable className="leaflet-popup-edit-screen" onChange={ this.handleEdits }>{this.state.inputValue}</div>
+            {/* <div contentEditable className="leaflet-popup-input" onChange={ this.handleEdits }>{this.state.inputValue}</div> */}
+
+            <ContentEditable className="leaflet-popup-input" html={this.state.inputValue} onChange={ this.handleEdits } />
+
             <div className="leaflet-popup-useraction-buttons">
-               <a>Cancel</a>
-               <a>Save</a>
+               <a className={`${prefix}-cancel-button`} onClick={this.cancelEdits} >Cancel</a>
+               <a className={`${prefix}-save-button`} onClick={this.saveEdits} >Save</a>
             </div>
          </>
       )

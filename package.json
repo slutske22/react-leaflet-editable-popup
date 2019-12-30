@@ -5,11 +5,12 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "leaflet": "^1.6.0",
     "react": "16.12.0",
+    "react-contenteditable": "3.3.3",
     "react-dom": "16.12.0",
-    "react-scripts": "3.0.1",
     "react-leaflet": "^2.6.0",
-    "leaflet": "^1.6.0"
+    "react-scripts": "3.0.1"
   },
   "devDependencies": {
     "typescript": "3.3.3"

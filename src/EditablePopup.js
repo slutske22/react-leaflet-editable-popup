@@ -1,6 +1,7 @@
 import React from 'react'
 import { Popup } from 'react-leaflet'
 import ContentEditable from 'react-contenteditable'
+import Parser from 'html-react-parser';
 import './editable-popup.css'
 
 const prefix = 'leaflet-popup-button'
@@ -25,7 +26,7 @@ class EditablePopup extends React.Component{
    }
 
    handleEdits = (e) => {
-      console.log(e.target.value)
+      console.log(e.target.value.toString())
       this.setState({inputValue: e.target.value})
    }
 
@@ -71,7 +72,7 @@ class EditablePopup extends React.Component{
 
       const contentScreen = (
          <>
-            <div>{this.state.content}</div>
+            {Parser(this.state.content)}
             {Buttons}
          </>
       )

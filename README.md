@@ -1,5 +1,5 @@
-# Leaflet Popup Modifier
-A small plugin for leaflet which allows the author to apply removable or editable options to a popup
+# React Leaflet Editable Popup
+A small plugin for leaflet which allows the author to make a popup editable.  You can also use the popup to remove its source.  This is adapted from [leaflet-popup-modifier](https://github.com/slutske22/leaflet-popup-modifier) to work with React-Leaflet.
 
 
 <p align="center">

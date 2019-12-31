@@ -35,7 +35,6 @@ button.leaflet-popup-button{
 .leaflet-popup-input{
    border: 1px solid lightgrey;
    min-width: 160px;
-   /* margin: 19px 19px 0px 19px; */
    padding: 5px;
 }
 .leaflet-popup-input:focus{
@@ -43,10 +42,3 @@ button.leaflet-popup-button{
    border: 1px solid #60b7da;
 }
 
-.leaflet-popup-input-ruler{
-   position: fixed;
-   top: -100px;
-   visibility: hidden;
-   font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
-   background-color: lightgrey;
-}

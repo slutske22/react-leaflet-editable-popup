@@ -26,7 +26,7 @@ class EditablePopup extends React.Component{
    }
 
    handleEdits = (e) => {
-      console.log(e.target.value.toString())
+      // console.log(e.target.value.toString())
       this.setState({inputValue: e.target.value})
    }
 
@@ -45,8 +45,11 @@ class EditablePopup extends React.Component{
    }
 
    removeSource = () => {
-      console.log(this.props.source.current.leafletElement)
-      this.props.source.current.leafletElement.remove()
+      if (this.props.source){
+         this.props.source.current.leafletElement.remove()
+      } else if(this.props.sourceIndex.toString()){
+         this.props.removeRandomMarker(this.props.sourceIndex)
+      }
    }
 
 

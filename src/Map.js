@@ -1,21 +1,69 @@
 import React from 'react'
-import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet'
+import { Map as LeafletMap, TileLayer, LayerGroup, Marker } from 'react-leaflet'
 import Popup from './EditablePopup'
+
+function randomNumber(min, max){
+   return ( Math.random() * (max - min) ) + min
+};
+
+const mapRef = React.createRef()
 
 const markerRef = React.createRef()
 const markerRef2 = React.createRef()
  
 class Map extends React.Component{
 
+   componentDidUpdate(){
+      console.log(this.state.randomMarkers)
+   }
+
+   state = {
+      randomMarkers: []
+   }
 
    placeRandomMarker = () => {
-      const bounds = this.refs.map.leafletElement.getBounds()
-      console.log(this.refs.marker.leafletElement)
+
+      const bounds = mapRef.current.leafletElement.getBounds()
+      const mapTop = bounds._northEast.lat;
+      const mapBottom = bounds._southWest.lat;
+      const mapRight = bounds._northEast.lng;
+      const mapLeft = bounds._southWest.lng;
+   
+      const pointLat = randomNumber(mapTop, mapBottom)
+      const pointLng = randomNumber(mapLeft, mapRight)
+
+      this.setState({
+         randomMarkers: [
+            ...this.state.randomMarkers,
+            {
+               coords: [pointLat, pointLng]
+            }
+         ]
+      })
+   }
+
+   removeRandomMarker = (index) => {
+      console.log(index)
+      this.setState(prevState => {
+         prevState.randomMarkers.splice(index, 1)
+         return {
+            randomMarkers: prevState.randomMarkers
+         }
+      })
    }
 
    render(){
+
+      const randomMarkers = this.state.randomMarkers.map( (markerSpec, index) => (
+         <Marker position={markerSpec.coords} key={index} >
+            <Popup editable removable sourceIndex={index} removeRandomMarker={(e) => this.removeRandomMarker(e)}>
+               {`This is popup number ${index}. This popup should be totally editable`}
+            </Popup>
+         </Marker>
+      ))
+
       return (
-         <LeafletMap id="mapId"  zoom={10} center={[32.96176, -117.03529]} ref={"map"}  >
+         <LeafletMap id="mapId"  zoom={10} center={[32.96176, -117.03529]} ref={mapRef}  >
 
             <TileLayer url='https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}'
             attribution='Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri' />
@@ -32,7 +80,15 @@ class Map extends React.Component{
                </Popup>
             </Marker>
 
+
+
+
             <button id="placeRandomMarkerButton" onClick={ this.placeRandomMarker }>Place a Random Marker</button>   
+
+            <LayerGroup>
+               {randomMarkers}
+            </LayerGroup>
+
 
          </LeafletMap>
 

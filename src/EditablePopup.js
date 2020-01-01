@@ -31,6 +31,9 @@ class EditablePopup extends React.Component{
    }
 
    saveEdits = () => {
+      if (!isNaN(this.props.sourceKey) && this.props.saveContentCallback){
+         this.props.saveContentCallback(this.state.inputValue, this.props.sourceKey)
+      }
       this.setState({
          content: this.state.inputValue,
       })
@@ -47,8 +50,8 @@ class EditablePopup extends React.Component{
    removeSource = () => {
       if (this.props.source){
          this.props.source.current.leafletElement.remove()
-      } else if(this.props.sourceIndex.toString()){
-         this.props.removeRandomMarker(this.props.sourceIndex)
+      } else if(!isNaN(this.props.sourceKey) && this.props.removalCallback){
+         this.props.removalCallback(this.props.sourceKey)
       }
    }
 

@@ -2,9 +2,17 @@ import React from 'react'
 import { Map as LeafletMap, TileLayer, LayerGroup, Marker } from 'react-leaflet'
 import Popup from './EditablePopup'
 
+//  ---- UTILITY FUNCTIONS ----------------------------- //
+
 function randomNumber(min, max){
    return ( Math.random() * (max - min) ) + min
 };
+
+function roundNumber(number, tensplace = 10){
+   return Math.round( number * tensplace) / tensplace;
+}
+
+
 
 const mapRef = React.createRef()
 
@@ -36,13 +44,16 @@ class Map extends React.Component{
          randomMarkers: [
             ...this.state.randomMarkers,
             {
-               coords: [pointLat, pointLng]
+               coords: [pointLat, pointLng],
+               popupContent: `This is marker is at latitude ${roundNumber(pointLat)} and longitude ${roundNumber(pointLng)}. 
+               This popup should be totally editable`
             }
          ]
       })
    }
 
    removeRandomMarker = (index) => {
+      mapRef.current.leafletElement.closePopup()
       console.log(index)
       this.setState(prevState => {
          prevState.randomMarkers.splice(index, 1)
@@ -57,7 +68,7 @@ class Map extends React.Component{
       const randomMarkers = this.state.randomMarkers.map( (markerSpec, index) => (
          <Marker position={markerSpec.coords} key={index} >
             <Popup editable removable sourceIndex={index} removeRandomMarker={(e) => this.removeRandomMarker(e)}>
-               {`This is popup number ${index}. This popup should be totally editable`}
+               {markerSpec.popupContent}
             </Popup>
          </Marker>
       ))

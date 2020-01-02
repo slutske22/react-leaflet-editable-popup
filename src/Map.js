@@ -29,13 +29,8 @@ class Map extends React.Component{
       // hacky as hell right here
       setTimeout( () => {
 
-         console.log(markerRef1.current.leafletElement);
-
-         const introPopup = markerRef1.current.leafletElement.getPopup()
-         const theMap = markerRef1.current.leafletElement._map
-         console.log(introPopup);
-         console.log(theMap);
-         // theMap.openPopup(introPopup)
+         const introMarker = markerRef1.current.leafletElement
+         introMarker.openPopup()
 
       },1)
    }
@@ -148,7 +143,7 @@ class Map extends React.Component{
 
 
 
-         <Marker position={[27.86176, -98.03529]} icon={violetIcon} ref={markerRef1}>
+            <Marker position={[27.86176, -98.03529]} icon={violetIcon} ref={markerRef1}>
                <Popup maxWidth="450" removable editable source={markerRef1}>
                {sampleMarkerText.removableAndEditable}
                </Popup>

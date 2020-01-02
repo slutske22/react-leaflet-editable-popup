@@ -42,7 +42,7 @@ EditablePopup inherits all props from [react-leaflets's Popup component](https:/
   
   <tr>
     <td> <code>open</code> </td>
-    <td> Opens the popup when map is loaded.  You can use `autoClose={false}` to open multiple popups at once (this is not specific to EditablePopup, but its good to know!) </td>
+    <td> Opens the popup when map is loaded.  You can use <code>autoClose={false}</code> to open multiple popups at once (this is not specific to EditablePopup, but its good to know!) </td>
   </tr>
   
   <tr>
@@ -71,6 +71,105 @@ EditablePopup inherits all props from [react-leaflets's Popup component](https:/
 
 </table>
 
+## Examples
+
+Check out the codesandbox for some examples in action.
+
+### Without state management
+
+Using the `editable` and `removable` props without a state management structure is very simple.  Just add them as props to your `<Popup>` and they will work.  See the simple example in the *Using this Plugin* section above.  Each popup will keep newly content within its own state.
+
+### With state management
+
+A very common react pattern is to render a series of components from an array using a `.map` statement.  For example:
+
+````jsx
+class MapWithMarkers extends React.Component{
+
+  state = {
+    markers: [
+      {
+        coords: [coords],
+        popupContent: 'Popup content is usually an HTML string.'
+      },
+      {
+        coords: ..., 
+        popupContent: ...
+      },
+      {...},
+      {...},
+      ...
+    ]
+  }
+  
+  render(){
+  
+    const mapMarkers = this.state.markers.map( (markerSpec, index) => {
+      return {
+        <Marker position={markerSpec.coords} key={index}>
+          <Popup removable editable>
+            {markerSpec.popupContent}
+          </Popup>
+        </Marker>
+      }
+    })
+  
+    return(
+      <Map center={center} zoom={zoom}>
+        {mapMarkers}
+      </Map>
+    )
+  }
+
+
+}
+````
+
+In the above example, markers are rendered from an array held in the `<MapWithMarkers />`'s state.  This example will allow the user to remove markers from the map or edit their content, but these changes do not communicate with the application's state.  In order to do this, you need to pass functions to the `removalCallback` and `saveContentCallback` props:
+
+````jsx
+  const mapMarkers = this.state.markers.map( (markerSpec, index) => {
+    return {
+      <Marker position={markerSpec.coords} key={index}>
+        <Popup removable editable 
+        removalCallback={(index) => this.removeMarkerFromState(index)}
+        saveContentCallback={(content, index) => this.saveContentToState(content, index)} >
+          {markerSpec.popupContent}
+        </Popup>
+      </Marker>
+    }
+  })
+````
+In this case, your callback functions can be defined like this:
+````jsx
+class MapWithMarkers extends React.Component{
+
+  removeMarkerFromState = (index) => {
+    this.setState(prevState => {
+      prevState.markers.splice(index, 1)
+      return {
+        markers: prevState.markers
+      }
+    })
+  }
+  
+  saveContentToState = (content, index) => {
+    this.setState( prevState => {
+      const newMarkers = prevState.markers
+      newMarkers[index].popupContent = content
+      return {
+        markers: newMarkers
+      }
+    })
+  }
+
+  state = {...}
+  
+  render(){...}
+
+}
+````
+So using our callback functions, we can reflect our changes in the application's global state.  This example involved a case where state is stored in a parent component, but your callback functions could just as easily communicate with a redux store, or any other state management system of your choice.
 
 ## Planned improvements:
 Currently the removal button says "Remove this marker," but not every popup originates from a marker.  Plans to change the word 'marker' to 'circle,' 'polygon,' 'line,' etc., automatically based on the source type in the works.

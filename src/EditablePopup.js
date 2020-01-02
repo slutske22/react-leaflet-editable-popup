@@ -48,12 +48,14 @@ class EditablePopup extends React.Component{
    }
 
    removeSource = () => {
-      if (this.props.source){
-         this.props.source.current.leafletElement.remove()
-      } else if(!isNaN(this.props.sourceKey) && this.props.removalCallback){
+
+      if(!this.props.sourceKey){
+         this.thePopup.leafletElement._source.remove()
+      } else if( (this.props.sourceKey || this.props.sourceKey ===0 ) && this.props.removalCallback){
          this.props.removalCallback(this.props.sourceKey)
       }
    }
+
 
 
    render(){
@@ -100,7 +102,7 @@ class EditablePopup extends React.Component{
       )
 
       return(
-         <Popup {...this.props} minWidth="160">
+         <Popup {...this.props} ref={thePopup => this.thePopup = thePopup} minWidth="160">
             {this.state.editScreenOpen ? editScreen : contentScreen}
          </Popup>
       )

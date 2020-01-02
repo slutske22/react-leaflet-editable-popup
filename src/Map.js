@@ -16,11 +16,7 @@ function roundNumber(number, tensplace = 10){
 
 
 const mapRef = React.createRef()
-
 const markerRef1 = React.createRef()
-const markerRef2 = React.createRef()
-const markerRef3 = React.createRef()
-const markerRef4 = React.createRef()
 
 
 class Map extends React.Component{
@@ -114,7 +110,7 @@ class Map extends React.Component{
             Go to the <a href="https://github.com/slutske22/React-Leaflet-Editable-Popup" target="_blank">GitHub page</a> for this plugin to read more about it.`,
 
          removable: `<h3>This marker is removable.</h3>
-            These black markers are hardcoded into the map, meaning they are not generated from an array.  When you hardcode a marker into your map, you must give it a <code><b>ref</b></code> prop, and create a <code><b><a href="https://reactjs.org/docs/refs-and-the-dom.html" target="_blank">react reference</a></b></code> for it.  You must also give its popup a <code><b>source</b></code> prop which references the marker's <code><b>ref</b></code>.  This will allow the <i><u>Remove this marker</u></i> button to function correctly.<br>
+            These black markers are hardcoded into the map, meaning they are not generated from an array or object.  When you hardcode a marker into your map, you do not need a special props for the <i><u>Remove</u></i> button to target the correct marker.<br>
             <br>
             If you are generating markers from an array, the process is slightly different.  Click the <i><u>Place a random marker</u></i> button for details.  Or check out the <a href="https://github.com/slutske22/React-Leaflet-Editable-Popup" target="_blank">github readme</a>.`,
 
@@ -154,20 +150,20 @@ class Map extends React.Component{
 
 
 
-            <Marker position={[20.96176, -117.03529]} icon={blackIcon} ref={markerRef2} >
-               <Popup removable source={markerRef2}>
+            <Marker position={[20.96176, -117.03529]} icon={blackIcon} >
+               <Popup removable>
                {sampleMarkerText.removable}
                </Popup>
             </Marker>
 
-            <Marker position={[22.86176, -100.03529]} icon={blackIcon} ref={markerRef3}>
-               <Popup removable source={markerRef3}>
+            <Marker position={[22.86176, -100.03529]} icon={blackIcon} >
+               <Popup removable>
                {sampleMarkerText.removable}
                </Popup>
             </Marker>
 
-            <Marker position={[15.86176, -90.03529]} icon={blackIcon} ref={markerRef4}>
-               <Popup removable source={markerRef4}>
+            <Marker position={[15.86176, -90.03529]} icon={blackIcon} >
+               <Popup removable>
                {sampleMarkerText.removable}
                </Popup>
             </Marker>

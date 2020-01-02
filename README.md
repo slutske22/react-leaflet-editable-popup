@@ -47,7 +47,7 @@ EditablePopup inherits all props from [react-leaflets's Popup component](https:/
   
   <tr>
     <td> <code>removable</code> </td>
-    <td> Renders a "Remove this Marker" button inside the popup.  When clicked, this will remove the popup's source (as well as the popup) from your map.  It will not delete your marker or popup instance from the map.  See `removalCallback` on how to do this. </td>
+    <td> Renders a "Remove this Marker" button inside the popup.  When clicked, this will remove the popup's source (as well as the popup) from your map.  It will not delete your marker or popup instance from the map.  See <code>removalCallback</code> on how to do this. </td>
   </tr>
   
   <tr>
@@ -71,13 +71,16 @@ EditablePopup inherits all props from [react-leaflets's Popup component](https:/
 
 </table>
 
+## Contenteditable
+In order for the user's input to be properly processed as HTML, user input is routed through <a href="https://www.npmjs.com/package/html-react-parser" target="_blank">html-react-parser</a>.  For this reason, the initial value of the popup's content that you code in must be in the form of a javascript string.  This is similar to Leaflet's [setContent](https://leafletjs.com/reference-1.6.0.html#popup-setcontent) function.
+
 ## Examples
 
 Check out the codesandbox for some examples in action.
 
 ### Without state management
 
-Using the `editable` and `removable` props without a state management structure is very simple.  Just add them as props to your `<Popup>` and they will work.  See the simple example in the *Using this Plugin* section above.  Each popup will keep newly content within its own state.
+Using the `editable` and `removable` props without a state management structure is very simple.  Just add them as props to your `<Popup>` and they will work.  See the simple example in the *Using this Plugin* section above.  Each popup will keep newly edited content within its own state.
 
 ### With state management
 
@@ -169,7 +172,24 @@ class MapWithMarkers extends React.Component{
 
 }
 ````
-So using our callback functions, we can reflect our changes in the application's global state.  This example involved a case where state is stored in a parent component, but your callback functions could just as easily communicate with a redux store, or any other state management system of your choice.
+So using our callback functions, we can reflect our changes in the application's global state.  This example involved a case where state is stored in a parent component, but your callback functions could just as easily communicate with a redux store, or any other state management system of your choice.  The following is an example for an application using redux:
+
+````jsx
+import { removeMarkerFromState, saveContentToState } from '.../actions/mapActions.js'
+
+// Inside <MapWithMarkers>'s render function:
+    <Popup removable editable 
+    removalCallback={(index) => this.props.removeMarkerFromState(index)}
+    saveContentCallback={(content, index) => this.props.saveContentToState(content, index)} >
+      {markerSpec.popupContent}
+    </Popup>
+
+// Using redux dispatch:
+const mapDispatchToProps = dispatch => ({
+  removeMarkerFromState: (index) => store.dispatch( removeMarkerFromState(index) )
+  saveContentToState: (content, index) => store.dispatch( saveContentToState(content, index) )
+})
+````
 
 ## Planned improvements:
 Currently the removal button says "Remove this marker," but not every popup originates from a marker.  Plans to change the word 'marker' to 'circle,' 'polygon,' 'line,' etc., automatically based on the source type in the works.

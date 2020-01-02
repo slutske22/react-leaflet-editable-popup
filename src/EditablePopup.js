@@ -58,7 +58,7 @@ class EditablePopup extends React.Component{
    }
 
    removeSource = () => {
-
+      // this.thePopup.leafletElement._source._map.closePopup()
       if(!this.props.sourceKey){
          this.thePopup.leafletElement._source.remove()
       } else if( (this.props.sourceKey || this.props.sourceKey ===0 ) && this.props.removalCallback){

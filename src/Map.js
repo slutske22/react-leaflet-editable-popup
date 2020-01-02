@@ -69,7 +69,7 @@ class Map extends React.Component{
          const newRandomMarkers = prevState.randomMarkers
          newRandomMarkers[index].popupContent = content
          return {
-         ...this.state.randomMarkers
+         ...this.state.newRandomMarkers
         }
       })
       console.log(this.state.randomMarkers)

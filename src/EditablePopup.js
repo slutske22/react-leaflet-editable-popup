@@ -9,6 +9,16 @@ const prefix = 'leaflet-popup-button'
 
 class EditablePopup extends React.Component{
 
+   componentDidMount(){
+      // This is admittedly hacky as hell
+      // If you have a better idea of how to implement a popup being open when the map loads, please let me know or open a pull request!
+      if (this.props.open){
+         setTimeout( () => {
+            this.thePopup.leafletElement._source.openPopup()
+         },0.001)
+      }
+   }
+
    state = {
       editScreenOpen: false,
       inputValue: this.props.children,

@@ -21,16 +21,6 @@ const markerRef1 = React.createRef()
 
 class Map extends React.Component{
 
-   componentDidMount(){
-      // hacky as hell right here
-      setTimeout( () => {
-
-         const introMarker = markerRef1.current.leafletElement
-         introMarker.openPopup()
-
-      },1)
-   }
-
    state = {
       randomMarkers: []
    }
@@ -54,9 +44,9 @@ class Map extends React.Component{
                popupContent: `<h3>This marker is removable and its popup is editable.</h3>
                This randomly generated marker is at ${roundNumber(pointLat, 1000)}° latitude and ${roundNumber(pointLng, 1000)}° longitude. <br>
                <br />
-               These blue markers are generated randomly and added to an array within the map's state object.  They are added to the map using an <code>array.map( (marker, index) => &lt;Marker&gt;)</code> function. In order for the <i><u>Remove this marker</u></i> button to function correctly, the <code>&lt;Popup&gt;</code> component requires a <code><b>sourceKey={index}</b></code> prop.  A the <code><b>removalCallback</b></code> prop is also required, which accepts the callback function of your choosing to communicate with the state where your array is kept, passing the <code>index</code> as the argument.  This will make sure that your <i><u>Remove</u></i> button removes the correct marker from your array and map.  This looks something like: <code><b>removalCallback={yourCallback(index)}</b></code><br>
+               These blue markers are generated randomly and added to an array within the map's state object.  They are added to the map using an <code>array.map( (marker, index) => &lt;Marker&gt;)</code> function. In order for the <i><u>Remove this marker</u></i> button to function correctly, the <code>&lt;Popup&gt;</code> component requires a <code>sourceKey={index}</code> prop.  A the <code>removalCallback</code> prop is also required, which accepts the callback function of your choosing to communicate with the state where your array is kept, passing the <code>index</code> as the argument.  This will make sure that your <i><u>Remove</u></i> button removes the correct marker from your array and map.  This looks something like: <code>removalCallback={yourCallback(index)}</code><br>
                <br>
-               Similarly, if you wish to maintain the popup's edited content within your application state, you can pass <code><b>saveContentCallback={yourCallback(content, index)}</b></code> as a prop.<br>
+               Similarly, if you wish to maintain the popup's edited content within your application state, you can pass <code>saveContentCallback={yourCallback(content, index)}</code> as a prop.<br>
                <br>
                Go to the <a href="https://github.com/slutske22/React-Leaflet-Editable-Popup" target="_blank">GitHub page</a> for this plugin to read more about it.`
             }
@@ -99,25 +89,23 @@ class Map extends React.Component{
       const sampleMarkerText = {
 
          removableAndEditable: `<h3>This marker is removable and its popup is editable.</h3>
-            An <code><b>&lt;EditablePopup&gt;</b></code> can be made to be editable, removable, both, or neither.  You can add <code><b>edtiable</b></code> or <code><b>removable</b></code> to its props to decide what type of popup you want.</br>
-            </br>
-            Click on a green popup to learn more about the editable features of an <code><b>&lt;EditablePopup&gt;</b></code><br>
-            </br>
-            Click on a black marker to learn about using an <code><b>&lt;EditablePopup&gt;</b></code> hardcoded into your map.<br>
-            </br>
-            Click on the <i><u>Place a Random Marker</u></i> button in the top right corner to learn about using <code><b>&lt;EditablePopup&gt;</b></code>s generated from an array, as is commong in most state-managed situations.<br>
-            </br>
+            An <code>&lt;EditablePopup&gt;</code> can be made to be editable, removable, both, or neither.  You can add <code>edtiable</code> or <code>removable</code> to its props to decide what type of popup you want.  A popup can also be made to open on map loading (like this one) by passing in the <code>open</code> prop.  Add <code>autoClose={false}</code> to have multiple popups open at the same time.
+            <ul>
+            <li>Click on a green popup to learn more about the editable features of an <code>&lt;EditablePopup&gt;</code></li>
+            <li>Click on a black marker to learn about using an <code>&lt;EditablePopup&gt;</code> hardcoded into your map.</li>
+            <li>Click on the <i><u>Place a Random Marker</u></i> button in the top right corner to learn about using <code>&lt;EditablePopup&gt;</code> with markers generated from an array or object, as is common in most state-managed situations.</li>
+            </ul>
             Go to the <a href="https://github.com/slutske22/React-Leaflet-Editable-Popup" target="_blank">GitHub page</a> for this plugin to read more about it.`,
 
          removable: `<h3>This marker is removable.</h3>
-            These black markers are hardcoded into the map, meaning they are not generated from an array or object.  When you hardcode a marker into your map, you do not need a special props for the <i><u>Remove</u></i> button to target the correct marker.<br>
+            These black markers are hardcoded into the map, meaning they are not generated from an array or object.  When you hardcode a marker into your map, you do not need any special props for the <i><u>Remove</u></i> button to target the correct marker.<br>
             <br>
             If you are generating markers from an array, the process is slightly different.  Click the <i><u>Place a random marker</u></i> button for details.  Or check out the <a href="https://github.com/slutske22/React-Leaflet-Editable-Popup" target="_blank">github readme</a>.`,
 
-         editable: `<h3>This marker is editable.</h3>
-            These green markers are editable but not removable.  An <code><b>&lt;EditablePopup&gt;</b></code> uses a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable" target="_blank">contenteditable</a> div to allow the user to edit the popup's content.  It acts as a rich text formatter for simple text editing within a popup.<br>
+         editable: `<h3>This popup is editable.</h3>
+            These green markers are editable but not removable.  An <code>&lt;EditablePopup&gt;</code> uses a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable" target="_blank">contenteditable</a> div to allow the user to edit the popup's content.  It acts as a rich text formatter for simple text editing within a popup.<br>
             <br>
-            <code><b>&lt;EditablePopup&gt;</b></code> keeps the newly saved content within its own state.  But the <code><b>saveContentCallback</b></code> prop is also available, which receives the popup HTML content as a javascript string, as well as the index of the marker (if the marker is being generated from an array - see the random markers for more info).  This can be fed to a function of your construction to save the popup content to a parent component, or a redux store, or any other state management system of your choosing. <br>
+            <code>&lt;EditablePopup&gt;</code> keeps the newly saved content within its own state.  But the <code>saveContentCallback</code> prop is also available, which takes a callback function of your construction to save the content to your preferred state location.  Your callback arguments should be the popup HTML content as a javascript string, as well as the index of the marker (if the marker is being generated from an array - see the random markers for more info).<br>
             <br>
             Once the save button is clicked, the html input is parsed through <a href="https://www.npmjs.com/package/html-react-parser" target="_blank">html-react-parser</a>. For this reason, the initial input that is hard-coded into the popup content must be a simple string.  If you wish to include javascript statements, use a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">template string</a> rather than a <a href="https://reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx" target="_blank">JSX expression</a>.  React components within an editable <code>&lt;EditablePopup&gt;</code> are not yet supported, but stay tuned!
 
@@ -140,7 +128,7 @@ class Map extends React.Component{
 
 
             <Marker position={[27.86176, -98.03529]} icon={violetIcon} ref={markerRef1}>
-               <Popup maxWidth="450" removable editable source={markerRef1}>
+               <Popup maxWidth="600" removable editable source={markerRef1} open autoClose={false}>
                {sampleMarkerText.removableAndEditable}
                </Popup>
             </Marker>
@@ -173,19 +161,19 @@ class Map extends React.Component{
 
 
             <Marker position={[25.86176, -112.03529]} icon={greenIcon}>
-               <Popup maxWidth="450" editable>
+               <Popup maxWidth="500" editable>
                {sampleMarkerText.editable}
                </Popup>
             </Marker>
 
             <Marker position={[17.86176, -145.03529]} icon={greenIcon}>
-               <Popup maxWidth="450" editable>
+               <Popup maxWidth="500" editable>
                {sampleMarkerText.editable}
                </Popup>
             </Marker>
 
             <Marker position={[17.86176, -80.03529]} icon={greenIcon}>
-               <Popup maxWidth="450" editable>
+               <Popup maxWidth="500" editable >
                {sampleMarkerText.editable}
                </Popup>
             </Marker>

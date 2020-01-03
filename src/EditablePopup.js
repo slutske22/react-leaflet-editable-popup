@@ -9,6 +9,15 @@ const prefix = 'leaflet-popup-button'
 
 
 class EditablePopup extends React.Component{
+   constructor(props){
+      super(props)
+      this.state = {
+         editScreenOpen: false,
+         // Checking if what the author passes in is an HTML string or a JSX element, and parses accordingly (there may be a better way to do this - open a PR!):
+         inputValue: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
+         content: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
+      }
+   }
 
    componentDidMount(){
       // This is admittedly hacky as hell
@@ -20,13 +29,6 @@ class EditablePopup extends React.Component{
       }
    }
 
-   // Checking if what the author passes in is an HTML string or a JSX element, and parses accordingly (there may be a better way to do this - open a PR!):
-
-   state = {
-      editScreenOpen: false,
-      inputValue: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
-      content: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
-   }
 
    openEditScreen = () => {
       this.setState({editScreenOpen: true})

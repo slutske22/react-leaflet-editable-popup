@@ -1,31 +1,40 @@
 {
-  "name": "react",
-  "version": "1.0.0",
-  "description": "",
-  "keywords": [],
-  "main": "src/EditablePopup.js",
-  "dependencies": {
-    "html-react-parser": "0.10.0",
-    "leaflet": "^1.6.0",
-    "react": "16.12.0",
-    "react-contenteditable": "3.3.3",
-    "react-dom": "16.12.0",
-    "react-leaflet": "^2.6.0",
-    "react-scripts": "3.0.1"
-  },
-  "devDependencies": {
-    "typescript": "3.3.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+   "name": "react-leaflet-editable-popup",
+   "version": "1.0.0",
+   "description": "A popup component for react-leaflet which is editable and removable.",
+   "keywords": [
+      "react-leaflet",
+      "popup",
+      "editable",
+      "removable",
+      "editable popup",
+      "removable popup",
+      "leaflet"
+   ],
+   "author": "Seth Lutske",
+   "main": "src/EditablePopup.js",
+   "dependencies": {
+      "html-react-parser": "0.10.0",
+      "leaflet": "^1.6.0",
+      "react": "16.12.0",
+      "react-contenteditable": "3.3.3",
+      "react-dom": "16.12.0",
+      "react-leaflet": "^2.6.0",
+      "react-scripts": "3.0.1"
+   },
+   "devDependencies": {
+      "typescript": "3.3.3"
+   },
+   "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test --env=jsdom",
+      "eject": "react-scripts eject"
+   },
+   "browserslist": [
+      ">0.2%",
+      "not dead",
+      "not ie <= 11",
+      "not op_mini all"
+   ]
 }

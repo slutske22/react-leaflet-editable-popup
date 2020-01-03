@@ -5,7 +5,7 @@ See the [GitHub](https://github.com/slutske22/React-Leaflet-Editable-Popup) for 
 
 ## Demo
 
-See this codesandbox for examples.  Click on the popups for explanations.
+See this [codesandbox](https://codesandbox.io/s/github/slutske22/React-Leaflet-Editable-Popup) for examples.  Click on the popups for explanations.
 
 ## Installation
 
@@ -83,7 +83,7 @@ Your initial value for the popup's content can be raw JSX, a React class or func
 
 ## Examples
 
-Check out the codesandbox for some examples in action.
+Check out the [codesandbox](https://codesandbox.io/s/github/slutske22/React-Leaflet-Editable-Popup) for some examples in action.
 
 ### Without state management
 

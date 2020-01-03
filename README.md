@@ -1,10 +1,7 @@
 # React Leaflet Editable Popup
 A small plugin for leaflet which allows the author to make a popup editable.  You can also use the popup to remove its source.  This is adapted from [leaflet-popup-modifier](https://github.com/slutske22/leaflet-popup-modifier) to work with React-Leaflet.
 
-
-<p align="center">
-  <img src="leaflet-popupMod-gif.gif">
-</p>
+See the [GitHub](https://github.com/slutske22/React-Leaflet-Editable-Popup) for more information.
 
 ## Demo
 
@@ -12,6 +9,11 @@ See this codesandbox for examples.  Click on the popups for explanations.
 
 ## Installation
 
+Install via npm:
+
+`npm install react-leaflet-editable-popup`
+
+Or just grab the EditablePopup.js and .css files from the src folder and stick them in your project.
 
 ## Using the plugin
 

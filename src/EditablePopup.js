@@ -20,7 +20,7 @@ class EditablePopup extends React.Component{
       }
    }
 
-   // Checking if what the author passes in is an HTML string or a JSX element, and parses accordingly (there may be a better way to do this):
+   // Checking if what the author passes in is an HTML string or a JSX element, and parses accordingly (there may be a better way to do this - open a PR!):
    parsedChildren = this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children
 
    state = {

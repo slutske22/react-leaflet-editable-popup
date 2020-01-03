@@ -34,36 +34,36 @@ Use within your map just like you would with a regular `react-leaflet` popup.  H
 EditablePopup inherits all props from [react-leaflets's Popup component](https://react-leaflet.js.org/docs/en/components#popup), which in turn inherits all options from [Leaflet's Popup](https://leafletjs.com/reference-1.6.0.html#popup) component.  An EditablePopup also offers the following props:
 
 <table>
-  
+
   <tr>
     <td  width="40%"> <b>Prop</b> </td>
     <td> <b> Description and Use</b> </td>
   </tr>
-  
+
   <tr>
     <td> <code>open</code> </td>
     <td> Opens the popup when map is loaded.  You can use <code>autoClose={false}</code> to open multiple popups at once (this is not specific to EditablePopup, but its good to know!) </td>
   </tr>
-  
+
   <tr>
     <td> <code>removable</code> </td>
     <td> Renders a "Remove this Marker" button inside the popup.  When clicked, this will remove the popup's source (as well as the popup) from your map.  It will not delete your marker or popup instance from the map.  See <code>removalCallback</code> on how to do this. </td>
   </tr>
-  
+
   <tr>
     <td> <code>editable</code> </td>
     <td> Renders an "Edit" button on the popup.  When clicked, this will allow the user to edit the content of the popup.  This is done with a <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content" target="_blank">contenteditable</a> div.  See below for more on that.</td>
   </tr>
-  
+
   <tr>
     <td colspan="2"><br> The following two props are used when generating markers (or any other popup source) dynamically from an array or object.  Enables you to pass the popup content and index (or key) of the popup's source to somewhere else in your application, i.e. a global state in parent component or to a redux store.<br>. </td>
   </tr>
-  
+
   <tr>
     <td> <code>removalCallback={ index => yourCallback(index) }</code> </td>
     <td> Enables you to pass the key or index of the rendered source from the 'Remove this Marker' button to your own callback function.  Useful to connect to a more global state and remove the correct source marker.  See examples below. </td>
   </tr>
-  
+
   <tr>
     <td> <code>saveContentCallback={ (content, index) => yourCallback(content, index) }</code> </td>
     <td> Enables you to pass the new popup content and index (or key) of the rendered source back to your own callback function.  This enables the author to save user edits into a more globally managed state.  See examples below. </td>
@@ -72,7 +72,12 @@ EditablePopup inherits all props from [react-leaflets's Popup component](https:/
 </table>
 
 ## Contenteditable
-In order for the user's input to be properly processed as HTML, user input is routed through <a href="https://www.npmjs.com/package/html-react-parser" target="_blank">html-react-parser</a>.  For this reason, the initial value of the popup's content that you code in must be in the form of a javascript string.  This is similar to Leaflet's [setContent](https://leafletjs.com/reference-1.6.0.html#popup-setcontent) function.
+
+<!-- In order for the user's input to be properly processed as HTML, user input is routed through <a href="https://www.npmjs.com/package/html-react-parser" target="_blank">html-react-parser</a>.  For this reason, the initial value of the popup's content that you code in must be in the form of a javascript string.  This is similar to Leaflet's [setContent](https://leafletjs.com/reference-1.6.0.html#popup-setcontent) function. -->
+
+<!-- If you wish to include javascript statements, use a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">template string</a> rather than a <a href="https://reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx" target="_blank">JSX expression</a> -->
+
+Your initial value for the popup's content can be raw JSX, a React class or functional component, or an HTML string.  The only requirement when using JSX is that it all must be wrapped in a single node, exactly like in React's `render` function.  When a user edits the content and saves it, it is always saved as an HTML string.
 
 ## Examples
 
@@ -96,7 +101,7 @@ class MapWithMarkers extends React.Component{
         popupContent: 'Popup content is usually an HTML string.'
       },
       {
-        coords: ..., 
+        coords: ...,
         popupContent: ...
       },
       {...},
@@ -104,9 +109,9 @@ class MapWithMarkers extends React.Component{
       ...
     ]
   }
-  
+
   render(){
-  
+
     const mapMarkers = this.state.markers.map( (markerSpec, index) => {
       return {
         <Marker position={markerSpec.coords} key={index}>
@@ -116,7 +121,7 @@ class MapWithMarkers extends React.Component{
         </Marker>
       }
     })
-  
+
     return(
       <Map center={center} zoom={zoom}>
         {mapMarkers}
@@ -134,7 +139,7 @@ In the above example, markers are rendered from an array held in the `<MapWithMa
   const mapMarkers = this.state.markers.map( (markerSpec, index) => {
     return {
       <Marker position={markerSpec.coords} key={index}>
-        <Popup removable editable 
+        <Popup removable editable
         removalCallback={(index) => this.removeMarkerFromState(index)}
         saveContentCallback={(content, index) => this.saveContentToState(content, index)} >
           {markerSpec.popupContent}
@@ -155,7 +160,7 @@ class MapWithMarkers extends React.Component{
       }
     })
   }
-  
+
   saveContentToState = (content, index) => {
     this.setState( prevState => {
       const newMarkers = prevState.markers
@@ -167,7 +172,7 @@ class MapWithMarkers extends React.Component{
   }
 
   state = {...}
-  
+
   render(){...}
 
 }
@@ -178,7 +183,7 @@ So using our callback functions, we can reflect our changes in the application's
 import { removeMarkerFromState, saveContentToState } from '.../actions/mapActions.js'
 
 // Inside <MapWithMarkers>'s render function:
-    <Popup removable editable 
+    <Popup removable editable
     removalCallback={(index) => this.props.removeMarkerFromState(index)}
     saveContentCallback={(content, index) => this.props.saveContentToState(content, index)} >
       {markerSpec.popupContent}

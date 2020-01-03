@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "keywords": [],
-  "main": "src/index.js",
+  "main": "src/EditablePopup.js",
   "dependencies": {
     "html-react-parser": "0.10.0",
     "leaflet": "^1.6.0",

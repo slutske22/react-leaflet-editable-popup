@@ -15,6 +15,30 @@ function roundNumber(number, tensplace = 10){
 
 
 
+
+class Test extends React.Component{
+   render(){
+      return(
+         <div>
+            <h3>This is a JSX class component</h3><br />
+            <FuncComponent />
+            {2 + 3}
+         </div>
+      )
+   }
+}
+
+const FuncComponent = () => {
+   return <h4>This is a JSX functional component</h4>
+}
+
+
+
+
+
+
+
+
 const mapRef = React.createRef()
 const markerRef1 = React.createRef()
 
@@ -69,8 +93,8 @@ class Map extends React.Component{
          const newRandomMarkers = prevState.randomMarkers
          newRandomMarkers[index].popupContent = content
          return {
-         ...this.state.newRandomMarkers
-        }
+            ...this.state.newRandomMarkers
+         }
       })
       console.log(this.state.randomMarkers)
    }
@@ -107,9 +131,7 @@ class Map extends React.Component{
             <br>
             <code>&lt;EditablePopup&gt;</code> keeps the newly saved content within its own state.  But the <code>saveContentCallback</code> prop is also available, which takes a callback function of your construction to save the content to your preferred state location.  Your callback arguments should be the popup HTML content as a javascript string, as well as the index of the marker (if the marker is being generated from an array - see the random markers for more info).<br>
             <br>
-            Once the save button is clicked, the html input is parsed through <a href="https://www.npmjs.com/package/html-react-parser" target="_blank">html-react-parser</a>. For this reason, the initial input that is hard-coded into the popup content must be a simple string.  If you wish to include javascript statements, use a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">template string</a> rather than a <a href="https://reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx" target="_blank">JSX expression</a>.  React components within an editable <code>&lt;EditablePopup&gt;</code> are not yet supported, but stay tuned!
-
-            Go to the <a href="https://github.com/slutske22/React-Leaflet-Editable-Popup" target="_blank">GitHub page</a> for this plugin to read more about it.`
+            Once the save button is clicked, the html input is parsed through <a href="https://www.npmjs.com/package/html-react-parser" target="_blank">html-react-parser</a>. The initial input that is hard-coded into the popup content must be a simple string or a React class or functional component.  Read more about the formatting of the initial input in the <a href="https://github.com/slutske22/React-Leaflet-Editable-Popup" target="_blank">GitHub readme</a>.`
       }
 
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOMServer from 'react-dom/server';
 import { Popup } from 'react-leaflet'
 import ContentEditable from 'react-contenteditable'
 import Parser from 'html-react-parser';
@@ -19,13 +20,14 @@ class EditablePopup extends React.Component{
       }
    }
 
+   // Checking if what the author passes in is an HTML string or a JSX element, and parses accordingly (there may be a better way to do this):
+   parsedChildren = this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children
+
    state = {
       editScreenOpen: false,
-      inputValue: this.props.children,
-      content: this.props.children,
+      inputValue: this.parsedChildren,
+      content: this.parsedChildren,
    }
-
-
 
    openEditScreen = () => {
       this.setState({editScreenOpen: true})
@@ -36,7 +38,6 @@ class EditablePopup extends React.Component{
    }
 
    handleEdits = (e) => {
-      // console.log(e.target.value.toString())
       this.setState({inputValue: e.target.value})
    }
 
@@ -58,7 +59,6 @@ class EditablePopup extends React.Component{
    }
 
    removeSource = () => {
-      // this.thePopup.leafletElement._source._map.closePopup()
       if(!this.props.sourceKey){
          this.thePopup.leafletElement._source.remove()
       } else if( (this.props.sourceKey || this.props.sourceKey ===0 ) && this.props.removalCallback){
@@ -96,6 +96,7 @@ class EditablePopup extends React.Component{
       const contentScreen = (
          <>
             {Parser(this.state.content)}
+            {/*}  { (typeof this.state.content === 'string') && Parser(this.state.content)}  */}
             {Buttons}
          </>
       )

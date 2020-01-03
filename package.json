@@ -1,6 +1,6 @@
 {
    "name": "react-leaflet-editable-popup",
-   "version": "1.0.3",
+   "version": "1.0.4",
    "description": "A popup component for react-leaflet which is editable and removable.",
    "keywords": [
       "react-leaflet",

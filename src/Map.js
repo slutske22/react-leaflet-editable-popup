@@ -96,7 +96,6 @@ class Map extends React.Component{
             ...this.state.newRandomMarkers
          }
       })
-      console.log(this.state.randomMarkers)
    }
 
    render(){

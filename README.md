@@ -12,6 +12,11 @@ See this [codesandbox](https://codesandbox.io/s/github/slutske22/React-Leaflet-E
 
 ## Installation
 
+Install via npm:
+
+`npm install react-leaflet-editable-popup`
+
+Or just grab the EditablePopup.js and .css files from the src folder and stick them in your project.
 
 ## Using the plugin
 

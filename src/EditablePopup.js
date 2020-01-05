@@ -80,31 +80,28 @@ class EditablePopup extends React.Component{
       let Buttons;
 
       if (this.props.removable && !this.props.editable){
-         Buttons = (
+         Buttons = () =>
             <div className="leaflet-popup-useraction-buttons">
                <button className={`${prefix} remove`} onClick={this.removeSource} >Remove this marker</button>
             </div>
-         )
       } else if (!this.props.removable && this.props.editable){
-         Buttons = (
+         Buttons = () =>
             <div className="leaflet-popup-useraction-buttons">
                <button className={`${prefix} edit`} onClick={ this.openEditScreen }>Edit</button>
             </div>
-         )
       } else if (this.props.removable && this.props.editable){
-         Buttons = (
+         Buttons = () =>
             <div className="leaflet-popup-useraction-buttons">
                <button className={`${prefix} remove`} onClick={this.removeSource} >Remove this marker</button>
                <button onClick={ this.openEditScreen } className={`${prefix} edit`}>Edit</button>
             </div>
-         )
       }
 
       const contentScreen = (
          <>
             {Parser(this.state.content)}
             {/*}  { (typeof this.state.content === 'string') && Parser(this.state.content)}  */}
-            {Buttons}
+            <Buttons />
          </>
       )
 

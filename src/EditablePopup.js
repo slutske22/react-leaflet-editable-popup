@@ -12,9 +12,9 @@ class EditablePopup extends React.Component{
    constructor(props){
       super(props)
 
-
       this.state = {
          editScreenOpen: false,
+         // Checking if what the author passes in is an HTML string or a JSX element, and parses accordingly (there may be a better way to do this - open a PR!):
          inputValue: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
          content: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
       }
@@ -55,8 +55,6 @@ class EditablePopup extends React.Component{
             this.props.removalCallback(this.props.sourceKey)
          }
       }
-
-
    }
 
    componentDidMount(){
@@ -69,48 +67,38 @@ class EditablePopup extends React.Component{
       }
    }
 
-   // Checking if what the author passes in is an HTML string or a JSX element, and parses accordingly (there may be a better way to do this - open a PR!):
-
-
-
-
-
    render(){
 
       let Buttons;
 
       if (this.props.removable && !this.props.editable){
-         Buttons = (
+         Buttons = () =>
             <div className="leaflet-popup-useraction-buttons">
                <button className={`${prefix} remove`} onClick={this.removeSource} >Remove this marker</button>
             </div>
-         )
       } else if (!this.props.removable && this.props.editable){
-         Buttons = (
+         Buttons = () =>
             <div className="leaflet-popup-useraction-buttons">
                <button className={`${prefix} edit`} onClick={ this.openEditScreen }>Edit</button>
             </div>
-         )
       } else if (this.props.removable && this.props.editable){
-         Buttons = (
+         Buttons = () =>
             <div className="leaflet-popup-useraction-buttons">
                <button className={`${prefix} remove`} onClick={this.removeSource} >Remove this marker</button>
                <button onClick={ this.openEditScreen } className={`${prefix} edit`}>Edit</button>
             </div>
-         )
       }
 
-      const contentScreen = (
+      const ContentScreen = () => (
          <>
             {Parser(this.state.content)}
-            {/*}  { (typeof this.state.content === 'string') && Parser(this.state.content)}  */}
-            {Buttons}
+            <Buttons />
          </>
       )
 
-      const editScreen = (
+      const EditScreen = () => (
          <>
-            <ContentEditable className="leaflet-popup-input" html={this.state.inputValue} ref="editableDiv" onChange={ this.handleEdits } />
+            <ContentEditable className="leaflet-popup-input" html={this.state.inputValue} onChange={ this.handleEdits } />
 
             <div className="leaflet-popup-useraction-buttons">
                <button className={`${prefix} cancel`} onClick={this.cancelEdits} >Cancel</button>
@@ -121,7 +109,7 @@ class EditablePopup extends React.Component{
 
       return(
          <Popup {...this.props} ref={thePopup => this.thePopup = thePopup} minWidth="160">
-            {this.state.editScreenOpen ? editScreen : contentScreen}
+            {this.state.editScreenOpen ? <EditScreen /> : <ContentScreen />}
          </Popup>
       )
    }

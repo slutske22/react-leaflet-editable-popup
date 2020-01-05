@@ -9,6 +9,55 @@ const prefix = 'leaflet-popup-button'
 
 
 class EditablePopup extends React.Component{
+   constructor(props){
+      super(props)
+
+
+      this.state = {
+         editScreenOpen: false,
+         inputValue: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
+         content: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
+      }
+
+      this.openEditScreen = () => {
+         this.setState({editScreenOpen: true})
+      }
+
+      this.closeEditScreen = () => {
+         this.setState({editScreenOpen: false})
+      }
+
+      this.handleEdits = (e) => {
+         this.setState({inputValue: e.target.value})
+      }
+
+      this.saveEdits = () => {
+         if (!isNaN(this.props.sourceKey) && this.props.saveContentCallback){
+            this.props.saveContentCallback(this.state.inputValue, this.props.sourceKey)
+         }
+         this.setState({
+            content: this.state.inputValue,
+         })
+         this.closeEditScreen()
+      }
+
+      this.cancelEdits = () => {
+         this.setState({
+            inputValue: this.state.content
+         })
+         this.closeEditScreen()
+      }
+
+      this.removeSource = () => {
+         if(!this.props.sourceKey){
+            this.thePopup.leafletElement._source.remove()
+         } else if( (this.props.sourceKey || this.props.sourceKey ===0 ) && this.props.removalCallback){
+            this.props.removalCallback(this.props.sourceKey)
+         }
+      }
+
+
+   }
 
    componentDidMount(){
       // This is admittedly hacky as hell
@@ -22,48 +71,7 @@ class EditablePopup extends React.Component{
 
    // Checking if what the author passes in is an HTML string or a JSX element, and parses accordingly (there may be a better way to do this - open a PR!):
 
-   state = {
-      editScreenOpen: false,
-      inputValue: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
-      content: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
-   }
 
-   openEditScreen = () => {
-      this.setState({editScreenOpen: true})
-   }
-
-   closeEditScreen = () => {
-      this.setState({editScreenOpen: false})
-   }
-
-   handleEdits = (e) => {
-      this.setState({inputValue: e.target.value})
-   }
-
-   saveEdits = () => {
-      if (!isNaN(this.props.sourceKey) && this.props.saveContentCallback){
-         this.props.saveContentCallback(this.state.inputValue, this.props.sourceKey)
-      }
-      this.setState({
-         content: this.state.inputValue,
-      })
-      this.closeEditScreen()
-   }
-
-   cancelEdits = () => {
-      this.setState({
-         inputValue: this.state.content
-      })
-      this.closeEditScreen()
-   }
-
-   removeSource = () => {
-      if(!this.props.sourceKey){
-         this.thePopup.leafletElement._source.remove()
-      } else if( (this.props.sourceKey || this.props.sourceKey ===0 ) && this.props.removalCallback){
-         this.props.removalCallback(this.props.sourceKey)
-      }
-   }
 
 
 

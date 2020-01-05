@@ -97,7 +97,7 @@ class EditablePopup extends React.Component{
             </div>
       }
 
-      const contentScreen = (
+      const ContentScreen = () => (
          <>
             {Parser(this.state.content)}
             {/*}  { (typeof this.state.content === 'string') && Parser(this.state.content)}  */}
@@ -105,9 +105,9 @@ class EditablePopup extends React.Component{
          </>
       )
 
-      const editScreen = (
+      const EditScreen = () => (
          <>
-            <ContentEditable className="leaflet-popup-input" html={this.state.inputValue} ref="editableDiv" onChange={ this.handleEdits } />
+            <ContentEditable className="leaflet-popup-input" html={this.state.inputValue} onChange={ this.handleEdits } />
 
             <div className="leaflet-popup-useraction-buttons">
                <button className={`${prefix} cancel`} onClick={this.cancelEdits} >Cancel</button>
@@ -118,7 +118,7 @@ class EditablePopup extends React.Component{
 
       return(
          <Popup {...this.props} ref={thePopup => this.thePopup = thePopup} minWidth="160">
-            {this.state.editScreenOpen ? editScreen : contentScreen}
+            {this.state.editScreenOpen ? <EditScreen /> : <ContentScreen />}
          </Popup>
       )
    }

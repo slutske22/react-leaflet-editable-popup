@@ -5,58 +5,54 @@ import ContentEditable from 'react-contenteditable'
 import Parser from 'html-react-parser';
 import './editable-popup.css'
 
-const prefix = 'leaflet-popup-button'
 
 
 class EditablePopup extends React.Component{
-   constructor(props){
-      super(props)
 
+   // Checking if what the author passes in is an HTML string or a JSX element, and parses accordingly (there may be a better way to do this - open a PR!):
+   parsedChildren = this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children
 
-      this.state = {
-         editScreenOpen: false,
-         inputValue: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
-         content: this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children,
+   state = {
+      editScreenOpen: false,
+      inputValue: this.parsedChildren,
+      content: this.parsedChildren,
+   }
+
+   openEditScreen = () => {
+      this.setState({editScreenOpen: true})
+   }
+
+   closeEditScreen = () => {
+      this.setState({editScreenOpen: false})
+   }
+
+   handleEdits = (e) => {
+      this.setState({inputValue: e.target.value})
+   }
+
+   saveEdits = () => {
+      if (!isNaN(this.props.sourceKey) && this.props.saveContentCallback){
+         this.props.saveContentCallback(this.state.inputValue, this.props.sourceKey)
       }
+      this.setState({
+         content: this.state.inputValue,
+      })
+      this.closeEditScreen()
+   }
 
-      this.openEditScreen = () => {
-         this.setState({editScreenOpen: true})
+   cancelEdits = () => {
+      this.setState({
+         inputValue: this.state.content
+      })
+      this.closeEditScreen()
+   }
+
+   removeSource = () => {
+      if(!this.props.sourceKey){
+         this.thePopup.leafletElement._source.remove()
+      } else if( (this.props.sourceKey || this.props.sourceKey ===0 ) && this.props.removalCallback){
+         this.props.removalCallback(this.props.sourceKey)
       }
-
-      this.closeEditScreen = () => {
-         this.setState({editScreenOpen: false})
-      }
-
-      this.handleEdits = (e) => {
-         this.setState({inputValue: e.target.value})
-      }
-
-      this.saveEdits = () => {
-         if (!isNaN(this.props.sourceKey) && this.props.saveContentCallback){
-            this.props.saveContentCallback(this.state.inputValue, this.props.sourceKey)
-         }
-         this.setState({
-            content: this.state.inputValue,
-         })
-         this.closeEditScreen()
-      }
-
-      this.cancelEdits = () => {
-         this.setState({
-            inputValue: this.state.content
-         })
-         this.closeEditScreen()
-      }
-
-      this.removeSource = () => {
-         if(!this.props.sourceKey){
-            this.thePopup.leafletElement._source.remove()
-         } else if( (this.props.sourceKey || this.props.sourceKey ===0 ) && this.props.removalCallback){
-            this.props.removalCallback(this.props.sourceKey)
-         }
-      }
-
-
    }
 
    componentDidMount(){
@@ -69,14 +65,9 @@ class EditablePopup extends React.Component{
       }
    }
 
-   // Checking if what the author passes in is an HTML string or a JSX element, and parses accordingly (there may be a better way to do this - open a PR!):
-
-
-
-
-
    render(){
 
+      const prefix = 'leaflet-popup-button'
       let Buttons;
 
       if (this.props.removable && !this.props.editable){
@@ -123,7 +114,5 @@ class EditablePopup extends React.Component{
       )
    }
 }
-
-
 
 export default EditablePopup

@@ -1,0 +1,39 @@
+.leaflet-popup-useraction-buttons,
+.leaflet-popup-input-actions{
+   display: flex;
+   justify-content: space-between;
+   padding: 13px 0px 0px 0px;
+}
+
+.leaflet-popup-button{
+   border-bottom: none;
+   text-decoration: none;
+   background: none;
+   border: none;
+   padding: 0;
+   font-size: 1em;
+   color: #069;
+   cursor: pointer;
+}
+.leaflet-popup-button:hover{
+   color: #0078A8;
+   text-decoration: underline;
+   cursor: pointer;
+}
+.leaflet-popup-button.edit,
+.leaflet-popup-button.save{
+   margin-left: auto;
+   text-align: right;
+}
+
+
+.leaflet-popup-input{
+   border: 1px solid lightgrey;
+   min-width: 160px;
+   padding: 5px;
+}
+.leaflet-popup-input:focus{
+   outline: 2px solid #60b7da;
+   border: 1px solid #60b7da;
+}
+

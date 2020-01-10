@@ -9,6 +9,7 @@ import { Map, TileLayer, Marker } from 'react-leaflet'
 import GeoSearch from './components/GeoSearch'
 import MousePosition from './components/MousePosition'
 import EditablePopup from './components/EditablePopup'
+import SearchBar from 'react-leaflet-esri-geosearch'
 
 
 const centerLat = 31.8667
@@ -25,7 +26,7 @@ export default function App() {
         subdomains='abcd' ext='png'
       />
 
-      <GeoSearch 
+      <SearchBar 
         expanded={true} collapseAfterResult={false} useMapBounds={false} position={"topright"} 
         providers={['arcgisOnlineProvider', 'geocodeServiceProvider']} />
 

@@ -4,26 +4,20 @@
 import React from "react";
 import "./styles.css";
 
-import { Map, TileLayer, Marker, Polyline } from 'react-leaflet'
+import { Map, TileLayer, Marker } from 'react-leaflet'
 
 import GeoSearch from './components/GeoSearch'
 import MousePosition from './components/MousePosition'
 import EditablePopup from './components/EditablePopup'
-import Arrowheads from './components/Arrowheads'
+import Polyline from './components/ArrowheadsPolyline'
 
 import { ensenadaBikePath } from './constants'
-
 
 const centerLat = 31.8667
 const centerLng = -116.5964
 
 
-
 class App extends React.Component{
-
-  componentDidMount(){
-    console.log(this)
-  }
 
   render(){
 
@@ -53,10 +47,7 @@ class App extends React.Component{
         </Marker>
 
 
-        <Polyline positions={ensenadaBikePath} ref={'myPolyline'} >
-          <Arrowheads parent={this.refs} />
-        </Polyline>
-
+        <Polyline positions={ensenadaBikePath} arrowheads={ {size: '1000m'} } />
 
       </Map>
 

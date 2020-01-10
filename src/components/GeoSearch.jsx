@@ -20,7 +20,6 @@ class GeoSearch extends MapControl {
   componentDidMount() {
     const { map } = this.props.leaflet;
     this.leafletElement.addTo(map);
-    console.log(ELG);
   }
 }
 

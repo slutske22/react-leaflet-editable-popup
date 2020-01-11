@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server';
+import L from 'leaflet'
 import { Popup } from 'react-leaflet'
 import ContentEditable from 'react-contenteditable'
 import Parser from 'html-react-parser';
@@ -7,16 +8,30 @@ import './EditablePopup.css'
 
 const prefix = 'leaflet-popup-button'
 
-
 class EditablePopup extends React.Component{
+   constructor(props){
+      super(props)
+
+      const sourceTypes = ['Layer','Circle','CircleMarker','Marker','Polyline','Polygon','ImageOverlay','VideoOverlay','SVGOverlay','Rectangle','LayerGroup','FeatureGroup','GeoJSON']
+
+      sourceTypes.forEach( type => {
+         L[type].include({
+            nametag: type.toLowerCase()
+         })
+      })
+
+   }
 
    componentDidMount(){
+
+      console.log(this.thePopup.leafletElement._source)
 
       if (this.props.open){
          setTimeout( () => {
             this.thePopup.leafletElement._source.openPopup()
          },0.001)
       }
+
    }
 
    parsedChildren = this.props.children.$$typeof ? ReactDOMServer.renderToStaticMarkup(this.props.children) : this.props.children
@@ -28,6 +43,7 @@ class EditablePopup extends React.Component{
    }
 
    openEditScreen = () => {
+      // console.log(this.thePopup.leafletElement._source.nametag)
       this.setState({editScreenOpen: true})
    }
 
@@ -69,6 +85,7 @@ class EditablePopup extends React.Component{
    render(){
 
       let Buttons;
+      // const { nametag } = this.thePopup.leafletElement._source
 
       if (this.props.removable && !this.props.editable){
          Buttons = (

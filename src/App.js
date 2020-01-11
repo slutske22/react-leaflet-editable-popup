@@ -40,7 +40,7 @@ class App extends React.Component{
         <MousePosition position={'bottomleft'} />
 
         <Marker position={[31.80, -116.79]}>
-          <EditablePopup editable removable maxWidth="450">
+          <EditablePopup editable removable open maxWidth="450">
             <div>
               <h3>Welcome to the react-leaflet custom components library</h3>
               <p>This is an example page of some custom components.  You'll notice a Search bar, which is a custom component built from the <a href="https://esri.github.io/esri-leaflet/api-reference/controls/geosearch.html#result-object" target="_blank">Esri Leaflet Geocoder</a>.  You'll also see a mouseposition coordinates custom component in the corner.  Even this popup that you're reading is a custom component which has additional features beyond a normal popup.</p>
@@ -50,7 +50,7 @@ class App extends React.Component{
 
 
         <Polyline positions={ensenadaBikePath} arrowheads={ {size: '300m', frequency: '1000m'} } >
-          <EditablePopup removable>
+          <EditablePopup removable editable>
             This is a polyline
           </EditablePopup>
         </Polyline>

@@ -9,7 +9,7 @@
     "esri-leaflet-geocoder": "2.3.2",
     "html-react-parser": "0.10.0",
     "leaflet": "1.6.0",
-    "leaflet-arrowheads": "^1.0.5",
+    "leaflet-arrowheads": "^1.0.8",
     "react": "16.12.0",
     "react-contenteditable": "3.3.3",
     "react-dom": "16.12.0",

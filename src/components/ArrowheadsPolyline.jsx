@@ -8,9 +8,8 @@ class ArrowheadsPolyline extends React.Component{
       const polyline = this.polylineRef.leafletElement
       if (this.props.arrowheads){
          polyline.arrowheads(this.props.arrowheads)
+         polyline._update()
       }
-      console.log(this.polylineRef)
-
    }
 
    render(){
@@ -20,6 +19,5 @@ class ArrowheadsPolyline extends React.Component{
    }
    
 }
-
 
 export default ArrowheadsPolyline

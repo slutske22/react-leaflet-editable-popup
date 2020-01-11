@@ -47,7 +47,11 @@ class App extends React.Component{
         </Marker>
 
 
-        <Polyline positions={ensenadaBikePath} arrowheads={ {size: '1000m'} } />
+        <Polyline positions={ensenadaBikePath} arrowheads={ {size: '300m', frequency: '1000m'} } >
+          <EditablePopup removable>
+            This is a polyline
+          </EditablePopup>
+        </Polyline>
 
       </Map>
 

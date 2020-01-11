@@ -11,6 +11,7 @@ import MousePosition from './components/MousePosition'
 import EditablePopup from './components/EditablePopup'
 import Polyline from './components/ArrowheadsPolyline'
 
+
 import { ensenadaBikePath } from './constants'
 
 const centerLat = 31.8667
@@ -22,6 +23,7 @@ class App extends React.Component{
   render(){
 
     return (
+
 
       <Map id="mapId" center={[centerLat, centerLng]} zoom={10} maxZoom={14} >
 

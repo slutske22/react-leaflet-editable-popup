@@ -14,8 +14,8 @@ import Polyline from './components/ArrowheadsPolyline'
 
 import { ensenadaBikePath } from './constants'
 
-const centerLat = 31.8667
-const centerLng = -116.5964
+const centerLat = 31.8117
+const centerLng = -116.6494
 
 
 class App extends React.Component{
@@ -25,7 +25,7 @@ class App extends React.Component{
     return (
 
 
-      <Map id="mapId" center={[centerLat, centerLng]} zoom={10} maxZoom={14} >
+      <Map id="mapId" center={[centerLat, centerLng]} zoom={11.5} maxZoom={14} zoomSnap='0.5' >
 
         <TileLayer
           attribution={'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}
@@ -39,7 +39,7 @@ class App extends React.Component{
 
         <MousePosition position={'bottomleft'} />
 
-        <Marker position={[centerLat-0.3, centerLng]}>
+        <Marker position={[31.80, -116.79]}>
           <EditablePopup editable removable maxWidth="450">
             <div>
               <h3>Welcome to the react-leaflet custom components library</h3>

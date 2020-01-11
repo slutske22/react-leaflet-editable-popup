@@ -24,13 +24,17 @@ class EditablePopup extends React.Component{
 
    componentDidMount(){
 
-      console.log(this.thePopup.leafletElement._source)
+      console.log(this.thePopup.leafletElement._source.nametag)
 
       if (this.props.open){
          setTimeout( () => {
             this.thePopup.leafletElement._source.openPopup()
          },0.001)
       }
+
+      this.setState({
+         nametag: this.props.nametag || this.thePopup.leafletElement._source.nametag
+      })
 
    }
 
@@ -40,6 +44,7 @@ class EditablePopup extends React.Component{
       editScreenOpen: false,
       inputValue: this.parsedChildren,
       content: this.parsedChildren,
+      nametag: this.props.nametag
    }
 
    openEditScreen = () => {
@@ -90,7 +95,7 @@ class EditablePopup extends React.Component{
       if (this.props.removable && !this.props.editable){
          Buttons = (
             <div className="leaflet-popup-useraction-buttons">
-               <button className={`${prefix} remove`} onClick={this.removeSource} >Remove this marker</button>
+               <button className={`${prefix} remove`} onClick={this.removeSource} >Remove this {this.state.nametag}</button>
             </div>
          )
       } else if (!this.props.removable && this.props.editable){
@@ -102,7 +107,7 @@ class EditablePopup extends React.Component{
       } else if (this.props.removable && this.props.editable){
          Buttons = (
             <div className="leaflet-popup-useraction-buttons">
-               <button className={`${prefix} remove`} onClick={this.removeSource} >Remove this marker</button>
+               <button className={`${prefix} remove`} onClick={this.removeSource} >Remove this {this.state.nametag}</button>
                <button onClick={ this.openEditScreen } className={`${prefix} edit`}>Edit</button>
             </div>
          )

@@ -50,7 +50,7 @@ class App extends React.Component{
 
 
         <Polyline positions={ensenadaBikePath} arrowheads={ {size: '300m', frequency: '1000m'} } >
-          <EditablePopup removable editable>
+          <EditablePopup removable editable nametag={'bike path'}>
             This is a polyline
           </EditablePopup>
         </Polyline>

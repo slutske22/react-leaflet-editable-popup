@@ -9,42 +9,57 @@ import { Map, TileLayer, Marker } from 'react-leaflet'
 import GeoSearch from './components/GeoSearch'
 import MousePosition from './components/MousePosition'
 import EditablePopup from './components/EditablePopup'
-import SearchBar from 'react-leaflet-esri-geosearch'
+import Polyline from './components/ArrowheadsPolyline'
 
+
+import { ensenadaBikePath } from './constants'
 
 const centerLat = 31.8667
 const centerLng = -116.5964
 
-export default function App() {
-  return (
 
-    <Map id="mapId" center={[centerLat, centerLng]} zoom={10} maxZoom={14} >
+class App extends React.Component{
 
-      <TileLayer
-        attribution={'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}
-        url={"https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}"}
-        subdomains='abcd' ext='png'
-      />
+  render(){
 
-      <SearchBar 
-        expanded={true} collapseAfterResult={false} useMapBounds={false} position={"topright"} 
-        providers={['arcgisOnlineProvider', 'geocodeServiceProvider']} />
-
-      <MousePosition position={'bottomleft'} />
-
-      <Marker position={[centerLat-0.3, centerLng]}>
-        <EditablePopup editable removable open maxWidth="450">
-          <div>
-            <h3>Welcome to the react-leaflet custom components library</h3>
-            <p>This is an example page of some custom components.  You'll notice a Search bar, which is a custom component built from the <a href="https://esri.github.io/esri-leaflet/api-reference/controls/geosearch.html#result-object" target="_blank">Esri Leaflet Geocoder</a>.  You'll also see a mouseposition coordinates custom component in the corner.  Even this popup that you're reading is a custom component which has additional features beyond a normal popup.</p>
-          </div>
-        </EditablePopup>
-      </Marker>
+    return (
 
 
-    </Map>
+      <Map id="mapId" center={[centerLat, centerLng]} zoom={10} maxZoom={14} >
+
+        <TileLayer
+          attribution={'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}
+          url={"https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}"}
+          subdomains='abcd' ext='png'
+        />
+
+        <GeoSearch 
+          expanded={true} collapseAfterResult={false} useMapBounds={false} position={"topright"} 
+          providers={['arcgisOnlineProvider', 'geocodeServiceProvider']} />
+
+        <MousePosition position={'bottomleft'} />
+
+        <Marker position={[centerLat-0.3, centerLng]}>
+          <EditablePopup editable removable maxWidth="450">
+            <div>
+              <h3>Welcome to the react-leaflet custom components library</h3>
+              <p>This is an example page of some custom components.  You'll notice a Search bar, which is a custom component built from the <a href="https://esri.github.io/esri-leaflet/api-reference/controls/geosearch.html#result-object" target="_blank">Esri Leaflet Geocoder</a>.  You'll also see a mouseposition coordinates custom component in the corner.  Even this popup that you're reading is a custom component which has additional features beyond a normal popup.</p>
+            </div>
+          </EditablePopup>
+        </Marker>
 
 
-  );
+        <Polyline positions={ensenadaBikePath} arrowheads={ {size: '300m', frequency: '1000m'} } >
+          <EditablePopup removable>
+            This is a polyline
+          </EditablePopup>
+        </Polyline>
+
+      </Map>
+
+
+    );
+  }
 }
 
+export default App

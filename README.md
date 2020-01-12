@@ -78,10 +78,6 @@ EditablePopup inherits all props from [react-leaflets's Popup component](https:/
 
 ## Contenteditable
 
-<!-- In order for the user's input to be properly processed as HTML, user input is routed through <a href="https://www.npmjs.com/package/html-react-parser" target="_blank">html-react-parser</a>.  For this reason, the initial value of the popup's content that you code in must be in the form of a javascript string.  This is similar to Leaflet's [setContent](https://leafletjs.com/reference-1.6.0.html#popup-setcontent) function. -->
-
-<!-- If you wish to include javascript statements, use a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals" target="_blank">template string</a> rather than a <a href="https://reactjs.org/docs/introducing-jsx.html#embedding-expressions-in-jsx" target="_blank">JSX expression</a> -->
-
 Your initial value for the popup's content can be raw JSX, a React class or functional component, or an HTML string.  The only requirement when using JSX is that it all must be wrapped in a single node, exactly like in React's `render` function.  When a user edits the content and saves it, it is always saved as an HTML string.
 
 ## Examples
@@ -103,11 +99,11 @@ class MapWithMarkers extends React.Component{
     markers: [
       {
         coords: [coords],
-        popupContent: 'Popup content is usually an HTML string.'
+        popupContent: '<p>Popup content is usually an HTML string.</p>'
       },
       {
-        coords: ...,
-        popupContent: ...
+        coords: [coords],
+        popupContent: <h3>Popup content can also be JSX or a React component</h3>
       },
       {...},
       {...},

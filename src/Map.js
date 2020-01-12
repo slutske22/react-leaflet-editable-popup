@@ -2,7 +2,7 @@ import React from 'react'
 import { Map as LeafletMap, TileLayer, LayerGroup, Marker } from 'react-leaflet'
 import Popup from './EditablePopup'
 // import Popup from 'react-leaflet-editable-popup-npm'
-import { redIcon, greenIcon, blackIcon, goldIcon, violetIcon} from './Icons'
+import { lochnessIcon, redIcon, greenIcon, blackIcon, goldIcon, violetIcon} from './Icons'
 
 //  ---- UTILITY FUNCTIONS ----------------------------- //
 
@@ -133,7 +133,13 @@ class Map extends React.Component{
                <p>These green markers are editable but not removable.  An <code>&lt;EditablePopup&gt;</code> uses a <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable" target="_blank">contenteditable</a> div to allow the user to edit the popup's content.  It acts as a rich text formatter for simple text editing within a popup.</p>
                <p><code>&lt;EditablePopup&gt;</code> keeps the newly saved content within its own state.  But the <code>saveContentCallback</code> prop is also available, which takes a callback function of your construction to save the content to your preferred state location.  Your callback arguments should be the popup HTML content as a javascript string, as well as the index of the marker (if the marker is being generated from an array - see the random markers for more info).</p>
                <p>Once the save button is clicked, the html input is parsed through <a href="https://www.npmjs.com/package/html-react-parser" target="_blank">html-react-parser</a>. The initial input that is hard-coded into the popup content must be a simple string or a React class or functional component.  Read more about the formatting of the initial input in the <a href="https://github.com/slutske22/React-Leaflet-Editable-Popup" target="_blank">GitHub readme</a>.</p>
-            </>
+            </>,
+            lochness: 
+               <>
+                  <h3>This monster is removable.</h3>
+                  <p>A removable <code>&lt;EditablePopup&gt;</code> will have a button that says "Remove this &lt;thing&gt;".  The plugin automatically assigns a name to &lt;thing&gt; based on its lealet name.  For example, a marker will say "Remove this marker," while a polygon will say "Remove this polygon."  Authors can specify a more personalized name by writing the <code>nametag=&#123;'yourNametag'&#125;</code> prop.
+                  </p>
+               </>
 
       }
 
@@ -200,6 +206,12 @@ class Map extends React.Component{
             <Marker position={[17.86176, -80.03529]} icon={greenIcon}>
                <Popup maxWidth="500" editable >
                {sampleMarkerText.editable}
+               </Popup>
+            </Marker>
+
+            <Marker position={[22, -130.03529]} icon={lochnessIcon}>
+               <Popup removable nametag={'Sea Monster'}>
+               {sampleMarkerText.lochness}
                </Popup>
             </Marker>
 

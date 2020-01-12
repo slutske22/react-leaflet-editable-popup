@@ -57,7 +57,7 @@ EditablePopup inherits all props from [react-leaflets's Popup component](https:/
 
   <tr>
     <td> <code>editable</code> </td>
-    <td> Renders an "Edit" button on the popup.  When clicked, this will allow the user to edit the content of the popup.  This is done with a <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content" target="_blank">contenteditable</a> div.  See below for more on that.</td>
+    <td> Renders an "Edit" button on the popup.  When clicked, this will allow the user to edit the content of the popup.  This is done with a <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content" target="_blank">contenteditable</a> div (specifically with <a href="https://github.com/lovasoa/react-contenteditable" target="_blank">react-contenteditable</a>).  See below for more on that.</td>
   </tr>
   
   <tr>

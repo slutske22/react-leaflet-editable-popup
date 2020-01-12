@@ -70,12 +70,12 @@ EditablePopup inherits all props from [react-leaflets's Popup component](https:/
   </tr>
 
   <tr>
-    <td> <code>removalCallback={ index => yourCallback(index) }</code> </td>
+    <td> <code>removalCallback={ index => this.yourCallback(index) }</code> </td>
     <td> Enables you to pass the key or index of the rendered source from the 'Remove this Marker' button to your own callback function.  Useful to connect to a more global state and remove the correct source marker.  See examples below. </td>
   </tr>
 
   <tr>
-    <td> <code>saveContentCallback={ (content, index) => yourCallback(content, index) }</code> </td>
+    <td> <code>saveContentCallback={ (content, index) => this.yourCallback(content, index) }</code> </td>
     <td> Enables you to pass the new popup content and index (or key) of the rendered source back to your own callback function.  This enables the author to save user edits into a more globally managed state.  See examples below. </td>
   </tr>
 

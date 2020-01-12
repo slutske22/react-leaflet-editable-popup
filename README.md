@@ -52,7 +52,7 @@ EditablePopup inherits all props from [react-leaflets's Popup component](https:/
 
   <tr>
     <td> <code>removable</code> </td>
-    <td> Renders a "Remove this Marker" button inside the popup.  When clicked, this will remove the popup's source (as well as the popup) from your map.  It will not delete your marker or popup instance from the map.  See <code>removalCallback</code> on how to do this. </td>
+    <td> Renders a "Remove this {leaflet element}" button inside the popup.  When clicked, this will remove the popup's source (as well as the popup) from your map.  It will not delete your element or popup instance from the map.  See <code>removalCallback</code> on how to do this. </td>
   </tr>
 
   <tr>

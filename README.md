@@ -59,6 +59,11 @@ EditablePopup inherits all props from [react-leaflets's Popup component](https:/
     <td> <code>editable</code> </td>
     <td> Renders an "Edit" button on the popup.  When clicked, this will allow the user to edit the content of the popup.  This is done with a <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Editable_content" target="_blank">contenteditable</a> div.  See below for more on that.</td>
   </tr>
+  
+  <tr>
+    <td> <code>nametag={<i>'yourNametag'</i>}</code> </td>
+    <td> Gives authors the option to change the 'Remove this {leaflet element}' to 'Remove this {nametag}'.  For all layers that can have a popup, this plugin installs names equivalent to the type of layer, and uses that as a nametag.  For example, a removable popup attached to a polyline will say 'Remove this polyline', whereas for a circle, it will say 'Remove this circle'.  The nametag prop allows you to customize that.</td>
+  </tr>
 
   <tr>
     <td colspan="2"><br> The following two props are used when generating markers (or any other popup source) dynamically from an array or object.  Enables you to pass the popup content and index (or key) of the popup's source to somewhere else in your application, i.e. a global state in parent component or to a redux store.<br>. </td>

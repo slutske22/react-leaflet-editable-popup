@@ -114,22 +114,22 @@ class EditablePopup extends React.Component{
       }
 
       const contentScreen = (
-         <>
+         <React.Fragment>
             {Parser(this.state.content)}
             {/*}  { (typeof this.state.content === 'string') && Parser(this.state.content)}  */}
             {Buttons}
-         </>
+         </React.Fragment>
       )
 
       const editScreen = (
-         <>
+         <React.Fragment>
             <ContentEditable className="leaflet-popup-input" html={this.state.inputValue} ref="editableDiv" onChange={ this.handleEdits } />
 
             <div className="leaflet-popup-useraction-buttons">
                <button className={`${prefix} cancel`} onClick={this.cancelEdits} >Cancel</button>
                <button className={`${prefix} save`} onClick={this.saveEdits} >Save</button>
             </div>
-         </>
+         </React.Fragment>
       )
 
       return(

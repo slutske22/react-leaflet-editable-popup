@@ -1,7 +1,7 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, LayerGroup, Marker } from 'react-leaflet'
 import Popup from './EditablePopup'
-// import Popup from 'react-leaflet-editable-popup-npm'
+// import Popup from 'react-leaflet-editable-popup'
 import { lochnessIcon, redIcon, greenIcon, blackIcon, goldIcon, violetIcon} from './Icons'
 
 //  ---- UTILITY FUNCTIONS ----------------------------- //
@@ -13,31 +13,6 @@ function randomNumber(min, max){
 function roundNumber(number, tensplace = 10){
    return Math.round( number * tensplace) / tensplace;
 }
-
-
-
-
-class Test extends React.Component{
-   render(){
-      return(
-         <div>
-            <h3>This is a JSX class component</h3><br />
-            <FuncComponent />
-            {2 + 3}
-         </div>
-      )
-   }
-}
-
-const FuncComponent = () => {
-   return <h4>This is a JSX functional component</h4>
-}
-
-
-
-
-
-
 
 
 const mapRef = React.createRef()

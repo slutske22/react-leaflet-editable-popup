@@ -3,6 +3,7 @@
 
 import React from "react";
 import "./styles.css";
+import './components/ActiveArea.css'
 
 import { Map, TileLayer, Marker } from 'react-leaflet'
 
@@ -10,6 +11,9 @@ import GeoSearch from './components/GeoSearch'
 import MousePosition from './components/MousePosition'
 import EditablePopup from './components/EditablePopup'
 import Polyline from './components/ArrowheadsPolyline'
+import RandomMarkersButtonLNative from './components/RandomMarkersButtonLNative'
+import { blackIcon } from './components/Icons'
+import ActiveArea from './components/ActiveArea'
 
 
 import { ensenadaBikePath } from './constants'
@@ -25,7 +29,7 @@ class App extends React.Component{
     return (
 
 
-      <Map id="mapId" center={[centerLat, centerLng]} zoom={11.5} maxZoom={14} zoomSnap='0.5' >
+      <Map id="mapId" center={[centerLat, centerLng]} zoom={11.5} maxZoom={14} zoomSnap='0.5' doubleClickZoom={false} >
 
         <TileLayer
           attribution={'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}
@@ -57,6 +61,10 @@ class App extends React.Component{
             </div>
           </EditablePopup>
         </Polyline>
+
+        <ActiveArea />
+
+        <RandomMarkersButtonLNative position={'bottomright'} icon={blackIcon} />
 
       </Map>
 

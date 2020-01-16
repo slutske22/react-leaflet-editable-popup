@@ -22,14 +22,24 @@ const centerLat = 31.8117
 const centerLng = -116.6494
 
 
+// const mapReference = React.createRef()
+
+
+
 class App extends React.Component{
 
+  componentDidMount(){
+    console.log(this.refs)
+  }
+
+
   render(){
+
 
     return (
 
 
-      <Map id="mapId" center={[centerLat, centerLng]} zoom={11.5} maxZoom={14} zoomSnap='0.5' doubleClickZoom={false} >
+      <Map id="mapId" center={[centerLat, centerLng]} zoom={11.5} maxZoom={14} zoomSnap='0.5' doubleClickZoom={false} ref={'mapReference'} >
 
         <TileLayer
           attribution={'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}

@@ -14,6 +14,7 @@ class ExternalComponents extends React.Component{
                console.log(value)
             }}
          </MapContext.Consumer>
+
       )
    }
 }

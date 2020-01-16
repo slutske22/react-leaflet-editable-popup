@@ -22,10 +22,15 @@ class App extends React.Component{
   // 5. ExternalComponents conditionally renders once state.mapLoaded is true, and receives the proper mapContext
   // I had tried this approach with redux in my firestarter project, but it was too slow and there was a delay in sending the mapReference through the redux store and back out to the components.  This reference and context method is pretty fast.
 
+
   state = { mapLoaded: false }
+
+  mapReference = React.createRef()
+  MapContext = React.createContext(this.mapReference)
 
   componentDidMount(){
     this.setState({ mapLoaded:true })
+
   }
 
   render(){
@@ -33,6 +38,7 @@ class App extends React.Component{
       <MapContext.Provider value={this.mapReference}>
         <Map mapReference={this.mapReference} ref={this.props.mapReference} />
         {this.state.mapLoaded && <ExternalComponents mapReference={this.mapReference} />}
+
       </MapContext.Provider>
     )
   }

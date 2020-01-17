@@ -5,7 +5,7 @@ import React from "react";
 import "./styles.css";
 
 import MapProvider from './Provider'
-import Map from './Map'
+import LeafletMap from './Map'
 import ExternalComponents from './externalComponents/ExternalComponents'
 
 
@@ -24,7 +24,7 @@ class App extends React.Component{
     return (
       <MapProvider>
 
-        <Map  />
+        <LeafletMap  />
 
         {this.state.mapLoaded && <ExternalComponents mapReference={this.mapReference} />}
 

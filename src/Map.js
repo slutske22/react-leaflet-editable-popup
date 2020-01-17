@@ -5,6 +5,7 @@ import React from "react";
 import './components/ActiveArea.css'
 
 import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet'
+import MapContext from './Context'
 
 import GeoSearch from './components/GeoSearch'
 import MousePosition from './components/MousePosition'
@@ -14,26 +15,25 @@ import RandomMarkersButtonLNative from './components/RandomMarkersButtonLNative'
 import { blackIcon } from './components/Icons'
 import ActiveArea from './components/ActiveArea'
 
-
 import { ensenadaBikePath } from './constants'
 
 const centerLat = 31.8117
 const centerLng = -116.6494
 
 
-// const mapReference = React.createRef()
-
-
-
 class Map extends React.Component{
 
+  mapRef = React.createRef(null);
 
+  componentDidMount() {
+    const map = this.mapRef.current.leafletElement;
+    this.props.setMap(map);
+    console.log('map front Map.js componentdidmount', map)
+  }
 
   render(){
 
-
     return (
-
 
       <LeafletMap 
          id="mapId" 
@@ -42,7 +42,7 @@ class Map extends React.Component{
          maxZoom={14} 
          zoomSnap='0.5' 
          doubleClickZoom={false}
-         ref={this.props.mapReference} >
+         ref={this.mapRef} >
 
         <TileLayer
           attribution={'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}
@@ -75,8 +75,8 @@ class Map extends React.Component{
           </EditablePopup>
         </Polyline>
 
-        <ActiveArea />
-
+        {/* <ActiveArea /> */}  {/* Working in ExternalComponents! */}
+        
         <RandomMarkersButtonLNative position={'bottomright'} icon={blackIcon} />
 
       </LeafletMap>
@@ -86,4 +86,8 @@ class Map extends React.Component{
   }
 }
 
-export default Map
+export default props =>  (
+  <MapContext.Consumer>
+    {({ setMap }) => <Map {...props} setMap={setMap} />}
+  </MapContext.Consumer>
+)

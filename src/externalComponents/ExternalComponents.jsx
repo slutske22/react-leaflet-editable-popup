@@ -1,18 +1,13 @@
 import React from 'react'
-import { MapContext } from '../App'
+import MapContext from '../Context'
+import ActiveArea from './ActiveArea'
 
 class ExternalComponents extends React.Component{
-
-   componentDidMount(){
-      console.log(this.props.mapReference.current.contextValue)
-   }
 
    render(){
       return(
          <MapContext.Consumer>
-            { (value) => {
-               console.log(value)
-            }}
+            {(value) => (<ActiveArea map={value} />)}
          </MapContext.Consumer>
       )
    }

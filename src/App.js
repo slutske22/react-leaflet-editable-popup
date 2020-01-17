@@ -4,23 +4,14 @@
 import React from "react";
 import "./styles.css";
 
+import MapProvider from './Provider'
 import Map from './Map'
 import ExternalComponents from './externalComponents/ExternalComponents'
 
-export const MapContext = React.createContext()
 
 class App extends React.Component{
 
   mapReference = React.createRef()
-  MapContext = React.createContext(this.mapReference)
-
-  // In order to properly pass the mapReference to the ExternalComponents, the following steps have to happen:
-  // 1. render runs()
-  // 2.  from render(), the mapReference is established
-  // 3.  componentDidMount runs
-  // 4. state is set in componentDidMount that the map is loaded and the mapReference is defined
-  // 5. ExternalComponents conditionally renders once state.mapLoaded is true, and receives the proper mapContext
-  // I had tried this approach with redux in my firestarter project, but it was too slow and there was a delay in sending the mapReference through the redux store and back out to the components.  This reference and context method is pretty fast.
 
   state = { mapLoaded: false }
 
@@ -30,10 +21,13 @@ class App extends React.Component{
 
   render(){
     return (
-      <MapContext.Provider value={this.mapReference}>
-        <Map mapReference={this.mapReference} ref={this.props.mapReference} />
+      <MapProvider>
+
+        <Map  />
+
         {this.state.mapLoaded && <ExternalComponents mapReference={this.mapReference} />}
-      </MapContext.Provider>
+        
+      </MapProvider>
     )
   }
 

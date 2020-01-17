@@ -1,3 +1,6 @@
+export const centerLat = 31.8117
+export const centerLng = -116.6494
+
 export const ensenadaBikePath = [
   [
     31.92098720813286,

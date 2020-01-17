@@ -6,9 +6,13 @@ class ExternalComponents extends React.Component{
 
    render(){
       return(
-         <MapContext.Consumer>
-            {(value) => (<ActiveArea map={value} />)}
-         </MapContext.Consumer>
+
+         <ActiveArea>
+            <code>
+               This activeArea is defined outside of the Map component, but communicates with it through the MapContext object.
+            </code>
+         </ActiveArea>
+
       )
    }
 }

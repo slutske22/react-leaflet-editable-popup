@@ -15,10 +15,9 @@ import RandomMarkersButtonLNative from './components/RandomMarkersButtonLNative'
 import { blackIcon } from './components/Icons'
 import ActiveArea from './components/ActiveArea'
 
-import { ensenadaBikePath } from './constants'
+import { ensenadaBikePath, centerLat, centerLng } from './constants'
 
-const centerLat = 31.8117
-const centerLng = -116.6494
+
 
 
 class Map extends React.Component{
@@ -28,7 +27,7 @@ class Map extends React.Component{
   componentDidMount() {
     const map = this.mapRef.current.leafletElement;
     this.props.setMap(map);
-    console.log('map front Map.js componentdidmount', map)
+    console.log('ref front Map.js componentdidmount', this.mapRef.current.contextValue)
   }
 
   render(){

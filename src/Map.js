@@ -4,7 +4,7 @@
 import React from "react";
 import './components/ActiveArea.css'
 
-import { Map as LeafletMap, TileLayer, Marker } from 'react-leaflet'
+import { Map as MapComponent, TileLayer, Marker } from 'react-leaflet'
 import MapContext from './Context'
 
 import GeoSearch from './components/GeoSearch'
@@ -35,7 +35,7 @@ class Map extends React.Component{
 
     return (
 
-      <LeafletMap 
+      <MapComponent 
          id="mapId" 
          center={[centerLat, centerLng]} 
          zoom={11.5} 
@@ -79,15 +79,17 @@ class Map extends React.Component{
         
         <RandomMarkersButtonLNative position={'bottomright'} icon={blackIcon} />
 
-      </LeafletMap>
+      </MapComponent>
 
 
     );
   }
 }
 
-export default props =>  (
+const LeafletMap = props =>  (
   <MapContext.Consumer>
     {({ setMap }) => <Map {...props} setMap={setMap} />}
   </MapContext.Consumer>
 )
+
+export default LeafletMap

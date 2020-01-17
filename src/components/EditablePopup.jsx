@@ -24,8 +24,6 @@ class EditablePopup extends React.Component{
 
    componentDidMount(){
 
-      console.log(this.thePopup.leafletElement._source.nametag)
-
       if (this.props.open){
          setTimeout( () => {
             this.thePopup.leafletElement._source.openPopup()

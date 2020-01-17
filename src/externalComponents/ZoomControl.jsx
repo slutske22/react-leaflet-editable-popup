@@ -1,5 +1,6 @@
 import React from 'react'
 import MapContext from '../Context'
+import './ZoomControl.css'
 
 class ZoomControl extends React.Component{
 
@@ -15,8 +16,8 @@ class ZoomControl extends React.Component{
 
       map.once('zoomend', () => {
          this.setState({
-            zoomInDisabled: map.getZoom() >= max ? 'leaflet-disabled' : null,
-            zoomOutDisabled: map.getZoom() <= min ? 'leaflet-disabled' : null
+            zoomInDisabled: map.getZoom() >= max ? 'leaflet-disabled' : '',
+            zoomOutDisabled: map.getZoom() <= min ? 'leaflet-disabled' : ''
          })
       })
 

@@ -2,6 +2,7 @@ import React from 'react'
 import MapContext from '../Context'
 import ActiveArea from './ActiveArea'
 import ZoomControl from './ZoomControl'
+import EsriGeoSearch from './EsriGeoSearch'
 
 import './ExternalComponents.css'
 
@@ -17,6 +18,8 @@ class ExternalComponents extends React.Component{
                <p>All components in this panel are not children of the <code>&lt;Map /&gt;</code> component.</p>
 
                <ZoomControl />
+
+               <EsriGeoSearch />
 
             </div>
 

@@ -1,0 +1,5 @@
+.leaflet-control-zoom{
+   float: none;
+   display: inline-block;
+   margin-bottom: 20px;
+}

@@ -27,7 +27,6 @@ class Map extends React.Component{
   componentDidMount() {
     const map = this.mapRef.current.leafletElement;
     this.props.setMap(map);
-    console.log('ref front Map.js componentdidmount', this.mapRef.current.contextValue)
   }
 
   render(){

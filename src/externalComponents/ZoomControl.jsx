@@ -9,30 +9,14 @@ class ZoomControl extends React.Component{
       zoomOutDisabled: null
    }
 
-   applyDisabledClasses = (map) => {
-
-      const max = map.options.maxZoom ? map.options.maxZoom : 18
-      const min = map.options.minZoom ? map.options.minZoom : 0
-
-      map.once('zoomend', () => {
-         this.setState({
-            zoomInDisabled: map.getZoom() >= max ? 'leaflet-disabled' : '',
-            zoomOutDisabled: map.getZoom() <= min ? 'leaflet-disabled' : ''
-         })
-      })
-
-   }
-
    zoomIn = (e, map) => {
       e.preventDefault()
       map.setZoom(map.getZoom() + 1)
-      this.applyDisabledClasses(map)
    }
 
    zoomOut = (e, map) => {
       e.preventDefault()
       map.setZoom(map.getZoom() - 1)
-      this.applyDisabledClasses(map)
    }
 
 
@@ -40,6 +24,18 @@ class ZoomControl extends React.Component{
       return (
          <MapContext.Consumer>
             { ({ map }) => {
+
+               const max = map.options.maxZoom ? map.options.maxZoom : 18
+               const min = map.options.minZoom ? map.options.minZoom : 0
+
+               map.once('zoomend', () => {
+
+                  this.setState({
+                     zoomInDisabled: map.getZoom() >= max ? 'leaflet-disabled' : '',
+                     zoomOutDisabled: map.getZoom() <= min ? 'leaflet-disabled' : ''
+                  })
+                  
+               })
 
                return(
                   <div className="leaflet-control-zoom leaflet-bar leaflet-control">

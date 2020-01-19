@@ -18,6 +18,7 @@
     "react-scripts": "3.0.1"
   },
   "devDependencies": {
+    "node-sass": "^4.13.1",
     "typescript": "3.3.3"
   },
   "scripts": {

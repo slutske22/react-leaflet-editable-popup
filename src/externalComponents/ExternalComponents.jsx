@@ -4,7 +4,7 @@ import ActiveArea from './ActiveArea'
 import ZoomControl from './ZoomControl'
 import EsriGeoSearch from './EsriGeoSearch'
 
-import './ExternalComponents.css'
+import './ExternalComponents.scss'
 
 class ExternalComponents extends React.Component{
 
@@ -19,7 +19,7 @@ class ExternalComponents extends React.Component{
 
                <ZoomControl />
 
-               <EsriGeoSearch />
+               <EsriGeoSearch expanded={true} />
 
             </div>
 

@@ -1,3 +1,5 @@
+// https://github.com/pointhi/leaflet-color-markers
+
 import L from 'leaflet';
 
 export const greenIcon = new L.Icon({

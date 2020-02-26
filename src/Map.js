@@ -10,10 +10,10 @@ import MapContext from './Context'
 import GeoSearch from './components/GeoSearch'
 import MousePosition from './components/MousePosition'
 import EditablePopup from './components/EditablePopup'
-import Polyline from './components/ArrowheadsPolyline'
+// import EditablePopup from 'react-leaflet-editable-popup'
+import Polyline from 'react-leaflet-arrowheads'
 import RandomMarkersButtonLNative from './components/RandomMarkersButtonLNative'
 import { blackIcon } from './components/Icons'
-import ActiveArea from './components/ActiveArea'
 
 import { ensenadaBikePath, centerLat, centerLng } from './constants'
 

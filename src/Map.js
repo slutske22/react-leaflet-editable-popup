@@ -1,7 +1,7 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, LayerGroup, Marker } from 'react-leaflet'
-import Popup from './EditablePopup'
-// import Popup from 'react-leaflet-editable-popup'
+// import Popup from './EditablePopup'
+import Popup from 'react-leaflet-editable-popup'
 import { lochnessIcon, redIcon, greenIcon, blackIcon, goldIcon, violetIcon} from './Icons'
 
 //  ---- UTILITY FUNCTIONS ----------------------------- //

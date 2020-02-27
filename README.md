@@ -12,19 +12,18 @@ See this [codesandbox](https://codesandbox.io/s/github/slutske22/React-Leaflet-E
 
 ## Installation
 
-~~Install via npm:~~
+Install via npm:
 
-~~`npm install react-leaflet-editable-popup`~~
+`npm install react-leaflet-editable-popup`
 
-~~Or just grab the EditablePopup.js and .css files from the src folder and stick them in your project.~~
+Or just grab the EditablePopup.js and .css files from the src folder and stick them in your project.
 
-I am having a hard time getting this to work with npm.  For now, just download the component .js and .css files and use them in your library.  If you want to help me get this working as a node module, please do!  I have [this question](https://stackoverflow.com/questions/59641585/react-leaflet-custom-component-context-not-being-passed) open on stackoverflow to describe the issue I am having.  If you have an answer, answer that question or open a PR!
 
 ## Using the plugin
 
 Import into your map component like so:
 ````javascript
-import Popup from 'react-leaflet-editable-popup' // not working just yet
+import Popup from 'react-leaflet-editable-popup'
 import Popup from '...wherever/components/EditablePopup'
 ````
 

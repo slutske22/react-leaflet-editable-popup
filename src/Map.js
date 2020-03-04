@@ -13,6 +13,8 @@ import EditablePopup from 'react-leaflet-editable-popup'
 import Polyline from 'react-leaflet-arrowheads'
 import RandomMarkersButtonLNative from './components/RandomMarkersButtonLNative'
 import { blackIcon } from './components/Icons'
+import EsriLeafletImageLayer from './components/EsriLeafletImageLayer'
+import EsriLeafletFeatureLayer from './components/EsriLeafletFeatureLayer'
 
 import { ensenadaBikePath, centerLat, centerLng } from './constants'
 
@@ -46,6 +48,10 @@ class Map extends React.Component{
           url={"https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.{ext}"}
           subdomains='abcd' ext='png'
         />
+
+        <EsriLeafletImageLayer url="https://landscape6.arcgis.com/arcgis/rest/services/World_Land_Cover_30m_BaseVue_2013/ImageServer" opacity={0.75}  useCors={false} />
+
+        <EsriLeafletFeatureLayer url='https://services1.arcgis.com/pf6KDbd8NVL1IUHa/arcgis/rest/services/Wildland_Urban_Interface_vector/FeatureServer/1' />
 
         <GeoSearch 
           expanded={true} collapseAfterResult={false} useMapBounds={false} position={"topright"} 

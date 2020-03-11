@@ -1,7 +1,7 @@
 import React from 'react'
 import { Map as LeafletMap, TileLayer, LayerGroup, Marker } from 'react-leaflet'
-// import Popup from './EditablePopup'
-import Popup from 'react-leaflet-editable-popup'
+import Popup from './EditablePopup'
+// import Popup from 'react-leaflet-editable-popup'
 import { lochnessIcon, redIcon, greenIcon, blackIcon, goldIcon, violetIcon} from './Icons'
 
 //  ---- UTILITY FUNCTIONS ----------------------------- //
@@ -78,7 +78,7 @@ class Map extends React.Component{
 
       const randomMarkers = this.state.randomMarkers.map( (markerSpec, index) => (
          <Marker position={markerSpec.coords} key={index} >
-            <Popup maxWidth='450' editable removable sourceKey={index} removalCallback={(index) => this.removeRandomMarker(index)} saveContentCallback={(content, index) => this.saveContentToState(content, index)}>
+            <Popup maxWidth='450' editable removable sourceKey={index} removalCallback={this.removeRandomMarker} saveContentCallback={this.saveContentToState}>
                {markerSpec.popupContent}
             </Popup>
          </Marker>

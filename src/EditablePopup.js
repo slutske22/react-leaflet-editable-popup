@@ -24,8 +24,6 @@ class EditablePopup extends React.Component{
 
    componentDidMount(){
 
-      console.log(this.thePopup.leafletElement._source.nametag)
-
       if (this.props.open){
          setTimeout( () => {
             this.thePopup.leafletElement._source.openPopup()
@@ -48,7 +46,6 @@ class EditablePopup extends React.Component{
    }
 
    openEditScreen = () => {
-      // console.log(this.thePopup.leafletElement._source.nametag)
       this.setState({editScreenOpen: true})
    }
 
@@ -61,7 +58,7 @@ class EditablePopup extends React.Component{
    }
 
    saveEdits = () => {
-      if (!isNaN(this.props.sourceKey) && this.props.saveContentCallback){
+      if (this.props.saveContentCallback){
          this.props.saveContentCallback(this.state.inputValue, this.props.sourceKey)
       }
       this.setState({
@@ -70,18 +67,18 @@ class EditablePopup extends React.Component{
       this.closeEditScreen()
    }
 
-   cancelEdits = () => {
+   cancelEdits = ( ) => {
       this.setState({
          inputValue: this.state.content
       })
       this.closeEditScreen()
    }
 
-   removeSource = () => {
-      if(!this.props.sourceKey){
+   removeSource = (index) => {
+      if(this.props.removalCallback){
+         this.props.removalCallback(index)
+      } else {
          this.thePopup.leafletElement._source.remove()
-      } else if( (this.props.sourceKey || this.props.sourceKey ===0 ) && this.props.removalCallback){
-         this.props.removalCallback(this.props.sourceKey)
       }
    }
 

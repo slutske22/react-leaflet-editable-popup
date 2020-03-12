@@ -67,16 +67,16 @@ class EditablePopup extends React.Component{
       this.closeEditScreen()
    }
 
-   cancelEdits = ( ) => {
+   cancelEdits = () => {
       this.setState({
          inputValue: this.state.content
       })
       this.closeEditScreen()
    }
 
-   removeSource = (index) => {
+   removeSource = () => {
       if(this.props.removalCallback){
-         this.props.removalCallback(index)
+         this.props.removalCallback(this.props.sourceKey)
       } else {
          this.thePopup.leafletElement._source.remove()
       }
@@ -87,7 +87,6 @@ class EditablePopup extends React.Component{
    render(){
 
       let Buttons;
-      // const { nametag } = this.thePopup.leafletElement._source
 
       if (this.props.removable && !this.props.editable){
          Buttons = (
@@ -113,7 +112,6 @@ class EditablePopup extends React.Component{
       const contentScreen = (
          <React.Fragment>
             {Parser(this.state.content)}
-            {/*}  { (typeof this.state.content === 'string') && Parser(this.state.content)}  */}
             {Buttons}
          </React.Fragment>
       )

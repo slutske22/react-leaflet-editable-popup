@@ -78,7 +78,7 @@ class Map extends React.Component{
 
       const randomMarkers = this.state.randomMarkers.map( (markerSpec, index) => (
          <Marker position={markerSpec.coords} key={index} >
-            <Popup maxWidth='450' editable removable sourceKey={index} removalCallback={this.removeRandomMarker} saveContentCallback={this.saveContentToState}>
+            <Popup maxWidth='450' editable removable key={index} sourceKey={index} removalCallback={this.removeRandomMarker} saveContentCallback={this.saveContentToState}>
                {markerSpec.popupContent}
             </Popup>
          </Marker>

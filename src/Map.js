@@ -1,4 +1,5 @@
 import React from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { Map as LeafletMap, TileLayer, LayerGroup, Marker } from 'react-leaflet'
 import Popup from './EditablePopup'
 // import Popup from 'react-leaflet-editable-popup'
@@ -77,8 +78,8 @@ class Map extends React.Component{
    render(){
 
       const randomMarkers = this.state.randomMarkers.map( (markerSpec, index) => (
-         <Marker position={markerSpec.coords} key={index} >
-            <Popup maxWidth='450' editable removable key={index} sourceKey={index} removalCallback={this.removeRandomMarker} saveContentCallback={this.saveContentToState}>
+         <Marker position={markerSpec.coords} key={uuidv4()} >
+            <Popup maxWidth='450' editable removable sourceKey={index} removalCallback={this.removeRandomMarker} saveContentCallback={this.saveContentToState}>
                {markerSpec.popupContent}
             </Popup>
          </Marker>

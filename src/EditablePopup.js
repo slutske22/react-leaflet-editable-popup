@@ -59,7 +59,7 @@ class EditablePopup extends React.Component{
 
    saveEdits = () => {
       if (this.props.saveContentCallback){
-         this.props.saveContentCallback(this.state.inputValue, this.props.sourceKey)
+         this.props.saveContentCallback(this.state.inputValue)
       }
       this.setState({
          content: this.state.inputValue,
@@ -76,7 +76,7 @@ class EditablePopup extends React.Component{
 
    removeSource = () => {
       if(this.props.removalCallback){
-         this.props.removalCallback(this.props.sourceKey)
+         this.props.removalCallback()
       } else {
          this.thePopup.leafletElement._source.remove()
       }

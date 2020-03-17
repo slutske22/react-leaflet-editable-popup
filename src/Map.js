@@ -45,11 +45,13 @@ class Map extends React.Component{
                popupContent: `<h3>This marker is removable and its popup is editable.</h3>
                This randomly generated marker is at ${roundNumber(pointLat, 1000)}° latitude and ${roundNumber(pointLng, 1000)}° longitude. <br>
                <br>
-               These blue markers are generated randomly and added to an array within the map's state object.  They are added to the map using an <code>array.map( (marker, index) => &lt;Marker&gt;)</code> function. In order for the <i><u>Remove this marker</u></i> button to function correctly, the <code>&lt;Popup&gt;</code> component requires a <code>sourceKey={index}</code> prop.  A the <code>removalCallback</code> prop is also required, which accepts the callback function of your choosing to communicate with the state where your array is kept, passing the <code>index</code> as the argument.  This will make sure that your <i><u>Remove</u></i> button removes the correct marker from your array and map.  This looks something like: <code>removalCallback={yourCallback(index)}</code><br>
+               These blue markers are generated randomly and added to an array within the map's state object.  They are added to the map using an <code>array.map( (marker, index) => &lt;Marker&gt;)</code> function. In order for the <i><u>Remove this marker</u></i> button to function correctly, the <code>removalCallback</code> prop is required. This function accepts the callback function of your choosing to communicate with the state where your array is kept, passing the <code>index</code> as the argument of the callback.  This will make sure that your <i><u>Remove</u></i> button removes the correct marker from your array and map.  This will be written like: <code>removalCallback={ () => {yourCallback(index)} </code><br>
                <br>
-               Similarly, if you wish to maintain the popup's edited content within your application state, you can pass <code>saveContentCallback={yourCallback(content, index)}</code> as a prop.<br>
+               Similarly, if you wish to maintain the popup's edited content within your application state, you can pass <code>saveContentCallback={ content => {yourCallback(content, index)} }</code> as a prop.<br>
                <br>
-               Go to the <a href="https://github.com/slutske22/React-Leaflet-Editable-Popup" target="_blank">GitHub page</a> for this plugin to read more about it.`
+               Go to the <a href="https://github.com/slutske22/React-Leaflet-Editable-Popup" target="_blank">GitHub page</a> for this plugin to read more about it.`,
+               open: false,
+               autoClose: true
             }
          ]
       })
@@ -75,11 +77,41 @@ class Map extends React.Component{
       })
    }
 
+   onOpenPopup = index => {
+      this.setState( prevState => {
+         const newRandomMarkers = prevState.randomMarkers
+         newRandomMarkers[index].open = true
+         return {
+            ...this.state.newRandomMarkers
+         }
+      })
+   }
+
+   onClosePopup = index => {
+      this.setState( prevState => {
+         const newRandomMarkers = prevState.randomMarkers
+         newRandomMarkers[index].open = false
+         return {
+            ...this.state.newRandomMarkers
+         }
+      })
+   }
+
    render(){
 
       const randomMarkers = this.state.randomMarkers.map( (markerSpec, index) => (
          <Marker position={markerSpec.coords} key={uuidv4()} >
-            <Popup maxWidth='450' editable removable sourceKey={index} removalCallback={this.removeRandomMarker} saveContentCallback={this.saveContentToState}>
+            <Popup 
+               open={markerSpec.open}
+               // onOpen={ () => this.onOpenPopup(index) }
+               // onClose={ () => { this.onClosePopup(index) } }
+               autoClose={markerSpec.autoClose}
+               maxWidth='500' 
+               editable 
+               removable 
+               sourceKey={index} 
+               removalCallback={ () => { this.removeRandomMarker(index) } } 
+               saveContentCallback={ (content) => { this.saveContentToState(content, index) } } >
                {markerSpec.popupContent}
             </Popup>
          </Marker>

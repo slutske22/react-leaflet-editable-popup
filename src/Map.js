@@ -4,7 +4,7 @@ import isEqual from 'react-fast-compare'
 import { Map as LeafletMap, TileLayer, LayerGroup, Marker } from 'react-leaflet'
 import Popup from './EditablePopup'
 // import Popup from 'react-leaflet-editable-popup'
-import { lochnessIcon, redIcon, greenIcon, blackIcon, goldIcon, violetIcon} from './Icons'
+import { lochnessIcon, blueIcon, greenIcon, blackIcon, goldIcon, violetIcon} from './Icons'
 
 //  ---- UTILITY FUNCTIONS ----------------------------- //
 
@@ -29,6 +29,9 @@ class Map extends React.Component{
 
    shouldComponentUpdate(nextProps, nextState) {
 
+      console.log('state', this.state.randomMarkers, 'nextstate', nextState.randomMarkers)
+
+
       if (this.state.randomMarkers.length !== nextState.randomMarkers.length){
          console.log('map rerendered')
          return true
@@ -37,18 +40,10 @@ class Map extends React.Component{
             console.log('map not rerendered')
             return false
          } else {
-            console.log('map rerendered', this.state.randomMarkers, nextState.randomMarkers)
+            console.log('map rerendered')
             return true
          }
       }
-
-      // if (this.state.randomMarkers !== nextState.randomMarkers && this.state.randomMarkers.length === nextState.randomMarkers) {
-      //    console.log('map not rerendered')
-      //    return false
-      // } else {
-      //    console.log('map rerendered')
-      //    return true
-      // }
 
    }
 
@@ -85,37 +80,51 @@ class Map extends React.Component{
 
    removeRandomMarker = (index) => {
       mapRef.current.leafletElement.closePopup()
-      this.setState(prevState => {
-         prevState.randomMarkers.splice(index, 1)
-         return {
-            randomMarkers: prevState.randomMarkers
-         }
+
+      const newRandomMarkers = [...this.state.randomMarkers]
+      newRandomMarkers.splice(index, 1)
+
+      this.setState({
+         randomMarkers: newRandomMarkers
       })
    }
 
    saveContentToState = (content, index) => {
-      this.setState( prevState => {
-         const newRandomMarkers = prevState.randomMarkers
-         newRandomMarkers[index].popupContent = content
-         newRandomMarkers[index].open = true
-         return {
-            randomMarkers: newRandomMarkers
+
+      const newRandomMarkers = this.state.randomMarkers.map( (marker, i) => {
+         if (i === index) {
+            return {
+               ...marker,
+               content: content,
+            }
+         } else {
+            return marker
          }
       })
+
+      this.setState({
+         randomMarkers: newRandomMarkers
+      })
+
    }
 
    onOpenPopup = index => {
 
       console.log('opened popup # ', index)
 
-      this.setState( prevState => {
-         if (prevState.randomMarkers[index].open === false) {
-            const newRandomMarkers = [...prevState.randomMarkers]
-            newRandomMarkers[index].open = true
+      const newRandomMarkers = this.state.randomMarkers.map( (marker, i) => {
+         if (i === index) {
             return {
-               randomMarkers: newRandomMarkers
+               ...marker,
+               open: true
             }
+         } else {
+            return {...marker}
          }
+      })
+
+      this.setState({
+         randomMarkers: newRandomMarkers
       })
 
    }
@@ -124,22 +133,27 @@ class Map extends React.Component{
 
       console.log('closed popup # ', index)
 
-      // this.setState( prevState => {
-      //    if (prevState.randomMarkers[index].open === true) {
-      //       const newRandomMarkers = [...prevState.randomMarkers]
-      //       newRandomMarkers[index].open = false
-      //       return {
-      //          randomMarkers: newRandomMarkers
-      //       }
-      //    }
-      // })
+      const newRandomMarkers = this.state.randomMarkers.map( (marker, i) => {
+         if (i === index) {
+            return {
+               ...marker,
+               open: false
+            }
+         } else {
+            return {...marker}
+         }
+      })
+
+      this.setState({
+         randomMarkers: newRandomMarkers
+      })
       
    }
 
    render(){
 
       const randomMarkers = this.state.randomMarkers.map( (markerSpec, index) => (
-         <Marker position={markerSpec.coords} key={uuidv4()} >
+         <Marker position={markerSpec.coords} key={uuidv4()} icon={blueIcon} >
             <Popup 
                open={markerSpec.open}
                onOpen={ () => this.onOpenPopup(index) }

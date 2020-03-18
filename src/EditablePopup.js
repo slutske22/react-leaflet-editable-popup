@@ -9,7 +9,9 @@ import './EditablePopup.css'
 const prefix = 'leaflet-popup-button'
 
 class EditablePopup extends React.Component{
+
    constructor(props){
+
       super(props)
 
       const sourceTypes = ['Layer','Circle','CircleMarker','Marker','Polyline','Polygon','ImageOverlay','VideoOverlay','SVGOverlay','Rectangle','LayerGroup','FeatureGroup','GeoJSON']
@@ -66,10 +68,6 @@ class EditablePopup extends React.Component{
       })
       this.closeEditScreen()
 
-      // console.log('this worked')
-
-      // const originMap = this.thePopup.leafletElement.options.leaflet.map
-      // this.thePopup.leafletElement.openOn(originMap)
    }
 
    cancelEdits = () => {
@@ -133,7 +131,7 @@ class EditablePopup extends React.Component{
       )
 
       return(
-         <Popup {...this.props} ref={thePopup => this.thePopup = thePopup} minWidth="160">
+         <Popup {...this.props} open={this.state.open} ref={thePopup => this.thePopup = thePopup} minWidth="160">
             {this.state.editScreenOpen ? editScreen : contentScreen}
          </Popup>
       )

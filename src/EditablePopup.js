@@ -27,7 +27,7 @@ class EditablePopup extends React.Component{
       if (this.props.open){
          setTimeout( () => {
             this.thePopup.leafletElement._source.openPopup()
-         },0.001)
+         },1)
       }
 
       this.setState({
@@ -65,6 +65,11 @@ class EditablePopup extends React.Component{
          content: this.state.inputValue,
       })
       this.closeEditScreen()
+
+      // console.log('this worked')
+
+      // const originMap = this.thePopup.leafletElement.options.leaflet.map
+      // this.thePopup.leafletElement.openOn(originMap)
    }
 
    cancelEdits = () => {

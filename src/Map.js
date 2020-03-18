@@ -1,5 +1,6 @@
 import React from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import isEqual from 'react-fast-compare'
 import { Map as LeafletMap, TileLayer, LayerGroup, Marker } from 'react-leaflet'
 import Popup from './EditablePopup'
 // import Popup from 'react-leaflet-editable-popup'
@@ -24,6 +25,31 @@ class Map extends React.Component{
 
    state = {
       randomMarkers: []
+   }
+
+   shouldComponentUpdate(nextProps, nextState) {
+
+      if (this.state.randomMarkers.length !== nextState.randomMarkers.length){
+         console.log('map rerendered')
+         return true
+      } else {
+         if (!isEqual(this.state.randomMarkers, nextState.randomMarkers)){
+            console.log('map not rerendered')
+            return false
+         } else {
+            console.log('map rerendered', this.state.randomMarkers, nextState.randomMarkers)
+            return true
+         }
+      }
+
+      // if (this.state.randomMarkers !== nextState.randomMarkers && this.state.randomMarkers.length === nextState.randomMarkers) {
+      //    console.log('map not rerendered')
+      //    return false
+      // } else {
+      //    console.log('map rerendered')
+      //    return true
+      // }
+
    }
 
    placeRandomMarker = () => {
@@ -71,30 +97,43 @@ class Map extends React.Component{
       this.setState( prevState => {
          const newRandomMarkers = prevState.randomMarkers
          newRandomMarkers[index].popupContent = content
+         newRandomMarkers[index].open = true
          return {
-            ...this.state.newRandomMarkers
+            randomMarkers: newRandomMarkers
          }
       })
    }
 
    onOpenPopup = index => {
+
+      console.log('opened popup # ', index)
+
       this.setState( prevState => {
-         const newRandomMarkers = prevState.randomMarkers
-         newRandomMarkers[index].open = true
-         return {
-            ...this.state.newRandomMarkers
+         if (prevState.randomMarkers[index].open === false) {
+            const newRandomMarkers = [...prevState.randomMarkers]
+            newRandomMarkers[index].open = true
+            return {
+               randomMarkers: newRandomMarkers
+            }
          }
       })
+
    }
 
    onClosePopup = index => {
-      this.setState( prevState => {
-         const newRandomMarkers = prevState.randomMarkers
-         newRandomMarkers[index].open = false
-         return {
-            ...this.state.newRandomMarkers
-         }
-      })
+
+      console.log('closed popup # ', index)
+
+      // this.setState( prevState => {
+      //    if (prevState.randomMarkers[index].open === true) {
+      //       const newRandomMarkers = [...prevState.randomMarkers]
+      //       newRandomMarkers[index].open = false
+      //       return {
+      //          randomMarkers: newRandomMarkers
+      //       }
+      //    }
+      // })
+      
    }
 
    render(){
@@ -103,9 +142,9 @@ class Map extends React.Component{
          <Marker position={markerSpec.coords} key={uuidv4()} >
             <Popup 
                open={markerSpec.open}
-               // onOpen={ () => this.onOpenPopup(index) }
-               // onClose={ () => { this.onClosePopup(index) } }
-               autoClose={markerSpec.autoClose}
+               onOpen={ () => this.onOpenPopup(index) }
+               onClose={ () => { this.onClosePopup(index) } }
+               // autoClose={markerSpec.autoClose}
                maxWidth='500' 
                editable 
                removable 

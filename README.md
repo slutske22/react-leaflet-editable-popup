@@ -6,9 +6,11 @@ A small plugin for leaflet which allows the author to make a popup editable.  Yo
   <img src="leaflet-popupMod-gif.gif">
 </p>
 
-## Demo
+## [React Only Demo](https://codesandbox.io/s/github/slutske22/React-Leaflet-Editable-Popup) / [React Redux Demo](https://codesandbox.io/s/editable-popup-redux-example-9u0t2)
 
 See this [codesandbox](https://codesandbox.io/s/github/slutske22/React-Leaflet-Editable-Popup) for examples.  Click on the popups for explanations.
+
+See [another example](https://codesandbox.io/s/editable-popup-redux-example-9u0t2), using react-redux and with a separate component for array-generated markers and popups.
 
 ## Installation
 
@@ -91,6 +93,8 @@ Your initial value for the popup's content can be raw JSX, a React class or func
 
 Check out the [codesandbox](https://codesandbox.io/s/github/slutske22/React-Leaflet-Editable-Popup) for some examples in action.
 
+See [another example](https://codesandbox.io/s/editable-popup-redux-example-9u0t2), using react-redux and with a separate component for array-generated markers and popups.
+
 ### Without state management
 
 Using the `editable` and `removable` props without a state management structure is very simple.  Just add them as props to your `<Popup>` and they will work.  See the simple example in the *Using this Plugin* section above.  Each popup will keep newly edited content within its own state.
@@ -122,7 +126,7 @@ class MapWithMarkers extends React.Component{
 
     const mapMarkers = this.state.markers.map( (markerSpec, index) => {
       return {
-        <Marker position={markerSpec.coords} key={index}>
+        <Marker position={markerSpec.coords} key={uuidv4()}>
           <Popup removable editable>
             {markerSpec.popupContent}
           </Popup>
@@ -146,10 +150,10 @@ In the above example, markers are rendered from an array held in the `<MapWithMa
 ````jsx
   const mapMarkers = this.state.markers.map( (markerSpec, index) => {
     return {
-      <Marker position={markerSpec.coords} key={index}>
+      <Marker position={markerSpec.coords} key={uuidv4()}>
         <Popup removable editable
-        removalCallback={(index) => this.removeMarkerFromState(index)}
-        saveContentCallback={(content, index) => this.saveContentToState(content, index)} >
+        removalCallback={ () => {this.removeMarkerFromState(index)} }
+        saveContentCallback={ content => {this.saveContentToState(content, index)} } >
           {markerSpec.popupContent}
         </Popup>
       </Marker>
@@ -161,22 +165,37 @@ In this case, your callback functions can be defined like this:
 class MapWithMarkers extends React.Component{
 
   removeMarkerFromState = (index) => {
-    this.setState(prevState => {
-      prevState.markers.splice(index, 1)
-      return {
-        markers: prevState.markers
-      }
+
+    // Close popup on leafletmap first - you'll need to define a map reference to do this
+    mapRef.current.leafletElement.closePopup()
+
+    // Create a new array identical to the old one, and modify it - immutability!
+    const newRandomMarkers = [...this.state.randomMarkers]
+    newRandomMarkers.splice(index, 1)
+
+    // ...and save to state
+    this.setState({
+        randomMarkers: newRandomMarkers
     })
   }
 
   saveContentToState = (content, index) => {
-    this.setState( prevState => {
-      const newMarkers = prevState.markers
-      newMarkers[index].popupContent = content
-      return {
-        markers: newMarkers
-      }
-    })
+
+      const newRandomMarkers = this.state.randomMarkers.map( (marker, i) => {
+         if (i === index) {
+            return {
+               ...marker,
+               popupContent: content,
+            }
+         } else {
+            return marker
+         }
+      })
+
+      this.setState({
+         randomMarkers: newRandomMarkers
+      })
+
   }
 
   state = {...}
@@ -185,15 +204,15 @@ class MapWithMarkers extends React.Component{
 
 }
 ````
-So using our callback functions, we can reflect our changes in the application's global state.  This example involved a case where state is stored in a parent component, but your callback functions could just as easily communicate with a redux store, or any other state management system of your choice.  The following is an example for an application using redux:
+So using our callback functions, we can reflect our changes in the application's global state.  *(Note the use of `uuid4()`, from [uuid](https://www.npmjs.com/package/uuid).  This is a scenario where using the index as the key is a very bad idea - wierd things will happen when you use `key={index}` and try to edit popup contents)* This example involved a case where state is stored in a parent component, but your callback functions could just as easily communicate with a redux store, or any other state management system of your choice.  The following is an example for an application using redux:
 
 ````jsx
 import { removeMarkerFromState, saveContentToState } from '.../actions/mapActions.js'
 
 // Inside <MapWithMarkers>'s render function:
     <Popup removable editable
-    removalCallback={(index) => this.props.removeMarkerFromState(index)}
-    saveContentCallback={(content, index) => this.props.saveContentToState(content, index)} >
+    removalCallback={ () => {this.props.removeMarkerFromState(index)} }
+    saveContentCallback={ content => {this.props.saveContentToState(content, index)} } >
       {markerSpec.popupContent}
     </Popup>
 
@@ -203,6 +222,117 @@ const mapDispatchToProps = dispatch => ({
   saveContentToState: (content, index) => store.dispatch( saveContentToState(content, index) )
 })
 ````
+
+### Managing Open and Close state in state managed scenarios
+
+This next part goes a little in depth, but you may find it useful if you will be using `EditablePopups` in a state-managed scenario.  One thing to consider is that when a popup's content is saved, it will update the parent state.  When the parent state is updated, the parent component will rerender.  This means that the popup you were editing will likely close when hitting the `Save` button, unless it happened to be set to `open` when you defined it.  We need a way to communicate with the parent state about which popup(s) should be open for each rerender.  We can use the built in `onOpen` and `onClose` functions that a regular react-leaflet `Popup` offers:
+
+````jsx
+
+  state = {
+    markers: [
+      {
+        coords: [coords],
+        popupContent: '<p>Popup content is usually an HTML string.</p>',
+        open: false
+      },
+      {
+        coords: [coords],
+        popupContent: <h3>Popup content can also be JSX or a React component</h3>
+        open: false
+      },
+      {...},
+      {...},
+      ...
+    ]
+  }
+
+  // Inside render():
+  const mapMarkers = this.state.markers.map( (markerSpec, index) => {
+    return {
+      <Marker position={markerSpec.coords} key={uuidv4()}>
+        <Popup removable editable open={markerSpec.open}
+          removalCallback={ () => {this.removeMarkerFromState(index)} }
+          saveContentCallback={ content => {this.saveContentToState(content, index)} }
+          onOpen={ () => {this.onOpenPopup(index)} }
+          onClose={ () => {this.onClosePopup(index)} } >
+
+          {markerSpec.popupContent}
+
+        </Popup>
+      </Marker>
+    }
+  })
+````
+
+We can define these callbacks to altar the `open` property of each array item:
+
+````jsx
+   onOpenPopup = index => {
+
+      const newRandomMarkers = this.state.randomMarkers.map( (marker, i) => {
+         if (i === index) {
+            return {
+               ...marker,
+               open: true
+            }
+         } else {
+            return {...marker}
+         }
+      })
+
+      this.setState({
+         randomMarkers: newRandomMarkers
+      })
+
+   }
+
+   onClosePopup = index => {
+
+      const newRandomMarkers = this.state.randomMarkers.map( (marker, i) => {
+         if (i === index) {
+            return {
+               ...marker,
+               open: false
+            }
+         } else {
+            return {...marker}
+         }
+      })
+
+      this.setState({
+         randomMarkers: newRandomMarkers
+      })
+      
+   }
+````
+
+Now when a popup is opened or closed, the parent's state will know to rerender it as such when anything is changed.  Considering you need to open a popup to edit it, clicking `save` on an open popup will rerender the map with that popup still open.
+
+### Problem / Limitation - Leaflet vs. React state management
+
+A strange problem occurs when using the `open` prop: on popup open, the map rerenders, as the state has changed.  When the map rerenders, Leaflets `map.closePopup()` function fires, effectively closing whatever popup is open.  So although react fires the `onOpen` function, Leaflet causes the `onClose` function to fire immediately after.  A possible solution to this problem is to use react's `shouldComponentUpdate`, and prevent any rerendering of the map when a `Marker`'s `open` or `popupContent` property changes.  Rather, we can ask the map to only rerender if the number of markers in an array has changed:
+
+````jsx
+   shouldComponentUpdate(nextProps, nextState) {
+
+      if (this.state.randomMarkers.length !== nextState.randomMarkers.length){
+         return true
+      } else {
+         if (!isEqual(this.state.randomMarkers, nextState.randomMarkers)){
+            return false
+         } else {
+            return true
+         }
+      }
+
+   }
+````
+
+Note the use of `isEqual` from [react-fast-compare](https://www.npmjs.com/package/react-fast-compare) for deep object / array comparison.  This `shouldComponentUpdate` function prevents the map from rerendering when a popup's `open` status or `popupContent` has changed, leaving `EditablePopup` to handle these state changes internally.  You may need to force an update if you want to update your state at some point (saving user activity to localStorage or a server for future reference, for example). Despite its hackiness, this does indeed wor and create a group of popups that function as expect, with good performance and UX.  If you find another solution to this problem, open an issue or PR.
+
+Whew!  That's a lot of boilerplate!  You may consider moving each array of markers to its own component, along with all of the callbacks and rendering logic for that array group.  You can find an example of that [here](https://codesandbox.io/s/editable-popup-redux-example-9u0t2).
+
 
 ## License
 GNU GENERAL PUBLIC LICENSE Version 3

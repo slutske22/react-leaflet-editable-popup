@@ -95,7 +95,7 @@ class Map extends React.Component{
          if (i === index) {
             return {
                ...marker,
-               content: content,
+               popupContent: content,
             }
          } else {
             return marker

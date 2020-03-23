@@ -29,18 +29,18 @@ class Map extends React.Component{
 
    shouldComponentUpdate(nextProps, nextState) {
 
-      console.log('state', this.state.randomMarkers, 'nextstate', nextState.randomMarkers)
+      // console.log('state', this.state.randomMarkers, 'nextstate', nextState.randomMarkers)
 
 
       if (this.state.randomMarkers.length !== nextState.randomMarkers.length){
-         console.log('map rerendered')
+         // console.log('map rerendered')
          return true
       } else {
          if (!isEqual(this.state.randomMarkers, nextState.randomMarkers)){
-            console.log('map not rerendered')
+            // console.log('map not rerendered')
             return false
          } else {
-            console.log('map rerendered')
+            // console.log('map rerendered')
             return true
          }
       }
@@ -110,7 +110,7 @@ class Map extends React.Component{
 
    onOpenPopup = index => {
 
-      console.log('opened popup # ', index)
+      // console.log('opened popup # ', index)
 
       const newRandomMarkers = this.state.randomMarkers.map( (marker, i) => {
          if (i === index) {
@@ -131,7 +131,7 @@ class Map extends React.Component{
 
    onClosePopup = index => {
 
-      console.log('closed popup # ', index)
+      // console.log('closed popup # ', index)
 
       const newRandomMarkers = this.state.randomMarkers.map( (marker, i) => {
          if (i === index) {

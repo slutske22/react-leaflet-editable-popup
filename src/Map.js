@@ -13,8 +13,9 @@ import EditablePopup from 'react-leaflet-editable-popup'
 import Polyline from 'react-leaflet-arrowheads'
 import RandomMarkersButtonLNative from './components/RandomMarkersButtonLNative'
 import { blackIcon } from './components/Icons'
-import EsriLeafletImageLayer from './components/EsriLeafletImageLayer'
-import EsriLeafletFeatureLayer from './components/EsriLeafletFeatureLayer'
+import EsriLeafletLayer from './components/EsriLeafletLayer'
+import EsriLeafletAuthLayer from './components/EsriLeafletAuthLayer'
+
 
 import { ensenadaBikePath, centerLat, centerLng } from './constants'
 
@@ -49,9 +50,11 @@ class Map extends React.Component{
           subdomains='abcd' ext='png'
         />
 
-        <EsriLeafletImageLayer url="https://landscape6.arcgis.com/arcgis/rest/services/World_Land_Cover_30m_BaseVue_2013/ImageServer" opacity={0.75}  useCors={false} />
+        <EsriLeafletLayer layerType="tiledMapLayer" url="https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_WUI_2010_01/MapServer" opacity={0.7} />
 
-        <EsriLeafletFeatureLayer url='https://services1.arcgis.com/pf6KDbd8NVL1IUHa/arcgis/rest/services/Wildland_Urban_Interface_vector/FeatureServer/1' />
+
+        <EsriLeafletAuthLayer layerType="imageMapLayer" url="https://landscape6.arcgis.com/arcgis/rest/services/World_Land_Cover_30m_BaseVue_2013/ImageServer" opacity={0.75} />
+
 
         <GeoSearch 
           expanded={true} collapseAfterResult={false} useMapBounds={false} position={"topright"} 

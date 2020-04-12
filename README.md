@@ -26,7 +26,6 @@ Or just grab the EditablePopup.js and .css files from the src folder and stick t
 Import into your map component like so:
 ````javascript
 import Popup from 'react-leaflet-editable-popup'
-import Popup from '...wherever/components/EditablePopup'
 ````
 
 Use within your map just like you would with a regular `react-leaflet` popup.  However, several new props are available to you.  For example:

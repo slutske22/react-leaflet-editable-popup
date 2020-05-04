@@ -1,10 +1,9 @@
 .activeArea{
    position: absolute;
-   top: 30px;
-   bottom: 30px;
+   top: 0px;
+   bottom: 00px;
    right: 0px;
-   margin: 10px;
-   width: 70%;
+   left: 0px;
    border: 2px dashed darkblue;
    pointer-events: none;
    z-index: 1000;

@@ -1,18 +1,51 @@
-.ExternalComponents{
+.ExternalComponents {
    position: absolute;
-   top: 30px;
-   bottom: 30px;
-   left: 40px;
-   width: 22%;
-   margin: 10px;
+   top: 0px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+   padding: 50px;
+   display: grid;
+   grid-template-columns: 1fr 5fr;
+   grid-gap: 20px;
+   pointer-events: none;
+
+}
+
+.sidebar{
    padding: 10px;
    background-color: rgba(255,255,255,0.8);
    z-index: 1000;
    font-family: sans-serif;
    font-size: 0.8em;
+   pointer-events: auto;
+
 
    h4 {
       margin: 0px;
    }
 
+}
+
+.CustomLayersControls{
+   border-bottom: 1px solid grey;
+   padding-bottom: 20px;
+   margin-bottom: 20px;
+
+   h4 {
+      margin-bottom: 5px;
+   }
+
+   label {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+   }
+
+}
+
+
+.ActiveAreaContainer{
+   position: relative;
+   border: 1px solid green
 }

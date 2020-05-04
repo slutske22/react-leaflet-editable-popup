@@ -4,7 +4,7 @@
 import React from "react";
 import './components/ActiveArea.css'
 
-import { Map as MapComponent, TileLayer, Marker } from 'react-leaflet'
+import { Map as MapComponent, TileLayer, Marker, LayersControl } from 'react-leaflet'
 import MapContext from './Context'
 
 import GeoSearch from './components/GeoSearch'
@@ -16,9 +16,9 @@ import { blackIcon } from './components/Icons'
 import EsriLeafletLayer from './components/EsriLeafletLayer'
 import EsriLeafletAuthLayer from './components/EsriLeafletAuthLayer'
 
+import { seattlePath, center } from './constants'
 
-import { ensenadaBikePath, centerLat, centerLng } from './constants'
-
+const { BaseLayer, Overlay } = LayersControl
 
 
 
@@ -28,17 +28,21 @@ class Map extends React.Component{
 
   componentDidMount() {
     const map = this.mapRef.current.leafletElement;
+    window.map = map
     this.props.setMap(map);
   }
 
   render(){
 
+   const { customLayers } = this.props
+
+
     return (
 
       <MapComponent 
          id="mapId" 
-         center={[centerLat, centerLng]} 
-         zoom={11.5} 
+         center={center} 
+         zoom={10} 
          maxZoom={14} 
          zoomSnap='0.5' 
          doubleClickZoom={false}
@@ -50,10 +54,9 @@ class Map extends React.Component{
           subdomains='abcd' ext='png'
         />
 
-        <EsriLeafletLayer layerType="tiledMapLayer" url="https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_WUI_2010_01/MapServer" opacity={0.7} />
+        {customLayers.esriLeafletLayer && <EsriLeafletLayer layerType="tiledMapLayer" url="https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_WUI_2010_01/MapServer" opacity={0.7} />}
 
-
-        <EsriLeafletAuthLayer layerType="imageMapLayer" url="https://landscape6.arcgis.com/arcgis/rest/services/World_Land_Cover_30m_BaseVue_2013/ImageServer" opacity={0.75} />
+         {customLayers.esriLeafletAuthLayer && <EsriLeafletAuthLayer layerType="imageMapLayer" url="https://landscape6.arcgis.com/arcgis/rest/services/World_Land_Cover_30m_BaseVue_2013/ImageServer" opacity={0.75} />}
 
 
         <GeoSearch 
@@ -62,17 +65,17 @@ class Map extends React.Component{
 
         <MousePosition position={'bottomleft'} />
 
-        <Marker position={[31.80, -116.79]}>
-          <EditablePopup editable removable open >
+        <Marker position={[center.lat-0.1, center.lng + 0.3]}>
+          <EditablePopup editable removable open maxWidth={400}>
             <div>
-              <h3>Welcome to the react-leaflet custom components library</h3>
-              <section>This is an example page of some custom components.  You'll notice a Search bar, which is a custom component built from the <a href="https://esri.github.io/esri-leaflet/api-reference/controls/geosearch.html#result-object" target="_blank">Esri Leaflet Geocoder</a>.  You'll also see a mouseposition coordinates custom component in the corner.  Even this popup that you're reading is a custom component which has additional features beyond a normal popup.</section>
+              <h2>Welcome to the react-leaflet custom components library</h2>
+              <section className="welcome-popup-text">This is an example page of some custom components.  You'll notice a Search bar, which is a custom component built from the <a href="https://esri.github.io/esri-leaflet/api-reference/controls/geosearch.html#result-object" target="_blank">Esri Leaflet Geocoder</a>.  You'll also see a mouseposition coordinates custom component in the corner.  Even this popup that you're reading is a custom component which has additional features beyond a normal popup.</section>
             </div>
           </EditablePopup>
         </Marker>
 
 
-        <Polyline positions={ensenadaBikePath} arrowheads={ {size: '300m', frequency: '1000m'} } >
+        <Polyline positions={seattlePath} arrowheads={ {size: '300m', frequency: '1000m'} } >
           <EditablePopup removable editable nametag={'bike path'}>
             <div>
               <h3>Leaflet Arrowheads</h3>
@@ -80,8 +83,6 @@ class Map extends React.Component{
             </div>
           </EditablePopup>
         </Polyline>
-
-        {/* <ActiveArea /> */}  {/* Working in ExternalComponents! */}
         
         <RandomMarkersButtonLNative position={'bottomright'} icon={blackIcon} />
 

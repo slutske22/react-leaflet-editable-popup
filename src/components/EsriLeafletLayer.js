@@ -12,6 +12,7 @@ class EsriLeafletLayer extends MapControl {
    }
 
    componentDidMount() {
+      console.log('Mouted EsriLeafletLayer')
       const { map } = this.props.leaflet;
       this.leafletElement.addTo(map);
    }

@@ -11,22 +11,46 @@ import ExternalComponents from './externalComponents/ExternalComponents'
 
 class App extends React.Component{
 
-  mapReference = React.createRef()
+   mapReference = React.createRef()
 
-  state = { mapLoaded: false }
+   state = { 
+      mapLoaded: false,
+      customLayers: {
+         esriLeafletLayer: false,
+         esriLeafletAuthLayer: false
+      }
+   }
 
-  componentDidMount(){
-    this.setState({ mapLoaded:true })
+   componentDidMount(){
+      this.setState({ mapLoaded:true })
+   }
 
-  }
+
+   toggleLayer = e => {
+      const layername = e.currentTarget.getAttribute('layer')
+      console.log(layername)
+
+      this.setState({
+         customLayers: {
+            ...this.state.customLayers,
+            [layername]: !this.state.customLayers[layername]
+         }
+      })
+   }
 
   render(){
     return (
       <MapProvider>
 
-        <LeafletMap  />
+        <LeafletMap customLayers={this.state.customLayers} />
 
-        {this.state.mapLoaded && <ExternalComponents mapReference={this.mapReference} />}
+         {this.state.mapLoaded && 
+            <ExternalComponents 
+               mapReference={this.mapReference} 
+               customLayers={this.state.customLayers}
+               toggleLayer={this.toggleLayer}
+            />
+         }
 
       </MapProvider>
     )

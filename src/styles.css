@@ -9,3 +9,11 @@ html, body, #root, #mapId{
   margin: 0;
   padding: 0;
 }
+
+.welcome-popup-text {
+   font-size: 1.1em;
+}
+
+h2{
+   font-size: 2em;
+}

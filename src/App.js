@@ -17,7 +17,11 @@ class App extends React.Component{
       mapLoaded: false,
       customLayers: {
          esriLeafletLayer: false,
-         esriLeafletAuthLayer: false
+         esriLeafletAuthLayer: false,
+         dem: false,
+         slope: false,
+         aspect: false,
+         slopeaspect: false
       }
    }
 

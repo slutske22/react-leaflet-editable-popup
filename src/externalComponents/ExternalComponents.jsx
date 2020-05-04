@@ -25,14 +25,37 @@ class ExternalComponents extends React.Component{
 
                <div className="CustomLayersControls">
                   <h4>Custom Layers</h4>
+
                      <label layer="esriLeafletLayer" onClick={this.toggleLayer}>
                         <input layer="esriLeafletLayer" type="checkbox" checked={customLayers.esriLeafletLayer} onChange={this.toggleLayer}/>
                         Esri Leaflet Layer
                      </label>
+
                      <label layer="esriLeafletAuthLayer" onClick={this.toggleLayer}>
                         <input layer="esriLeafletAuthLayer"  type="checkbox" checked={customLayers.esriLeafletAuthLayer} onChange={this.toggleLayer}/>
                         Esri Leaflet Auth Layer
                      </label>
+
+                     <label layer="dem" onClick={this.toggleLayer}>
+                        <input layer="dem"  type="checkbox" checked={customLayers.dem} onChange={this.toggleLayer}/>
+                        Custom Topo: Digital Elevation Model
+                     </label>
+
+                     <label layer="slope" onClick={this.toggleLayer}>
+                        <input layer="slope"  type="checkbox" checked={customLayers.slope} onChange={this.toggleLayer}/>
+                        Custom Topo: Slope
+                     </label>
+
+                     <label layer="aspect" onClick={this.toggleLayer}>
+                        <input layer="aspect"  type="checkbox" checked={customLayers.aspect} onChange={this.toggleLayer}/>
+                        Custom Topo: Aspect
+                     </label>
+
+                     <label layer="slopeaspect" onClick={this.toggleLayer}>
+                        <input layer="slopeaspect"  type="checkbox" checked={customLayers.slopeaspect} onChange={this.toggleLayer}/>
+                        Custom Topo: Aspect & Slope
+                     </label>
+
                </div>
             
                <div>

@@ -4,7 +4,7 @@
 import React from "react";
 import './components/ActiveArea.css'
 
-import { Map as MapComponent, TileLayer, Marker, LayersControl } from 'react-leaflet'
+import { Map as MapComponent, TileLayer, Marker, GridLayer } from 'react-leaflet'
 import MapContext from './Context'
 
 import GeoSearch from './components/GeoSearch'
@@ -13,13 +13,12 @@ import EditablePopup from 'react-leaflet-editable-popup'
 import Polyline from 'react-leaflet-arrowheads'
 import RandomMarkersButtonLNative from './components/RandomMarkersButtonLNative'
 import { blackIcon } from './components/Icons'
+
 import EsriLeafletLayer from './components/EsriLeafletLayer'
 import EsriLeafletAuthLayer from './components/EsriLeafletAuthLayer'
+import TopoLayer from './components/TopoLayer'
 
 import { seattlePath, center } from './constants'
-
-const { BaseLayer, Overlay } = LayersControl
-
 
 
 class Map extends React.Component{
@@ -54,11 +53,6 @@ class Map extends React.Component{
           subdomains='abcd' ext='png'
         />
 
-        {customLayers.esriLeafletLayer && <EsriLeafletLayer layerType="tiledMapLayer" url="https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_WUI_2010_01/MapServer" opacity={0.7} />}
-
-         {customLayers.esriLeafletAuthLayer && <EsriLeafletAuthLayer layerType="imageMapLayer" url="https://landscape6.arcgis.com/arcgis/rest/services/World_Land_Cover_30m_BaseVue_2013/ImageServer" opacity={0.75} />}
-
-
         <GeoSearch 
           expanded={true} collapseAfterResult={false} useMapBounds={false} position={"topright"} 
           providers={['arcgisOnlineProvider', 'geocodeServiceProvider']} />
@@ -66,7 +60,7 @@ class Map extends React.Component{
         <MousePosition position={'bottomleft'} />
 
         <Marker position={[center.lat-0.1, center.lng + 0.3]}>
-          <EditablePopup editable removable open maxWidth={400}>
+          <EditablePopup editable removable open maxWidth={400} autoPan={false}>
             <div>
               <h2>Welcome to the react-leaflet custom components library</h2>
               <section className="welcome-popup-text">This is an example page of some custom components.  You'll notice a Search bar, which is a custom component built from the <a href="https://esri.github.io/esri-leaflet/api-reference/controls/geosearch.html#result-object" target="_blank">Esri Leaflet Geocoder</a>.  You'll also see a mouseposition coordinates custom component in the corner.  Even this popup that you're reading is a custom component which has additional features beyond a normal popup.</section>
@@ -85,6 +79,19 @@ class Map extends React.Component{
         </Polyline>
         
         <RandomMarkersButtonLNative position={'bottomright'} icon={blackIcon} />
+
+
+         {/* ------------- CUSTOM LAYERS  ----------------*/}
+
+         {customLayers.esriLeafletLayer && <EsriLeafletLayer layerType="tiledMapLayer" url="https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_WUI_2010_01/MapServer" opacity={0.7} />}
+
+         {customLayers.esriLeafletAuthLayer && <EsriLeafletAuthLayer layerType="imageMapLayer" url="https://landscape6.arcgis.com/arcgis/rest/services/World_Land_Cover_30m_BaseVue_2013/ImageServer" opacity={0.75} />}
+
+         {customLayers.dem && <TopoLayer topotype="dem" />}
+         {customLayers.slope && <TopoLayer topotype="slope" />}
+         {customLayers.aspect && <TopoLayer topotype="aspect" />}
+         {customLayers.slopeaspect && <TopoLayer topotype="slopeaspect" />}
+
 
       </MapComponent>
 

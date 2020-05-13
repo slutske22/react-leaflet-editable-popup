@@ -66,7 +66,7 @@ A higher order component which requests an Esri auth token (with your provided `
 
 #### TopoLayer
 
-A set of customizable layers built from the [Mapbox Terrain RGB layer](https://docs.mapbox.com/help/troubleshooting/access-elevation-data/#mapbox-terrain-rgb).  Requires the `topotype` prop, which can takes values of `'dem'`, `'slope'`, `'aspect'`, or `'slopeaspect'`.  Will transform the RGB layer into colorized visualizations of these topography types.  Leverages web workers to do so.  The web worker code is found in the [\public\scripts folder](https://github.com/slutske22/react-leaflet-custom-components/tree/master/public/scripts) of the source code in this repo.  You can altar the .shading.js files to customize your colors.  You can learn more about these layers [here](https://observablehq.com/@slutske22/slope-and-aspect-in-leaflet).
+A set of customizable layers built from the [Mapbox Terrain RGB layer](https://docs.mapbox.com/help/troubleshooting/access-elevation-data/#mapbox-terrain-rgb).  Requires the `topotype` prop, which can takes values of `'dem'`, `'slope'`, `'aspect'`, or `'slopeaspect'`.  Will transform the RGB layer into colorized visualizations of these topography types.  Leverages web workers to do so.  The web worker code is found in the [\public\scripts folder](https://github.com/slutske22/react-leaflet-custom-components/tree/master/public/scripts) of the source code in this repo.  You can altar the .shading.js files to customize your colors.  You can learn more about these layers [here](https://observablehq.com/@slutske22/slope-and-aspect-in-leaflet).  Requires Mapbox access token - please use your own.
 
 ## Externalized Map Components
 

@@ -56,6 +56,43 @@ function raster2slopes(raster){
       }
    }
 
+
+   /** Shameless Hack: 
+    * When calculating slope, we can't get values
+    * that are on the edge of a tile, as we can't
+    * get their neighbors.  Their neighbors are on
+    * a different tile.  Rather than trying to coordinate
+    * data between tiles, this loop takes the pixel
+    * 2 pixels deep from each edge and copies it to
+    * the edge pixel.  The hack is 1px wide and barely
+    * visible
+    */
+   for (x = 0; x < 256; x++){
+      for (y = 0; y < 256; y++){
+
+         i = y * 256 + x
+
+         if (x === 0){
+            j = y * 256 + x + 1
+            slopes[i] = slopes[j]
+         }
+         if (x === 255){
+            j = y * 256 + x - 1
+            slopes[i] = slopes[j]
+         }
+         if (y === 0){
+            j = (y + 1) * 256 + x
+            slopes[i] = slopes[j]
+         }
+         if (y === 255){
+            j = (y - 1) * 256 + x
+            slopes[i] = slopes[j]
+         }
+         
+
+      }
+   }
+
    return slopes
 
 }

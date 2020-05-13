@@ -8,23 +8,21 @@ This repo is a playground for development of custom components for React-Leaflet
 
 All components listed here are designed to be used as direct children of the `<Map />` component.  They are written according to the [react-leaflet: Creating custom components](https://react-leaflet.js.org/docs/en/custom-components.html) guide.
 
-
-
 ### Editable Popup
 
-<p align="center">
-  <img src="https://github.com/slutske22/React-Leaflet-Editable-Popup/raw/master/leaflet-popupMod-gif.gif" width="80%">
-</p>
+  <p align="center">
+    <img src="https://github.com/slutske22/React-Leaflet-Editable-Popup/raw/master/leaflet-popupMod-gif.gif" width="80%">
+  </p>
 
-A popup component with additional features.  This component has its own [repo](https://github.com/slutske22/React-Leaflet-Editable-Popup) and [npm package](https://www.npmjs.com/package/react-leaflet-editable-popup).  Check out the documentation there for details on how to install and use.
-
+  A popup component with additional features.  This component has its own [repo](https://github.com/slutske22/React-Leaflet-Editable-Popup) and [npm package](https://www.npmjs.com/package/react-leaflet-editable-popup).  Check out the documentation there for details on how to install and use.
+    
 ### Arrowheads
 
-<p align="center">
-  <img src="https://github.com/slutske22/react-leaflet-arrowheads/raw/master/images/banner.png" width="80%">
-</p>
+  <p align="center">
+    <img src="https://github.com/slutske22/react-leaflet-arrowheads/raw/master/images/banner.png" width="80%">
+  </p>
 
-A react-leaflet wrapper for [leaflet-arrowheads](https://github.com/slutske22/leaflet-arrowheads).  This component has its own [repo](https://github.com/slutske22/react-leaflet-arrowheads) and [npm package](https://www.npmjs.com/package/react-leaflet-arrowheads). Check out the documentation there for details on how to install and use.
+  A react-leaflet wrapper for [leaflet-arrowheads](https://github.com/slutske22/leaflet-arrowheads).  This component has its own [repo](https://github.com/slutske22/react-leaflet-arrowheads) and [npm package](https://www.npmjs.com/package/react-leaflet-arrowheads). Check out the documentation there for details on how to install and use.
 
 ### ActiveArea
 
@@ -50,6 +48,25 @@ A small component which gives the user's mouse position in latitude and longitud
 
 A button to randomly place a marker anywhere within the map's bounds.  Not currently hooked up to any react state objects.
 TODO:  Allow for state management callback similar to EditablePopup example.
+
+### Custom Layers
+
+
+#### EsriLeafletLayer
+
+This generic use layer can create any type of [esri-leaflet layer](https://esri.github.io/esri-leaflet/tutorials/introduction-to-layer-types.html).  All options that would be passed to any of these layers can be passed as props to this component.  The additional `layerType` props is required to specify which esri-leaflet layertype is desired (i.e. `featureLayer`, `imageMapLayer`, `tiledMapLayer`, etc.)
+
+#### EsriLeafletAuthLayer
+
+The same as the `<EsriLeafletLayer />`, but wrapped in the `withEsriAuth` HOC.
+
+#### withEsriAuth
+
+A higher order component which requests an Esri auth token (with your provided `client_id` and `client_secret` - please use your own), feeds it to the an `<EsriLeafletAuthLayer />`.
+
+#### TopoLayer
+
+A set of customizable layers built from the [Mapbox Terrain RGB layer](https://docs.mapbox.com/help/troubleshooting/access-elevation-data/#mapbox-terrain-rgb).  Requires the `topotype` prop, which can takes values of `'dem'`, `'slope'`, `'aspect'`, or `'slopeaspect'`.  Will transform the RGB layer into colorized visualizations of these topography types.  Leverages web workers to do so.  The web worker code is found in the [\public\scripts folder](https://github.com/slutske22/react-leaflet-custom-components/tree/master/public/scripts) of the source code in this repo.  You can altar the .shading.js files to customize your colors.  You can learn more about these layers [here](https://observablehq.com/@slutske22/slope-and-aspect-in-leaflet).
 
 ## Externalized Map Components
 

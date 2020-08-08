@@ -1,0 +1,11 @@
+{
+  "name": "rlv3-custom-components-example",
+  "version": "0.1.0",
+  "description": "Example project to display custom components for react-leaflet v3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Seth Lutske",
+  "license": "ISC"
+}

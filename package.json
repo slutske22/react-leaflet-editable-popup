@@ -4,7 +4,7 @@
   "description": "custom components for react leaflet v3",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "example:start": "webpack-dev-server --config webpack.example.js --open --mode development --compress"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.1.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^4.2.1",

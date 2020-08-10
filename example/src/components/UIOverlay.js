@@ -2,6 +2,7 @@ import React from 'react'
 
 import Sidebar from './Sidebar'
 import { ActiveArea } from '../../../components/external/ActiveArea'
+import { ExternalLeafletControl } from '../../../components/external/ExternalLeafletControl'
 
 const UIOverlay = props => {
 
@@ -9,7 +10,7 @@ const UIOverlay = props => {
       <div className="UIOverlay">
          <Sidebar map={props.map} />
          <ActiveArea map={props.map}>
-            {/* <LeafletExternalControl map={props.map} control="zoom" /> */}
+            {/* <ExternalLeafletControl map={props.map} control="zoom" /> */}
          </ActiveArea>
       </div>
    )

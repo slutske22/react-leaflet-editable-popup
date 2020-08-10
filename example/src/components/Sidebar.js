@@ -7,7 +7,9 @@ import { GoLinkExternal, GoLocation } from 'react-icons/go'
 import { RiShapeLine } from 'react-icons/ri'
 
 import { Sidebar, Tab } from '../../../components/external/Sidebar'
-import { ExternalLeafletControl } from '../../../components/external/ExternalLeafletControl'
+import { ExternalZoomControl } from '../../../components/external/ExternalZoomControl'
+import { ExternalScaleControl } from '../../../components/external/ExternalScaleControl'
+import { ExternalAttributionControl } from '../../../components/external/ExternalAttributionControl'
 
 const SidebarComponent = ({ map }) => {
 
@@ -73,8 +75,9 @@ const SidebarComponent = ({ map }) => {
                   The standard leaflet controls you see below are not children of the map, but rather a child of this Sidebar.  The activearea div you see with the blue border is also an externalized version of the ActiveArea component.
                </p>
                <div className="external-controls-collection">
-                  <ExternalLeafletControl map={map} control="zoom" />
-                  <ExternalLeafletControl map={map} control="scale" />
+                  <ExternalZoomControl map={map}/>
+                  <ExternalScaleControl map={map} />
+                  <ExternalAttributionControl map={map} />
                </div>
             </Tab>
 

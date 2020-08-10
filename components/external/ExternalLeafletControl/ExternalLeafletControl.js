@@ -20,7 +20,7 @@ class ExternalLeafletControl extends React.Component {
 
    render(){
       return (
-         <div className={`${this.containerName} ${capitalizeFirstLetter(this.props.control)}Control`} />
+         <div className={`${this.props.className || ''} ${this.containerName} ${capitalizeFirstLetter(this.props.control)}Control`} />
       )
    }
 

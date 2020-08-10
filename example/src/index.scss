@@ -56,3 +56,16 @@ button.sidebar-tab-button svg {
 h3 {
    border-bottom: 1px solid black;
 }
+.external-controls-collection {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   & > * {
+      flex-basis: 150px;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+}

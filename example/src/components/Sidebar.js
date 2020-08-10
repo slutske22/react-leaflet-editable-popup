@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FiHome, FiChevronLeft, FiCompass, FiSettings, FiLayers } from "react-icons/fi";
 import { FaMapMarkerAlt, FaShapes } from 'react-icons/fa'
 import { BsReverseLayoutTextSidebarReverse, BsController } from 'react-icons/bs'
-import { GoLinkExternal } from 'react-icons/go'
+import { GoLinkExternal, GoLocation } from 'react-icons/go'
 import { GrLocation } from 'react-icons/gr'
 import { RiShapeLine } from 'react-icons/ri'
 import { Sidebar, Tab } from '../../../components/external/Sidebar'
@@ -73,7 +73,7 @@ const SidebarComponent = ({ map }) => {
                <p>Custom layers tab</p>
             </Tab>
 
-            <Tab id="uilayers" header="UI Layers" icon={<GrLocation />}>
+            <Tab id="uilayers" header="UI Layers" icon={<GoLocation />}>
                <p>Custom popups, markers, etc.</p>
             </Tab>
 

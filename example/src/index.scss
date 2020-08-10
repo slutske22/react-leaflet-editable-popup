@@ -1,3 +1,7 @@
+/* --------------------------------------------------- */
+/*      Global Layout Styles                                 */
+/* --------------------------------------------------- */
+
 html, body, #root, .App, #mapId {
    width: 100%;
    height: 100%;
@@ -7,4 +11,18 @@ html, body, #root, .App, #mapId {
 
 .App {
    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+
+/* --------------------------------------------------- */
+/*      Sidebar Styles                                 */
+/* --------------------------------------------------- */
+
+button.sidebar-tab-button svg {
+   height: 14px;
+   width: 14px;
+}
+.sidebar-content {
+   border-left: 1px solid lightgray;
 }

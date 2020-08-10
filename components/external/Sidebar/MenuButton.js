@@ -26,6 +26,7 @@ const MenuButton = props => {
       <button
         className="sidebar-tab-button"
         role='tab'
+        title={props.header}
         onClick={e => onClick(e, props.id)}>{' '}{icon}
       </button>
     </li>

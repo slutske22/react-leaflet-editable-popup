@@ -75,10 +75,6 @@ $screen-large: 1200px;
     background-color: #fff
 }
 
-.sidebar-tab-button {
-    cursor: pointer;
-}
-
 .sidebar-left .sidebar-tabs {
     left: 0
 }
@@ -126,7 +122,10 @@ $screen-large: 1200px;
 }
 
 .sidebar-tabs>li>button, .sidebar-tabs>ul>li>button {
-    display: block;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
     line-height: 40px;

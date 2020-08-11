@@ -32,6 +32,11 @@ const SidebarComponent = ({ map }) => {
       dispatch( setSidebarTab(id) )
    }
 
+   const setTab = id => {
+      setOpenTab(id)
+      dispatch( setSidebarTab(id) )
+   }
+
    return (
       <Sidebar
          map={map}
@@ -51,32 +56,32 @@ const SidebarComponent = ({ map }) => {
             <p>
                <button 
                   className="menu btn-link" 
-                  onClick={() => setOpenTab('ui')}>
+                  onClick={() => setTab('ui')}>
                      Layout Components
                </button>
                <button 
                   className="menu btn-link"
-                  onClick={() => setOpenTab('externalConrols')}>
+                  onClick={() => setTab('externalConrols')}>
                      Externalized Controls
                </button>
                <button 
                   className="menu btn-link"
-                  onClick={() => setOpenTab('layers')}>
+                  onClick={() => setTab('layers')}>
                      Custom Layers
                </button>
                <button 
                   className="menu btn-link"
-                  onClick={() => setOpenTab('uilayers')}>
+                  onClick={() => setTab('uilayers')}>
                      Markers and Popups
                </button>
                <button 
                   className="menu btn-link"
-                  onClick={() => setOpenTab('vectorlayers')}>
+                  onClick={() => setTab('vectorlayers')}>
                      Custom Path Components
                </button>
                <button 
                   className="menu btn-link"
-                  onClick={() => setOpenTab('esrileaflet')}>
+                  onClick={() => setTab('esrileaflet')}>
                      Esri-Leaflet for React-Leaflet
                </button>
             </p>
@@ -88,11 +93,11 @@ const SidebarComponent = ({ map }) => {
          <Tab id="ui" header="Layout Components" icon={<BsReverseLayoutTextSidebarReverse />}>
             <h3>Sidebar</h3>
             <p>
-               This sidebar is adapted from <a href="https://github.com/eferhatg/react-leaflet-sidetabs" target="_blank" rel="noopener noreferrer">react-leaflet-sidetabs</a> to be compatible with react-leaflet version 3.  It is an external component, so check out the <button className="btn-link" onClick={() => setOpenTab('externalConrols')}>external components</button> tab for more info.
+               This sidebar is adapted from <a href="https://github.com/eferhatg/react-leaflet-sidetabs" target="_blank" rel="noopener noreferrer">react-leaflet-sidetabs</a> to be compatible with react-leaflet version 3.  It is an external component, so check out the <button className="btn-link" onClick={() => setTab('externalConrols')}>external components</button> tab for more info.
             </p>
             <h3>ActiveArea</h3>
             <p>
-               Adapted from <a href="https://github.com/Mappy/Leaflet-active-area" target="_blank" rel="noopener noreferrer">leaflet-active-area</a>, this component uses the <code>{`<div>`}</code> of your choice as the active part of the map, applying all positioning to that div (highlighted in dotted blue).
+               Adapted from <a href="https://github.com/Mappy/Leaflet-active-area" target="_blank" rel="noopener noreferrer">leaflet-active-area</a>, this component uses the <code>{`<div>`}</code> of your choice as the active part of the map, applying all positioning to that div (highlighted in dotted blue when on this tab).
                <button 
                className="toggle-active-area btn"
                onClick={() => dispatch( toggleActiveArea(!useActiveArea) )}>

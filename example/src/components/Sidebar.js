@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
 import { FiHome, FiChevronLeft, FiCompass, FiSettings, FiLayers } from "react-icons/fi";
-import { FaMapMarkerAlt, FaShapes } from 'react-icons/fa'
 import { BsReverseLayoutTextSidebarReverse, BsController } from 'react-icons/bs'
 import { GoLinkExternal, GoLocation } from 'react-icons/go'
 import { RiShapeLine } from 'react-icons/ri'
+import { IoIosGlobe } from 'react-icons/io'
 
 import { Sidebar, Tab } from '../../../components/external/Sidebar'
 import { ExternalZoomControl } from '../../../components/external/ExternalZoomControl'
@@ -41,14 +41,43 @@ const SidebarComponent = ({ map }) => {
                   Welcome to the React-Leaflet V3 custom components library.  This example page shows off some of the custom components that have been built and adapted for react-leaflet v3.  
                </p>
                <p>
-                  Click the icons on the left to learn more about the various types of custom components offered here.
+                  <button 
+                     className="menu btn-link" 
+                     onClick={() => setOpenTab('ui')}>
+                        Layout Components
+                  </button>
+                  <button 
+                     className="menu btn-link"
+                     onClick={() => setOpenTab('externalConrols')}>
+                        Externalized Controls
+                  </button>
+                  <button 
+                     className="menu btn-link"
+                     onClick={() => setOpenTab('layers')}>
+                        Custom Layers
+                  </button>
+                  <button 
+                     className="menu btn-link"
+                     onClick={() => setOpenTab('uilayers')}>
+                        Markers and Popups
+                  </button>
+                  <button 
+                     className="menu btn-link"
+                     onClick={() => setOpenTab('vectorlayers')}>
+                        Custom Path Components
+                  </button>
+                  <button 
+                     className="menu btn-link"
+                     onClick={() => setOpenTab('esrileaflet')}>
+                        Esri-Leaflet for React-Leaflet
+                  </button>
                </p>
                <p>
                   Check out the github page for more information.
                </p>
             </Tab>
 
-            <Tab id="sidebar" header="Layout Components" icon={<BsReverseLayoutTextSidebarReverse />}>
+            <Tab id="ui" header="Layout Components" icon={<BsReverseLayoutTextSidebarReverse />}>
                <h3>Sidebar</h3>
                <p>
                   This sidebar is adapted from <a href="https://github.com/eferhatg/react-leaflet-sidetabs" target="_blank" rel="noopener noreferrer">react-leaflet-sidetabs</a> to be compatible with react-leaflet version 3.  It is an external component, so check out the <button className="btn-link" onClick={() => setOpenTab('externalConrols')}>external components</button> tab for more info.
@@ -91,6 +120,10 @@ const SidebarComponent = ({ map }) => {
             </Tab>
 
             <Tab id="vectorlayers" header="Vector Layers" icon={<RiShapeLine />}>
+               <p>Custom vector layers</p>
+            </Tab>
+
+            <Tab id="esrileaflet" header="Esri Leaflet" icon={<IoIosGlobe />}>
                <p>Custom vector layers</p>
             </Tab>
 

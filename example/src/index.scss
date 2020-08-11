@@ -38,6 +38,16 @@ button.btn-link {
    &:hover{
       text-decoration: underline;
    }
+
+   &.menu {
+      display: block;
+      margin-bottom: 1em;
+      margin-left: 1em;
+
+      &:last-child{
+         margin-bottom: 2em;
+      }
+   }
 }
 
 

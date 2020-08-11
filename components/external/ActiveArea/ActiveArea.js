@@ -42,8 +42,12 @@ class ActiveArea extends React.Component{
    }
 
    render(){
+
+      // remove map from props, use the rest
+      const {map, ...activeProps} = this.props
+
       return(
-         <div className="ActiveArea" id="ActiveArea">
+         <div className="ActiveArea" id="ActiveArea" {...activeProps}>
             {this.props.children}
          </div>
       )

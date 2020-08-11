@@ -26,6 +26,14 @@ a:hover {
    text-decoration: underline;
 }
 
+button.btn {
+   cursor: pointer;
+   background-color: white;
+   border: 1px solid black;
+   border-radius: 5px;
+   padding: 5px;
+}
+
 button.btn-link {
    background-color: white;
    color: $linkcolor;
@@ -52,10 +60,48 @@ button.btn-link {
 
 
 
+
+/* --------------------------------------------------- */
+/*      Layout Styles                                 */
+/* --------------------------------------------------- */
+
+.UIOverlay {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 10px;
+  margin: 10px;
+  z-index: 10000;
+  pointer-events: none;
+
+  & >* {
+    pointer-events: auto;
+  }
+  
+}
+
+
+.ActiveArea {
+  border: 2px dotted blue;
+}
+
+
+
+
+
 /* --------------------------------------------------- */
 /*      Sidebar Styles                                 */
 /* --------------------------------------------------- */
 
+#leaflet-sidebar {
+  position: relative;
+  top: 0px;
+  left: 0px;
+}
 button.sidebar-tab-button svg {
    height: 14px;
    width: 14px;
@@ -78,4 +124,10 @@ h3 {
       align-items: center;
       justify-content: center;
    }
+}
+
+.toggle-active-area {
+   display: block;
+   width: 100%;
+   margin-top: 5px;
 }

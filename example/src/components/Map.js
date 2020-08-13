@@ -22,24 +22,6 @@ const Map = props => {
 
             {sidebarTab === 'esrileaflet' && <>
 
-               <LayersControl position="topright" collapsed={false}>
-                  <LayersControl.BaseLayer name="Feature Layer" checked>
-                     <EsriLeafletLayer opacity={props.opacity} layerType="featureLayer" url="https://sampleserver6.arcgisonline.com/arcgis/rest/services/Earthquakes_Since1970/MapServer/0" />
-                  </LayersControl.BaseLayer>
-                  <LayersControl.BaseLayer name="Tiled Map Layer">
-                     <EsriLeafletLayer opacity={props.opacity} layerType="tiledMapLayer" url="https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_WUI_2010_01/MapServer" />
-                  </LayersControl.BaseLayer>
-                  <LayersControl.BaseLayer name="Base Map Layer">
-                     <EsriLeafletLayer opacity={props.opacity} layerType="basemapLayer" name="Imagery" />
-                  </LayersControl.BaseLayer>
-                  <LayersControl.BaseLayer name="Dynamic Map Layer">
-                     <EsriLeafletLayer opacity={props.opacity} layerType="dynamicMapLayer" url="https://services.arcgisonline.com/arcgis/rest/services/Specialty/Soil_Survey_Map/MapServer" />
-                  </LayersControl.BaseLayer>
-                  <LayersControl.BaseLayer name="Image Map Layer">
-                     <EsriLeafletLayer opacity={props.opacity} layerType="imageMapLayer" url="https://landsat.arcgis.com/arcgis/rest/services/Landsat/PS/ImageServer" attribution="United States Geological Survey (USGS), National Aeronautics and Space Administration (NASA)" />
-                  </LayersControl.BaseLayer>
-               </LayersControl>
-
                <LayersControl position="topleft" collapsed={false}>
                   <LayersControl.BaseLayer name="Feature Layer" checked>
                      <EsriLeafletLayer opacity={props.opacity} layerType="featureLayer" url="https://sampleserver6.arcgisonline.com/arcgis/rest/services/Earthquakes_Since1970/MapServer/0" />

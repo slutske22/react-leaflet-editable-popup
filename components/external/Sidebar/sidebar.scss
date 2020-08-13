@@ -285,6 +285,8 @@ $screen-large: 1200px;
         left: 40px;
     }
     transition: left 500ms;
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    min-width: 200px;
 }
 
 .rehomed-top-right, .rehomed-bottom-right {

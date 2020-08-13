@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/slutske22/react-leaflet-custom-components#readme",
   "dependencies": {
+    "esri-leaflet": "^2.5.0",
+    "esri-leaflet-geocoder": "^2.3.3",
     "leaflet": "^1.6.0",
     "leaflet-active-area": "^1.1.1",
     "react": "^16.13.1",

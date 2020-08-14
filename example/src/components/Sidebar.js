@@ -121,7 +121,7 @@ const SidebarComponent = ({ map }) => {
             `}
             </pre></code>
             <p>
-               The standard leaflet controls you see below are not children of the map, but rather a child of this Sidebar.  The activearea div you see with the green border is also an externalized version of the ActiveArea component.
+               The standard leaflet controls you see below are not children of the map, but rather a child of this Sidebar.  The activearea div you see with the blue dotted border is also an externalized version of the ActiveArea component.
             </p>
             <div className="external-controls-collection">
 

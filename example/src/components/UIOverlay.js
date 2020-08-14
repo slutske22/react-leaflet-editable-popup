@@ -8,7 +8,7 @@ import { ExternalLeafletControl } from '../../../components/external/ExternalLea
 const UIOverlay = props => {
 
    const useActiveArea = useSelector(state => state.useActiveArea)
-   const showActiveArea = useSelector(state => state.sidebarTab) === 'ui' ? true :  false
+   const showActiveArea = useSelector(state => state.sidebarTab) === 'externalConrols'
    const style = showActiveArea
       ? {}
       : {border: 'none'}
@@ -16,9 +16,7 @@ const UIOverlay = props => {
    return (
       <div className="UIOverlay">
          <Sidebar map={props.map} />
-         {useActiveArea && <ActiveArea style={style} map={props.map}>
-            {/* <ExternalLeafletControl map={props.map} control="zoom" /> */}
-         </ActiveArea>}
+         {useActiveArea && <ActiveArea style={style} map={props.map} />}
       </div>
    )
 

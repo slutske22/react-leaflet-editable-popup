@@ -1,11 +1,11 @@
 import React from 'react'
 import { ExternalLeafletControl } from '../ExternalLeafletControl'
-import './ExternalAttributionControl.scss'
+import './AttributionControlExternal.scss'
 
-const ExternalAttributionControl = props => (
+const AttributionControlExternal = props => (
    <ExternalLeafletControl 
       className={`ExternalAttributionControl ${props.className || ''}`} 
       control="attribution" {...props} />
 )
 
-export default ExternalAttributionControl
+export default AttributionControlExternal

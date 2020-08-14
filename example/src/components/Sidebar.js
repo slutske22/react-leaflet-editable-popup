@@ -10,9 +10,9 @@ import { RiShapeLine } from 'react-icons/ri'
 import { IoIosGlobe } from 'react-icons/io'
 
 import { Sidebar, Tab } from '../../../components/external/Sidebar'
-import { ExternalZoomControl } from '../../../components/external/ExternalZoomControl'
-import { ExternalScaleControl } from '../../../components/external/ExternalScaleControl'
-import { ExternalAttributionControl } from '../../../components/external/ExternalAttributionControl'
+import { ZoomControlExternal } from '../../../components/external/ZoomControlExternal'
+import { ScaleControlExternal } from '../../../components/external/ScaleControlExternal'
+import { AttributionControlExternal } from '../../../components/external/AttributionControlExternal'
 
 const SidebarComponent = ({ map }) => {
 
@@ -122,9 +122,9 @@ const SidebarComponent = ({ map }) => {
                The standard leaflet controls you see below are not children of the map, but rather a child of this Sidebar.  The activearea div you see with the green border is also an externalized version of the ActiveArea component.
             </p>
             <div className="external-controls-collection">
-               <ExternalZoomControl map={map}/>
-               <ExternalScaleControl map={map} />
-               <ExternalAttributionControl map={map} />
+               <ZoomControlExternal map={map}/>
+               <ScaleControlExternal map={map} />
+               <AttributionControlExternal map={map} />
             </div>
          </Tab>
 

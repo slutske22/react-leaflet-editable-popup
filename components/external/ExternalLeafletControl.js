@@ -5,7 +5,7 @@ function capitalizeFirstLetter(input) {
    return input[0].toUpperCase() + input.slice(1); 
  } 
 
-class ExternalLeafletControl extends React.Component {
+export class ExternalLeafletControl extends React.Component {
    constructor(props){
       super(props)
       this.containerName = props.containerName || `${props.control}-control-container`
@@ -25,5 +25,3 @@ class ExternalLeafletControl extends React.Component {
    }
 
 }
-
-export default ExternalLeafletControl

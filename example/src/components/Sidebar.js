@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { TileLayer, FeatureGroup, Marker, Popup } from 'react-leaflet'
 
 import { setSidebarTab, toggleActiveArea } from '../store/actions'
 
@@ -13,6 +14,7 @@ import { Sidebar, Tab } from '../../../components/external/Sidebar'
 import { ZoomControlExternal } from '../../../components/external/ZoomControlExternal'
 import { ScaleControlExternal } from '../../../components/external/ScaleControlExternal'
 import { AttributionControlExternal } from '../../../components/external/AttributionControlExternal'
+import { LayersControlExternal } from '../../../components/external/LayersControlExternal'
 
 const SidebarComponent = ({ map }) => {
 
@@ -122,9 +124,39 @@ const SidebarComponent = ({ map }) => {
                The standard leaflet controls you see below are not children of the map, but rather a child of this Sidebar.  The activearea div you see with the green border is also an externalized version of the ActiveArea component.
             </p>
             <div className="external-controls-collection">
+
                <ZoomControlExternal map={map}/>
+
                <ScaleControlExternal map={map} />
-               <AttributionControlExternal map={map} />
+
+               <LayersControlExternal map={map}>
+                  <LayersControlExternal.BaseLayer name="Esri Grey" checked>
+                     <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}" attribution='Tiles © Esri' />
+                  </LayersControlExternal.BaseLayer>
+                  <LayersControlExternal.BaseLayer name="Esri Physical">
+                     <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Physical_Map/MapServer/tile/{z}/{y}/{x}" attribution='Tiles © Esri — Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri' />
+                  </LayersControlExternal.BaseLayer>
+                  <LayersControlExternal.Overlay name="OSM Mapnik">
+                     <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' />
+                  </LayersControlExternal.Overlay>
+                  <LayersControlExternal.Overlay name="FeatureGroup">
+                     <FeatureGroup>
+                        <Marker position={map.getCenter()}>
+                           <Popup>
+                              Marker 1 in a feature group
+                           </Popup>
+                        </Marker>
+                        <Marker position={{lat: map.getCenter().lat + 1, lng: map.getCenter().lng}}>
+                           <Popup>
+                              Marker 2 in a feature group
+                           </Popup>
+                        </Marker>
+                     </FeatureGroup>
+                  </LayersControlExternal.Overlay>
+               </LayersControlExternal>
+
+               <AttributionControlExternal className="full-width" map={map} />
+
             </div>
          </Tab>
 

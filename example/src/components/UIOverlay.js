@@ -16,7 +16,7 @@ const UIOverlay = props => {
    return (
       <div className="UIOverlay">
          <Sidebar map={props.map} />
-         {useActiveArea && <ActiveArea style={style} map={props.map} />}
+         {useActiveArea && <ActiveArea className="external" style={style} map={props.map} />}
       </div>
    )
 

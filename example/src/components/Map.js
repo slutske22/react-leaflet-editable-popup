@@ -2,7 +2,6 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { EsriLeafletGeoSearch } from '../../../components/esrileaflet'
-import { EsriLeafletLayersControl } from './molecules/EsriLeafletLayersControl'
 
 const Map = props => {
 
@@ -22,11 +21,8 @@ const Map = props => {
                attribution="Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri" />
 
             {sidebarTab === 'esrileaflet' && <>
-
                <EsriLeafletLayersControl />
-
                <EsriLeafletGeoSearch useMapBounds={false} />
-
             </>}
    
          </MapContainer>

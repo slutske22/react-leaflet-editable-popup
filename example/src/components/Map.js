@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { EsriLeafletGeoSearch } from '../../../components/esrileaflet'
+import { EsriLeafletLayersControl } from './molecules/EsriLeafletLayersControl'
 
 const Map = props => {
 

@@ -4,5 +4,9 @@
    margin: 0;
    padding: 0 5px;
    color: #333;
-   white-space: normal;
+
+   & > * {
+      white-space: normal;
+   }
+   
 }

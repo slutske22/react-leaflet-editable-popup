@@ -8,7 +8,7 @@ const UIOverlay = props => {
 
    const useActiveArea = useSelector(state => state.useActiveArea)
    const openTab = useSelector(state => state.sidebarTab)
-   const showActiveArea = (openTab === 'externalConrols' || openTab === 'ui') ? true : false
+   const showActiveArea = (openTab === 'externalConrols' || openTab === 'ui') ? true : false;
    const style = showActiveArea
       ? {}
       : {border: 'none'}

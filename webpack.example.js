@@ -10,7 +10,7 @@ module.exports = {
       path: path.resolve(__dirname, 'example/dist'),
       publicPath: '/'
    },
-   target: 'node',
+   // target: 'node',
    devtool: 'cheap-module-source-map',
    module: {
       rules: [

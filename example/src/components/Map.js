@@ -1,16 +1,18 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker } from 'react-leaflet'
 
 import { EsriLeafletLayersControl } from './molecules/EsriLeafletLayersControl'
 import { path } from './constants'
 
 import { EsriLeafletGeoSearch } from '../../../components/esrileaflet'
 import { ArrowheadsPolyline } from '../../../components/ArrowheadsPolyline'
+import { EditablePopup } from '../../../components/EditablePopup'
 
 const Map = props => {
 
    const sidebarTab = useSelector(state => state.sidebarTab)
+   const [popupContent, setPopupContent] = useState('<h2>This popup is editable.</h2>')
 
    const map = useMemo( () => {
       return  (
@@ -32,6 +34,16 @@ const Map = props => {
 
             {sidebarTab === 'vectorlayers' && <>
                <ArrowheadsPolyline smoothFactor={5} positions={path} arrowheads={{size: '10px'}}  />
+            </>}
+
+            {sidebarTab === 'uilayers' && <>
+               <Marker position={{lat: 37.773972, lng: -122.431297}}>
+                  <EditablePopup 
+                     removable editable open
+                     saveContentCallback={setPopupContent}>
+                     {popupContent}
+                  </EditablePopup>
+               </Marker>
             </>}
    
          </MapContainer>

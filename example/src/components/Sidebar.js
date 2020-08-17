@@ -169,7 +169,8 @@ const SidebarComponent = ({ map }) => {
          </Tab>
 
          <Tab id="uilayers" header="UI Layers" icon={<GoLocation />}>
-            <p>Custom popups, markers, etc.</p>
+            <h3>EditablePopup</h3>
+            <p>An popup with user-editable content.  Can also be used to remove its source, and control its own open / closed behavior.  Based on <a href="https://github.com/slutske22/leaflet-popup-modifier" target="_blank" rel="noopener noreferrer">leaflet-popup-modifier</a>.</p>
          </Tab>
 
          <Tab id="vectorlayers" header="Vector Layers" icon={<RiShapeLine />}>

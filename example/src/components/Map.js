@@ -1,8 +1,12 @@
 import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 import { MapContainer, TileLayer } from 'react-leaflet'
-import { EsriLeafletGeoSearch } from '../../../components/esrileaflet'
+
 import { EsriLeafletLayersControl } from './molecules/EsriLeafletLayersControl'
+import { path } from './constants'
+
+import { EsriLeafletGeoSearch } from '../../../components/esrileaflet'
+import { ArrowheadsPolyline } from '../../../components/ArrowheadsPolyline'
 
 const Map = props => {
 
@@ -24,6 +28,10 @@ const Map = props => {
             {sidebarTab === 'esrileaflet' && <>
                <EsriLeafletLayersControl />
                <EsriLeafletGeoSearch useMapBounds={false} />
+            </>}
+
+            {sidebarTab === 'vectorlayers' && <>
+               <ArrowheadsPolyline smoothFactor={5} positions={path} arrowheads={{size: '10px'}}  />
             </>}
    
          </MapContainer>

@@ -173,7 +173,10 @@ const SidebarComponent = ({ map }) => {
          </Tab>
 
          <Tab id="vectorlayers" header="Vector Layers" icon={<RiShapeLine />}>
-            <p>Custom vector layers</p>
+            <h3>ArrowheadsPolyline</h3>
+            <p>
+               React-leaflet wrapper for <a href="https://github.com/slutske22/leaflet-arrowheads" target="_blank" rel="noopener noreferrer">leaflet-arrowheads</a>.
+            </p>
          </Tab>
 
          <Tab id="esrileaflet" header="Esri Leaflet" icon={<IoIosGlobe />}>

@@ -158,6 +158,9 @@ const SidebarComponent = ({ map }) => {
                <AttributionControlExternal className="full-width" map={map} />
 
             </div>
+            <p>
+               <code className="todo">TODO: External layers control not communicating with native leaflet attribution control...why?</code>
+            </p>
          </Tab>
 
 
@@ -174,7 +177,17 @@ const SidebarComponent = ({ map }) => {
          </Tab>
 
          <Tab id="esrileaflet" header="Esri Leaflet" icon={<IoIosGlobe />}>
-            <p>Custom vector layers</p>
+
+            <p>react-leaflet components for <a href="https://esri.github.io/esri-leaflet/" target="_blank" rel="noopener noreferrer">esri-leaflet</a></p>
+
+            <h3>EsriLeafletLayer</h3>
+            <p>Catch all component to conjure any of the standard <a href="https://esri.github.io/esri-leaflet/api-reference/#layers" target="_blank" rel="noopener noreferrer">esri-leaflet layers</a> (excluding the Cluster and Heat plugin layers).</p>
+
+            <h3>EsriLeafletGeoSearch</h3>
+            <p>
+               Component to conjure the <a href="https://esri.github.io/esri-leaflet/api-reference/controls/geosearch.html" target="_blank" rel="noopener noreferrer">esri-leaflet geocoder GeoSearch plugin</a>.  Requires <code>npm install esri-leaflet-geocoder</code> as well as <a href="https://github.com/Esri/esri-leaflet-geocoder#example" target="_blank" rel="noopener noreferrer">including their css</a>.
+            </p>
+
          </Tab>
 
 

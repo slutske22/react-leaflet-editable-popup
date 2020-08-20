@@ -135,6 +135,16 @@ h3 {
       margin-top: 10px;
    }
 }
+.EsriGeoSearchExternal {
+  position: relative;
+  margin-top: 10px;
+}
+.leaflet-touch .geocoder-control.geocoder-control-expanded {
+   width: 100%;
+}
+.geocoder-control-input {
+  position: static;
+}
 
 .toggle-active-area {
    display: block;

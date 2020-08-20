@@ -15,6 +15,7 @@ import { ZoomControlExternal } from '../../../components/external/ZoomControlExt
 import { ScaleControlExternal } from '../../../components/external/ScaleControlExternal'
 import { AttributionControlExternal } from '../../../components/external/AttributionControlExternal'
 import { LayersControlExternal } from '../../../components/external/LayersControlExternal'
+import { EsriGeoSearchExternal } from '../../../components/external/EsriGeoSearchExternal'
 
 const SidebarComponent = ({ map }) => {
 
@@ -156,6 +157,8 @@ const SidebarComponent = ({ map }) => {
                </LayersControlExternal>
 
                <AttributionControlExternal className="full-width" map={map} />
+
+               <EsriGeoSearchExternal map={map} expanded={true} useMapBounds={false} collapseAfterResult={false} placeholder="Externalized Esri Leaflet GeoSearch..." />
 
             </div>
             <p>

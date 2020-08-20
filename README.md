@@ -1,5 +1,7 @@
 # React Leaflet Custom Components
 
+### Note: [react-leaflet v3](https://react-leaflet-v3.now.sh/) is coming soon.  While RLV3 is still in beta, updated versions of these components can be found on the [V3 branch](https://github.com/slutske22/react-leaflet-custom-components/tree/V3).
+
 This repo is a playground for development of custom components for React-Leaflet.  If you wish to use any of these, copy their source code.  I imagine that most of these components would need to be further customized to suit any given application's needs, so there is currently no npm package available.  If you find you want the ease of writing `import { SomeComponent } from 'react-leaflet-custom-components'`, open up an issue and I'll work on making a package.
 
 ## :eyes: [Demo (CodeSandBox)](https://codesandbox.io/s/github/slutske22/react-leaflet-custom-components) :eyes:

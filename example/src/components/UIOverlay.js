@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import Sidebar from './Sidebar'
-import { ActiveArea } from '../../../components/external/ActiveArea'
+import { ActiveAreaExternal } from '../../../src'
 
 const UIOverlay = props => {
 
@@ -16,7 +16,7 @@ const UIOverlay = props => {
    return (
       <div className="UIOverlay">
          <Sidebar map={props.map} />
-         {useActiveArea && <ActiveArea className="external" style={style} map={props.map} />}
+         {useActiveArea && <ActiveAreaExternal className="external" style={style} map={props.map} />}
       </div>
    )
 

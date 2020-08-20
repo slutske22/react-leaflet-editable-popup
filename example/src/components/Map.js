@@ -5,9 +5,9 @@ import { MapContainer, TileLayer, Marker } from 'react-leaflet'
 import { EsriLeafletLayersControl } from './molecules/EsriLeafletLayersControl'
 import { path } from './constants'
 
-import { EsriLeafletGeoSearch } from '../../../components/esrileaflet'
-import { ArrowheadsPolyline } from '../../../components/ArrowheadsPolyline'
-import { EditablePopup } from '../../../components/EditablePopup'
+import { EsriLeafletGeoSearch } from '../../../src'
+import { ArrowheadsPolyline } from '../../../src'
+import { EditablePopup } from '../../../src'
 
 const Map = props => {
 

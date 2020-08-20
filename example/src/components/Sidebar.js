@@ -10,12 +10,12 @@ import { GoLinkExternal, GoLocation } from 'react-icons/go'
 import { RiShapeLine } from 'react-icons/ri'
 import { IoIosGlobe } from 'react-icons/io'
 
-import { Sidebar, Tab } from '../../../components/external/Sidebar'
-import { ZoomControlExternal } from '../../../components/external/ZoomControlExternal'
-import { ScaleControlExternal } from '../../../components/external/ScaleControlExternal'
-import { AttributionControlExternal } from '../../../components/external/AttributionControlExternal'
-import { LayersControlExternal } from '../../../components/external/LayersControlExternal'
-import { EsriGeoSearchExternal } from '../../../components/external/EsriGeoSearchExternal'
+import { Sidebar, Tab } from '../../../src'
+import { ZoomControlExternal } from '../../../src'
+import { ScaleControlExternal } from '../../../src'
+import { AttributionControlExternal } from '../../../src'
+import { LayersControlExternal } from '../../../src'
+import { EsriGeoSearchExternal } from '../../../src'
 
 const SidebarComponent = ({ map }) => {
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { LayersControl } from 'react-leaflet'
-import { EsriLeafletLayer } from '../../../../components/esrileaflet'
+import { EsriLeafletLayer } from '../../../../src'
 
 
 export const EsriLeafletLayersControl = () => {

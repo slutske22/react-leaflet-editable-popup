@@ -1,0 +1,343 @@
+$screen-small: 768px;
+$screen-medium: 992px;
+$screen-large: 1200px;
+
+:root {
+   --leaflet-sidetabs-width-s: 305px;
+   --leaflet-sidetabs-width-m: 390px;
+   --leaflet-sidetabs-width-l: 460px;
+   --breakpoint-s: 768px;
+   --breakpoint-m: 992px;
+   --breakpoint-l: 1200px;
+}
+
+.sidebar {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: inherit;
+    z-index: 2000;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .65)
+}
+
+.sidebar.collapsed {
+    width: 40px
+}
+
+@media (min-width: $screen-small ) and (max-width: $screen-medium ) {
+    .sidebar {
+        width: var(--leaflet-sidetabs-width-s);
+    }
+    .sidebar-pane {
+        min-width: 265px
+    }
+}
+
+@media (min-width: $screen-medium ) and (max-width: $screen-large ) {
+    .sidebar {
+        width: var(--leaflet-sidetabs-width-m);
+    }
+}
+
+@media (min-width: $screen-large) {
+    .sidebar {
+        width: var(--leaflet-sidetabs-width-l);
+    }
+}
+
+.sidebar-left {
+    left: 0
+}
+
+.sidebar-right {
+    right: 0
+}
+
+@media (min-width:768px) {
+    .sidebar {
+        top: 10px;
+        bottom: 10px;
+        transition: width .5s
+    }
+    .sidebar-left {
+        left: 10px
+    }
+    .sidebar-right {
+        right: 10px
+    }
+}
+
+.sidebar-tabs {
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background-color: #fff
+}
+
+.sidebar-left .sidebar-tabs {
+    left: 0
+}
+
+.sidebar-right .sidebar-tabs {
+    right: 0
+}
+
+.sidebar-tabs, .sidebar-tabs>ul {
+    position: absolute;
+    width: 40px;
+    margin: 0;
+    padding: 0
+}
+
+.sidebar-tabs>li, .sidebar-tabs>ul>li {
+    width: 100%;
+    height: 40px;
+    color: #333;
+    font-size: 12pt;
+    overflow: hidden;
+    transition: all 80ms
+}
+
+.sidebar-tabs>li:hover, .sidebar-tabs>ul>li:hover {
+    color: #000;
+    background-color: #eee
+}
+
+.sidebar-tabs>li.active, .sidebar-tabs>ul>li.active {
+    color: #fff;
+    background-color: #0074d9
+}
+
+.sidebar-tabs>li.disabled, .sidebar-tabs>ul>li.disabled {
+    color: rgba(51, 51, 51, .4)
+}
+
+.sidebar-tabs>li.disabled:hover, .sidebar-tabs>ul>li.disabled:hover {
+    background: 0 0
+}
+
+.sidebar-tabs>li.disabled>a, .sidebar-tabs>ul>li.disabled>a {
+    cursor: default
+}
+
+.sidebar-tabs>li>button, .sidebar-tabs>ul>li>button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+    color: inherit;
+    text-decoration: none;
+    text-align: center
+}
+
+.sidebar-tabs>ul+ul {
+    bottom: 0
+}
+
+.sidebar-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, .95);
+    overflow-x: hidden;
+    overflow-y: auto
+}
+
+.sidebar-left .sidebar-content {
+    left: 40px;
+    right: 0
+}
+
+.sidebar-right .sidebar-content {
+    left: 0;
+    right: 40px
+}
+
+.sidebar.collapsed>.sidebar-content {
+    overflow-y: hidden
+}
+
+.sidebar-pane {
+    display: none;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 10px 20px
+}
+
+.sidebar-pane.active {
+    display: block
+}
+
+.sidebar-header {
+    margin: -10px -20px 0;
+    height: 40px;
+    padding: 0 20px;
+    line-height: 40px;
+    font-size: 14.4pt;
+    color: #fff;
+    background-color: #0074d9
+}
+
+.sidebar-right .sidebar-header {
+    padding-left: 40px
+}
+
+.sidebar-close {
+    position: absolute;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    cursor: pointer
+}
+
+.sidebar-left .sidebar-close {
+    right: 0
+}
+
+.sidebar-right .sidebar-close {
+    left: 0
+}
+
+.sidebar-left~.sidebar-map {
+    margin-left: 40px
+}
+
+.sidebar-right~.sidebar-map {
+    margin-right: 40px
+}
+
+.sidebar.leaflet-touch {
+    box-shadow: none;
+    .sidebar-left~.sidebar-map .leaflet-left {
+        left: 315px
+    }
+    .sidebar-right~.sidebar-map .leaflet-right {
+        right: 315px
+    }
+}
+
+@media (min-width:992px) and (max-width:1199px) {
+    .sidebar-pane {
+        min-width: 350px
+    }
+    .sidebar-left~.sidebar-map .leaflet-left {
+        left: 400px
+    }
+    .sidebar-right~.sidebar-map .leaflet-right {
+        right: 400px
+    }
+}
+
+@media (min-width:1200px) {
+    .sidebar-pane {
+        min-width: 420px
+    }
+    .sidebar-left~.sidebar-map .leaflet-left {
+        left: 470px
+    }
+    .sidebar-right~.sidebar-map .leaflet-right {
+        right: 470px
+    }
+}
+
+@media (min-width:768px) {
+    .sidebar-left~.sidebar-map {
+        margin-left: 0
+    }
+    .sidebar-right~.sidebar-map {
+        margin-right: 0
+    }
+    .sidebar {
+        border-radius: 4px
+    }
+    .sidebar.leaflet-touch {
+        border: 2px solid rgba(0, 0, 0, .2)
+    }
+    .sidebar-left~.sidebar-map .leaflet-left {
+        transition: left .5s
+    }
+    .sidebar-left.collapsed~.sidebar-map .leaflet-left {
+        left: 50px
+    }
+    .sidebar-right~.sidebar-map .leaflet-right {
+        transition: right .5s
+    }
+    .sidebar-right.collapsed~.sidebar-map .leaflet-right {
+        right: 50px
+    }
+}
+
+
+.sidebar-tabs>li>button, .sidebar-tabs>ul>li>button {
+    background-color: transparent;
+    border: none;
+}
+
+/* Rehomed controls css, if props.rehomeControls is true */
+.rehomed-top-left, .rehomed-bottom-left {
+    .collapsed & {
+        left: 40px;
+    }
+    transition: left 500ms;
+    font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+    min-width: 200px;
+}
+
+.rehomed-top-right, .rehomed-bottom-right {
+    .collapsed & {
+        right: 40px;
+    }
+    transition: right 500ms;
+}
+
+.rehomed-top-left, .rehomed-top-right {
+    .leaflet-control:first-child {
+        margin-top: 0;
+    } 
+}
+
+.rehomed-bottom-left, .rehomed-bottom-right {
+    .leaflet-control:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: $screen-small ) {
+    .rehomed-top-left, .rehomed-bottom-left,
+    .rehomed-top-right, .rehomed-bottom-right{
+        display: none;
+    }
+}
+
+@media (min-width: $screen-small ) and (max-width: $screen-medium ) {
+    .rehomed-top-left, .rehomed-bottom-left {
+        left: var(--leaflet-sidetabs-width-s);
+    }
+    .rehomed-top-right, .rehomed-bottom-right{
+        right: var(--leaflet-sidetabs-width-s);
+    }
+}
+
+@media (min-width: $screen-medium ) and (max-width: $screen-large ) {
+    .rehomed-top-left, .rehomed-bottom-left {
+        left: var(--leaflet-sidetabs-width-m);
+    }
+    .rehomed-top-right, .rehomed-bottom-right{
+        right: var(--leaflet-sidetabs-width-m);
+    }
+}
+
+@media (min-width: $screen-large) {
+    .rehomed-top-left, .rehomed-bottom-left {
+        left: var(--leaflet-sidetabs-width-l);
+    }
+    .rehomed-top-right, .rehomed-bottom-right{
+        right: var(--leaflet-sidetabs-width-l);
+    }
+}

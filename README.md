@@ -12,6 +12,10 @@ See this [codesandbox](https://codesandbox.io/s/github/slutske22/React-Leaflet-E
 
 See [another example](https://codesandbox.io/s/editable-popup-redux-example-9u0t2), using react-redux and with a separate component for array-generated markers and popups.
 
+## Requirements
+
+** Note: This package is currently compatible with reactleaflet v2.  I will publish a v3-compatible version shortly.
+
 ## Installation
 
 Install via npm:

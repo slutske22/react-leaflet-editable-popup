@@ -2,8 +2,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import isEqual from 'react-fast-compare';
 import { MapContainer, TileLayer, LayerGroup, Marker } from 'react-leaflet';
-import Popup from '../module';
-// import Popup from 'react-leaflet-editable-popup'
+import Popup from 'react-leaflet-editable-popup';
 import {
 	lochnessIcon,
 	blueIcon,
@@ -26,13 +25,13 @@ const markerRef1 = React.createRef();
 
 class Map extends React.Component {
 	state = {
-      mapRef: null,
+		mapRef: null,
 		randomMarkers: [],
 	};
 
-   setMapRef = map => {
-      this.setState({ mapRef: map })
-   };
+	setMapRef = (map) => {
+		this.setState({ mapRef: map });
+	};
 
 	shouldComponentUpdate(nextProps, nextState) {
 		if (this.state.randomMarkers.length !== nextState.randomMarkers.length) {
@@ -50,7 +49,7 @@ class Map extends React.Component {
 	}
 
 	placeRandomMarker = () => {
-      const {mapRef} = this.state
+		const { mapRef } = this.state;
 		const bounds = mapRef.getBounds();
 		const mapTop = bounds._northEast.lat;
 		const mapBottom = bounds._southWest.lat;
@@ -84,7 +83,7 @@ class Map extends React.Component {
 	};
 
 	removeRandomMarker = (index) => {
-      const {mapRef} = this.state
+		const { mapRef } = this.state;
 		mapRef.closePopup();
 
 		const newRandomMarkers = [...this.state.randomMarkers];
@@ -199,7 +198,7 @@ class Map extends React.Component {
 						<a
 							href="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/contenteditable"
 							target="_blank"
-                     rel="noreferrer"
+							rel="noreferrer"
 						>
 							contenteditable
 						</a>{' '}
@@ -223,7 +222,7 @@ class Map extends React.Component {
 						<a
 							href="https://www.npmjs.com/package/html-react-parser"
 							target="_blank"
-                     rel="noreferrer"
+							rel="noreferrer"
 						>
 							html-react-parser
 						</a>
@@ -234,7 +233,7 @@ class Map extends React.Component {
 						<a
 							href="https://github.com/slutske22/React-Leaflet-Editable-Popup"
 							target="_blank"
-                     rel="noreferrer"
+							rel="noreferrer"
 						>
 							GitHub readme
 						</a>

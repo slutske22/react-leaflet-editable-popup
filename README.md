@@ -6,15 +6,15 @@ A small plugin for leaflet which allows the author to make a popup editable. You
   <img src="assets/demo.gif">
 </p>
 
-## [React Only Demo](https://codesandbox.io/s/github/slutske22/React-Leaflet-Editable-Popup) / [React Redux Demo](https://codesandbox.io/s/editable-popup-redux-example-9u0t2)
+## [React Only Demo](https://codesandbox.io/s/github/slutske22/react-leaflet-editable-popup/tree/master/example) / [React Redux Demo](https://codesandbox.io/s/editable-popup-redux-example-9u0t2)
 
-See this [codesandbox](https://codesandbox.io/s/github/slutske22/React-Leaflet-Editable-Popup) for examples. Click on the popups for explanations.
+See this [codesandbox](https://codesandbox.io/s/github/slutske22/react-leaflet-editable-popup/tree/master/example) for examples. Click on the popups for explanations.
 
 See [another example](https://codesandbox.io/s/editable-popup-redux-example-9u0t2), using react-redux and with a separate component for array-generated markers and popups.
 
 ## Requirements
 
-This package works with react-leaflet version 3 as a default.  If you are still working with react-leaflet@^2, either use `npm i react-leaflet-editable-popup@^1.0.0`, or use the `v2` prop on an editable popup.  See the [props](#props) section for details.
+This package works with react-leaflet version 3 as a default. If you are still working with react-leaflet@^2, either use `npm i react-leaflet-editable-popup@^1.0.0`, or use the `v2` prop on an editable popup. See the [props](#props) section for details.
 
 ## Installation
 
@@ -100,7 +100,7 @@ Your initial value for the popup's content can be raw JSX, a React class or func
 
 ## Examples
 
-Check out the [codesandbox](https://codesandbox.io/s/github/slutske22/React-Leaflet-Editable-Popup) for some examples in action.
+Check out the [codesandbox](https://codesandbox.io/s/github/slutske22/react-leaflet-editable-popup/tree/master/example) for some examples in action.
 
 See [another example](https://codesandbox.io/s/editable-popup-redux-example-9u0t2), using react-redux and with a separate component for array-generated markers and popups.
 

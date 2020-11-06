@@ -1,0 +1,57 @@
+{
+   "name": "react-leaflet-editable-popup",
+   "version": "2.0.2",
+   "description": "An editable popup component for react-leaflet",
+   "main": "build/EditablePopup.js",
+   "scripts": {
+      "start": "webpack --watch",
+      "build": "npm run clean && npm run transpile && npm run copy",
+      "build:webpack": "npm run clean && webpack",
+      "copy": "cp src/EditablePopup.css build/",
+      "transpile": "./node_modules/.bin/babel src --out-dir build",
+      "clean": "rimraf build",
+      "use:npmReadme": "mv 'README.md' 'git.README.md' && mv 'npm.README.md' 'README.md' ",
+      "use:gitReadme": "mv 'README.md' 'npm.README.md' && mv 'git.README.md' 'README.md' ",
+      "checkoutput": "npm pack && tar -xvzf *.tgz && rm -rf package *.tgz",
+      "prepublishOnly": "npm run use:npmReadme",
+      "postpublish": "npm run use:gitReadme"
+   },
+   "files": [
+      "/build"
+   ],
+   "keywords": [
+      "leaflet",
+      "react-leaflet",
+      "react-leaflet-v3",
+      "popup"
+   ],
+   "author": "Seth Lutske",
+   "license": "ISC",
+   "devDependencies": {
+      "@babel/cli": "^7.0.0",
+      "@babel/core": "^7.0.0",
+      "@babel/plugin-proposal-class-properties": "^7.7.4",
+      "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+      "@babel/plugin-transform-react-jsx": "^7.0.0",
+      "@babel/preset-env": "^7.0.0",
+      "babel-loader": "^8.1.0",
+      "css-loader": "^3.6.0",
+      "leaflet": "^1.7.1",
+      "react": "^17.0.1",
+      "react-dom": "^17.0.1",
+      "react-leaflet": "^3.0.0",
+      "style-loader": "^1.3.0",
+      "webpack": "^4.44.2",
+      "webpack-cli": "^3.3.12"
+   },
+   "dependencies": {
+      "html-react-parser": "^0.10.0",
+      "react-contenteditable": "^3.3.3"
+   },
+   "peerDependencies": {
+      "react": "^17.0.1",
+      "react-dom": "^17.0.1",
+      "react-leaflet": "^3.0.0",
+      "leaflet": "^1.7.1"
+   }
+}

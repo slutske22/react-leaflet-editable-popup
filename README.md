@@ -237,7 +237,7 @@ const mapDispatchToProps = dispatch => ({
 
 ### Managing Open and Close state in state managed scenarios
 
-***Note***: The following sections address issues that have been mostly resolved in react-leaflet version 3.  Read on if you are using react-leaflet v2, or experiencing strange behavior with state-managed editable popups.
+***Note: The following sections address issues that have been mostly resolved in react-leaflet version 3.  Read on if you are using react-leaflet v2, or experiencing strange behavior with state-managed editable popups.***
 
 This next part goes a little in depth, but you may find it useful if you will be using `EditablePopups` in a state-managed scenario. One thing to consider is that when a popup's content is saved, it will update the parent state. When the parent state is updated, the parent component will rerender. This means that the popup you were editing will likely close when hitting the `Save` button, unless it happened to be set to `open` when you defined it. We need a way to communicate with the parent state about which popup(s) should be open for each rerender. We can use the built in `onOpen` and `onClose` functions that a regular react-leaflet `Popup` offers:
 
